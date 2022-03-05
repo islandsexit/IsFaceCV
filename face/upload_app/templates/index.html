@@ -1,14 +1,25 @@
-<!DOCTYPE html>
-<html>
- <head>
-  <meta charset="utf-8">
-  <title>Ввод числа</title>
- </head>
- <body>
-  <form action="">
-   <p>Введите число :</p>
-   <p><input type="number" size="6" ></p>
+{% extends 'layout.html' %}
 
-  </form>
- </body>
-</html>
+
+{% block content %}
+ <div style="margin-top: 200px; margin-left:200px;">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit" name="action" class="btn btn-primary mb-2">submit</button>
+        </form>
+    </div>
+
+    {% for el in face %}
+    <div class="face">
+        <h3> {{el.face_id}}</h3>
+        <h4> {{el.face_name}}</h4>
+        <h4> {{el.face_img}}</h4>
+
+
+        <img src="{{el.face_img.url}}" alt="{{el.face_name}}" width="120" height="90" />
+
+    </div>
+    {% endfor %}
+
+    {% endblock %}
