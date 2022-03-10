@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+ <div class="form-group" style="margin-top: 100px; display: flex;align-items: center;justify-content: center"  >
+        <form action="" method="POST" enctype="multipart/form-data" oninput="6===event.target.value.length&amp;&amp;this.submit()">
+            {% csrf_token %}
+            <input type="submit">
+            <input required="" autofocus="" name="password" autocomplete="off" placeholder="••••••" maxlength="6" pattern="[0-9]*" inputmode="numeric" x-inputmode="numeric" data-error="" oninput="this.value=this.value.replace(/[^0-9]/,&quot;&quot;)">
+
+        </form>
+
+
+
+ </div>
+{% endblock %}
