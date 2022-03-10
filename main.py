@@ -1,8 +1,24 @@
+import base64
+
 import cv2
 import numpy as np
 import os
 
+def resizing(new_width=None, new_height=None, interp=cv2.INTER_LINEAR):
+    h, w = img.shape[:2]
 
+    if new_width is None and new_height is None:
+        return img
+
+    if new_width is None:
+        ratio = new_height / h
+        dimension = (int(w * ratio), new_height)
+
+    else:
+        ratio = new_width / w
+        dimension = (new_width, int(h * ratio))
+
+    return cv2.resize(img, dimension, interpolation=interp)
 prototxt_path = 'mod/deploy.txt'
 model_path = "mod/res10_300x300_ssd_iter_140000_fp16.caffemodel"
 
@@ -31,7 +47,9 @@ def trust(img_path, not_face=True):
             # получаем уверенность
             confidence = output[i, 2]
             if confidence > 0.80:
-                cv2.imwrite(f'./img/1resize_{img_path}', cv2.resize(img, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_LINEAR))
+                cv2.imwrite(f'./img/1resize_{img_path}', resizing(480))
+                encoded_string = base64.b64encode(resizing(img))
+
                 return f"{confidence * 100:.2f}%"
         if flip ==-1:
             return 'No face'
@@ -43,5 +61,20 @@ for i in os.listdir('./img'):
     img = cv2.imread(f"./img/{i}")
     print(img.shape)
 
+def resizing(img, new_width=None, new_height=None, interp=cv2.INTER_LINEAR):
+    h, w = img.shape[:2]
+
+    if new_width is None and new_height is None:
+        return img
+
+    if new_width is None:
+        ratio = new_height / h
+        dimension = (int(w * ratio), new_height)
+
+    else:
+        ratio = new_width / w
+        dimension = (new_width, int(h * ratio))
+
+    return cv2.resize(img, dimension, interpolation=interp)
 
 

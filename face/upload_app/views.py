@@ -1,6 +1,11 @@
+import uuid
+
 import requests as RQ
 from django.shortcuts import render
 from .forms import FaceFormRegister
+# --------Для ресайза---------
+from PIL import Image
+from io import BytesIO
 
 
 # from face.upload_app.take_db_response import take_db_data
@@ -19,10 +24,10 @@ def auth(request):
             valid = True if data_from_db['Result'] == 'SUCCES' else False
             if valid:
                 Id = data_from_db['DESC']
-                return render(request, 'auth.html', {'prov': 'Ваш код работает исправно', "valid": valid, "id":f'{Id}'})
-            else: return render(request, 'auth.html', {'prov': 'Такого кода не существует', "valid": valid})
-
-
+                return render(request, 'auth.html',
+                              {'prov': 'Ваш код работает исправно', "valid": valid, "id": f'{Id}'})
+            else:
+                return render(request, 'auth.html', {'prov': 'Такого кода не существует', "valid": valid})
 
     if request.method == 'POST':
 
@@ -32,19 +37,23 @@ def auth(request):
         if confidence > 90:
             try:
                 img64 = img_Base64(file)
+                print(img64)
+                print(request.FILES)
                 try:
                     responseVov = RQ.post('http://192.168.48.114:8080/docreateguest', data={
-                            "ID": ID,
-                            "img64": img64
-                        })
+                        "ID": ID,
+                        "img64": img64
+                    })
                     print(responseVov)
                 except Exception as e:
                     return render(request, 'auth.html', {'prov': 'Ошибка на сервере Вовы', "valid": "0", "id": f'{ID}'})
             except Exception as e:
-                return render(request, 'auth.html', {'prov': 'Ошибка кодирования в Base64', "valid": "0", "id":f'{ID}'})
+                return render(request, 'auth.html',
+                              {'prov': 'Ошибка кодирования в Base64', "valid": "0", "id": f'{ID}'})
 
-            return render(request, 'auth.html', {'prov': 'Отправил запрос к вове', "succes":True})
-        return render(request, 'auth.html', {'prov': f'Не удалось найти лицо, пожалуйста отправьте другое фото', "valid": "0", "id":f'{ID}'})
+            return render(request, 'auth.html', {'prov': 'Отправил запрос к вове', "succes": True})
+        return render(request, 'auth.html',
+                      {'prov': f'Не удалось найти лицо, пожалуйста отправьте другое фото', "valid": "0", "id": f'{ID}'})
 
     return render(request, 'auth.html', {'prov': 'Blyt2'})
 
@@ -53,30 +62,59 @@ def index(request):
     return render(request, 'index.html', {'prov': 'Oshibka', 'form': FaceFormRegister()})
 
 
-
-#----------------------Временное решение с Base64-----------------
+# ----------------------Временное решение с Base64-----------------
 import base64
+
 
 def img_Base64(imgMem):
     try:
-        return base64.b64encode(imgMem.read())
+        im = Image.open(imgMem)
+        wpercent = (480 / float(im.size[0]))
+        hsize = int((float(im.size[1]) * float(wpercent)))
+        img = im.resize((480, hsize), Image.ANTIALIAS)
+        name_img = str(uuid.uuid4()) + '.png'
+        img.save(name_img)
+        print(name_img)
+        img.show()
+        with open(name_img, "rb") as image_file:
+            encoded_string = base64.b64encode(image_file.read())
+        os.remove(name_img)
+        return encoded_string
     except Exception as e:
+        print(e)
         return None
 
 
-
-#---------------------Конец временного решения с Base64-----------------
-
+# ---------------------Конец временного решения с Base64-----------------
 
 
-#-------------------------Временное решение с opencv---------------
+# -------------------------Временное решение с opencv---------------
 import cv2
 import numpy as np
 import os
 
+
+def resizing(img, new_width=None, new_height=None, interp=cv2.INTER_LINEAR):
+    h, w = img.shape[:2]
+
+    if new_width is None and new_height is None:
+        return img
+
+    if new_width is None:
+        ratio = new_height / h
+        dimension = (int(w * ratio), new_height)
+
+    else:
+        ratio = new_width / w
+        dimension = (new_width, int(h * ratio))
+
+    return cv2.resize(img, dimension, interpolation=interp)
+
+
 prototxt_path = '../mod/deploy.txt'
 model_path = "../mod/res10_300x300_ssd_iter_140000_fp16.caffemodel"
 model = cv2.dnn.readNetFromCaffe(prototxt_path, model_path)
+
 
 def isFace_in_img(imgMem):
     try:
@@ -99,13 +137,8 @@ def isFace_in_img(imgMem):
         return 0
     return 0
 
-#------------------------Конец временного решения с OPenCV---------------------------
 
-
-
-
-
-
+# ------------------------Конец временного решения с OPenCV---------------------------
 
 
 # ----------------------------Временное решение c базой данных----------------------
