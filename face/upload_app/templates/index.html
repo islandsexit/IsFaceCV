@@ -1,8 +1,7 @@
 {% extends 'layout.html' %}
 
-
 {% block content %}
- <div style="margin-top: 200px; margin-left:200px;">
+  <div class="form-group" style="margin-top: 100px; display: flex;align-items: center;justify-content: center">
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{form.as_p}}
@@ -11,10 +10,10 @@
     </div>
 
     {% for el in face %}
-    <div class="face">
-        <h3> {{el.face_id}}</h3>
-        <h4> {{el.face_name}}</h4>
-        <h4> {{el.face_img}}</h4>
+    <div class="face" style="margin-top: 100px; display: flex;align-items: center;justify-content: center">
+<!--        <h3> {{el.face_id}}</h3>-->
+        <h4> {{el.face_name_ch}}</h4>
+<!--        <h4> {{el.face_img}}</h4>-->
 
 
         <img src="{{el.face_img.url}}" alt="{{el.face_name}}" width="120" height="90" />
