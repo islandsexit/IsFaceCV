@@ -1,16 +1,39 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-
+    {%if not succes %}
  <div class="form-group" style="margin-top: 100px; display: flex;align-items: center;justify-content: center"  >
-        <form action="" method="POST" enctype="multipart/form-data" oninput="6===event.target.value.length&amp;&amp;this.submit()">
-            {% csrf_token %}
+     {% if not valid %}
+        <form action="" method="GET" enctype="multipart/form-data" oninput="6===event.target.value.length&amp;&amp;this.submit()">
+
+
             <input type="submit">
             <input required="" autofocus="" name="password" autocomplete="off" placeholder="••••••" maxlength="6" pattern="[0-9]*" inputmode="numeric" x-inputmode="numeric" data-error="" oninput="this.value=this.value.replace(/[^0-9]/,&quot;&quot;)">
 
         </form>
+     {% else %}
+     <form action="" method="POST" enctype="multipart/form-data" class="form-inline md-form">
+        {% csrf_token %}
+                    <p class="text-info">Разрешается к загрузке только изображения</p>
+                    <p class="text-info">Максимальный размер загружаемого файла, не должно превысить 3MB</p>
 
 
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" name="file_img" id="file_img" required accept="image/*">
+                            <input name="id" style="display:none;" value="{{id}}">
+                        </div>
+                    </div>
+
+                    <button type="submit" name="upload_image" style="margin-top: 20px; class="btn btn-primary">Загрузить изображение</button>
+                </form>
+    {% endif %}
 
  </div>
+
+{% else %}
+
+
+ {% endif %}
+
 {% endblock %}

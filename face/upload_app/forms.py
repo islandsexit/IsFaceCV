@@ -1,11 +1,11 @@
-from .models import Face
+from .models import FaceToken
 from django.forms import ModelForm, ImageField,TextInput
 
 
 class FaceFormRegister(ModelForm):
     class Meta:
-        model = Face
-        fields = ['face_token_ch' ]
+        model = FaceToken
+        fields = ['face_token_ch']
         widgets = {'face_token_ch':TextInput(attrs={
             'class':'form_face',
             'placeholder':'********',
