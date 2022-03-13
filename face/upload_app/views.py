@@ -12,39 +12,43 @@ from io import BytesIO
 
 
 def auth(request):
+    valid = False
     if request.method == 'GET':
         face_token_ch = request.GET.get('password', False)
-        if face_token_ch:
-            try:
-                data_from_db = take_db_data(face_token_ch)
-            except Exception as e:
-                return render(request, 'auth.html',
-                              {'prov': 'Сервер недоступен', "valid": '0'})
-
-            valid = True if data_from_db['Result'] == 'SUCCES' else False
-            if valid:
-                Id = data_from_db['DESC']
-                return render(request, 'auth.html',
-                              {'prov': 'Ваш код работает исправно', "valid": valid, "id": f'{Id}'})
-            else:
-                return render(request, 'auth.html', {'prov': 'Такого кода не существует', "valid": valid})
+        # if face_token_ch:
+        #     try:
+        #         data_from_db = take_db_data(face_token_ch)
+        #     except Exception as e:
+        #         return render(request, 'auth.html',
+        #                       {'prov': 'Сервер недоступен', "valid": valid})
+        #     if data_from_db['Result'] == 'SUCCES':
+        #         valid = True
+        #
+        #     if valid:
+        #         Id = data_from_db['DESC']
+        return render(request, 'auth.html',
+                      {'prov': 'Ваш код работает исправно', "valid": 'True', "id": f'{31}'})
+        # else:
+        #     return render(request, 'auth.html', {'prov': data_from_db['DESC'], "valid": valid})
 
     if request.method == 'POST':
 
         ID = request.POST['id']
         file = request.FILES['file_img']
-        confidence = isFace_in_img(file)
-        if confidence > 90:
+        img, confidence = isFace_in_img(file)
+        if confidence:
             try:
-                img64 = img_Base64(file)
-                print(img64)
-                print(request.FILES)
+                img64 = img_Base64(img)
+                with open("examp.txt", "wb") as f:
+                    f.write(img64)
+
                 try:
-                    responseVov = RQ.post('http://192.168.48.114:8080/docreateguest', data={
-                        "ID": ID,
-                        "img64": img64
-                    })
-                    print(responseVov)
+                    print('Otpravilos')
+                    # responseVov = RQ.post('http://192.168.48.114:8080/docreateguest', data={
+                    #     "ID": ID,
+                    #     "img64": img64
+                    # })
+                    # print(responseVov.json())
                 except Exception as e:
                     return render(request, 'auth.html', {'prov': 'Ошибка на сервере Вовы', "valid": "0", "id": f'{ID}'})
             except Exception as e:
@@ -68,14 +72,8 @@ import base64
 
 def img_Base64(imgMem):
     try:
-        im = Image.open(imgMem)
-        wpercent = (480 / float(im.size[0]))
-        hsize = int((float(im.size[1]) * float(wpercent)))
-        img = im.resize((480, hsize), Image.ANTIALIAS)
         name_img = str(uuid.uuid4()) + '.png'
-        img.save(name_img)
-        print(name_img)
-        img.show()
+        cv2.imwrite(name_img, imgMem)
         with open(name_img, "rb") as image_file:
             encoded_string = base64.b64encode(image_file.read())
         os.remove(name_img)
@@ -87,6 +85,11 @@ def img_Base64(imgMem):
 
 # ---------------------Конец временного решения с Base64-----------------
 
+
+# ----------------------Временное решение Переворота изображения------------
+import PIL.ImageOps
+
+# ----------------------Конец временного решения Переворота изображения----------
 
 # -------------------------Временное решение с opencv---------------
 import cv2
@@ -111,31 +114,75 @@ def resizing(img, new_width=None, new_height=None, interp=cv2.INTER_LINEAR):
     return cv2.resize(img, dimension, interpolation=interp)
 
 
-prototxt_path = '../mod/deploy.txt'
-model_path = "../mod/res10_300x300_ssd_iter_140000_fp16.caffemodel"
-model = cv2.dnn.readNetFromCaffe(prototxt_path, model_path)
+face = r'../mod/front.xml'
+eye = r'../mod/eye.xml'
+mouth = r'../mod/mouth.xml'
+face_cascade_db = cv2.CascadeClassifier(face)
+eye_cascade = cv2.CascadeClassifier(eye)
+mouth_cascade = cv2.CascadeClassifier(mouth)
 
 
 def isFace_in_img(imgMem):
     try:
         img = cv2.imdecode(np.fromstring(imgMem.read(), np.uint8), cv2.IMREAD_UNCHANGED)
-        print('IMG zagryzilos')
-        blob = cv2.dnn.blobFromImage(img, 1.0, (300, 300), (104.0, 177.0, 123.0))
-
-        # устанавливаем на вход нейронной сети изображение
-        model.setInput(blob)
-
-        # выполняем логический вывод и получаем результат
-        output = np.squeeze(model.forward())
-        for i in range(0, output.shape[0]):
-            # получаем уверенность
-            confidence = output[i, 2]
-            if confidence > 0.80:
-                return confidence * 100
+        img = resizing(img, new_width=None, new_height=450)
     except Exception as e:
-        print('Zalupa')
-        return 0
-    return 0
+        print('Проблема с изображением в функции isFace')
+    for flip in range(1, 10, 1):
+        print(flip)
+        img = fix_orientation(img, flip)
+        if face_cascade_db.detectMultiScale(img, 1.1, 19) != ():
+            print('face')
+            eyes = eye_cascade.detectMultiScale(img, 1.1, 19)
+            if eyes != ():
+                mouths = mouth_cascade.detectMultiScale(img, 1.1, 19)
+                if mouths != ():
+                    for (mx, my, mw, mh) in mouths:
+                        count = 0
+                        for (ex, ey, ew, eh) in eyes:
+                            if my > ey:
+                                if 160 < ey < 320:
+                                    count = count+1
+                                    if count ==2:
+                                        return img, True
+    return 12, False
+
+
+def fix_orientation(image, orientation):
+    # 1 = Horizontal(normal)
+    # 2 = Mirror horizontal
+    # 3 = Rotate 180
+    # 4 = Mirror vertical
+    # 5 = Mirror horizontal and rotate 270 CW
+    # 6 = Rotate 90 CW
+    # 7 = Mirror horizontal and rotate 90 CW
+    # 8 = Rotate 270 CW
+
+    if type(orientation) is list:
+        orientation = orientation[0]
+
+    if orientation == 1:
+        pass
+    elif orientation == 2:
+        image = cv2.flip(image, 0)
+    elif orientation == 3:
+        image = cv2.rotate(image, cv2.ROTATE_180)
+    elif orientation == 4:
+        image = cv2.flip(image, 1)
+    elif orientation == 5:
+        image = cv2.flip(image, 0)
+        image = cv2.rotate(image, cv2.ROTATE_90_COUNTERCLOCKWISE)
+    elif orientation == 6:
+        image = cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE)
+    elif orientation == 7:
+        image = cv2.flip(image, 0)
+        image = cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE)
+    elif orientation == 8:
+        image = cv2.rotate(image, cv2.ROTATE_90_COUNTERCLOCKWISE)
+    elif orientation == 9:
+        image = cv2.flip(image, -1)
+
+    return image
 
 
 # ------------------------Конец временного решения с OPenCV---------------------------
@@ -185,9 +232,12 @@ def take_db_data(code):
         connection = create_connection('profiledb', 'sb_pass', 'QNLPGMWWhh2q', '192.168.35.197')
         code = code
         db_req = f"SELECT id FROM public.requests where now() between active_from and active_to and invite_code = {code}"
-        resp = execute_read_query(connection, db_req)[0][0]
+        try:
+            resp = execute_read_query(connection, db_req)[0][0]
+        except Exception:
+            json.loads('{"Result":"ERROR", "DESC":"Такого кода не существует"}')
     except Exception as e:
-        return json.loads('{"Result":"ERROR", "DESC":"Глобальная ошибка вычленения данных из базы данных"}')
+        return json.loads('{"Result":"ERROR", "DESC":"Сервер недоступен, повторите позднее"}')
     return json.loads('{"Result":"SUCCES", "DESC":"' + str(resp) + '"}')
 
 

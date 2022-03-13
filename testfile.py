@@ -1,51 +1,111 @@
-import psycopg2
-from psycopg2 import OperationalError
-import json
+import uuid
+
+import cv2
+import numpy as np
+import os
+
+from PIL import Image
 
 
-def create_connection(db_name, db_user, db_password, db_host):
-    connection = None
+def resizing(img, new_width=None, new_height=None, interp=cv2.INTER_LINEAR):
+    h, w = img.shape[:2]
+
+    if new_width is None and new_height is None:
+        return img
+
+    if new_width is None:
+        ratio = new_height / h
+        dimension = (int(w * ratio), new_height)
+
+    else:
+        ratio = new_width / w
+        dimension = (new_width, int(h * ratio))
+
+    return cv2.resize(img, dimension, interpolation=interp)
+
+
+
+face = r'./mod/front.xml'
+eye = r'./mod/eye.xml'
+mouth = r'./mod/mouth.xml'
+face_cascade_db = cv2.CascadeClassifier(face)
+eye_cascade = cv2.CascadeClassifier(eye)
+mouth_cascade = cv2.CascadeClassifier(mouth)
+
+
+def isFace_in_img(imgMem):
     try:
-        connection = psycopg2.connect(
-            database=db_name,
-            user=db_user,
-            password=db_password,
-            host=db_host
-        )
-    except OperationalError as e:
-        print(f"Ошибка подключения к серверу '{e}'")
-        return json.loads('{"Result":"ERROR", "DESC":"Ошибка подключения к серверу"}')
-    return connection
-
-
-def execute_read_query(connection, query):
-    try:
-        if connection['result'] == 'ERROR':
-            print('Прерывание excute_read_query')
-            return json.loads('{"Result":"ERROR", "DESC":"Ошибка подключения к серверу"}')
-    except:
-        print('All_cool')
-    cursor = connection.cursor()
-    result = None
-    try:
-        cursor.execute(query)
-        result = cursor.fetchall()
-        return result
+        # img = cv2.imdecode(np.fromstring(imgMem.read(), np.uint8), cv2.IMREAD_UNCHANGED)
+        img = cv2.imread('img/leftpos.jpg')
+        img = resizing(img, new_width = None,new_height=450)
     except Exception as e:
-        print(f"The error '{e}' occurred")
-        return "NULL"
+        print('Проблема с изображением в функции isFace')
+    for flip in range(1,10,1):
+        img = fix_orientation(img, flip)
+        if flip!=-2:
+            img = cv2.flip(img, flip)
+        print(flip)
+        if face_cascade_db.detectMultiScale(img, 1.1, 19)!=():
+            print('face')
+            eyes = eye_cascade.detectMultiScale(img, 1.1, 19)
+            if  eyes !=():
+                print('eyes=======',eyes)
+                mouths = mouth_cascade.detectMultiScale(img, 1.1, 19)
+                print('mouth=======', mouths)
+            if mouths !=():
+                for (mx, my, mw,mh) in mouths:
+                # count=0
+                    for (ex, ey, ew, eh) in eyes:
+                        if my>ey:
+                        # if ey>130 and ey < 320:
+                        #     count = count+1
+                        #     print(count)
+                        #     if count ==2:
+                        #         print('all-Cool')
+                                return img
+    print(12)
+    return 12
 
 
-def take_db_data(code):
-    try:
-        connection = create_connection('profiledb', 'sb_pass', 'QNLPGMWWhh2q', '192.168.35.197')
-        code = code
-        db_req = f"SELECT id FROM public.requests where now() between active_from and active_to and invite_code = {code}"
-        resp = execute_read_query(connection, db_req)[0][0]
-    except Exception as e :
-        return json.loads('{"Result":"ERROR", "DESC":"Глобальная ошибка вычленения данных из базы данных"}')
-    return json.loads('{"Result":"SUCCES", "DESC":"'+str(resp)+'"}')
+def fix_orientation(image, orientation):
+    # 1 = Horizontal(normal)
+    # 2 = Mirror horizontal
+    # 3 = Rotate 180
+    # 4 = Mirror vertical
+    # 5 = Mirror horizontal and rotate 270 CW
+    # 6 = Rotate 90 CW
+    # 7 = Mirror horizontal and rotate 90 CW
+    # 8 = Rotate 270 CW
+
+    if type(orientation) is list:
+        orientation = orientation[0]
+
+    if orientation == 1:
+        pass
+    elif orientation == 2:
+        image = cv2.flip(image, 0)
+    elif orientation == 3:
+        image = cv2.rotate(image, cv2.ROTATE_180)
+    elif orientation == 4:
+        image = cv2.flip(image, 1)
+    elif orientation == 5:
+        image = cv2.flip(image, 0)
+        image = cv2.rotate(image, cv2.ROTATE_90_COUNTERCLOCKWISE)
+    elif orientation == 6:
+        image = cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE)
+    elif orientation == 7:
+        image = cv2.flip(image, 0)
+        image = cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE)
+    elif orientation == 8:
+        image = cv2.rotate(image, cv2.ROTATE_90_COUNTERCLOCKWISE)
+    elif orientation == 9:
+        image = cv2.flip(image, -1)
+
+    return image
 
 
-
-print(take_db_data('528776'))
+name_img = str(uuid.uuid4()) + '.png'
+cv2.imwrite(name_img, isFace_in_img('dddd'))
+print(name_img)
+image = Image.open(name_img)
+image.show()
