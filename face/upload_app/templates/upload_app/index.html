@@ -1,0 +1,14 @@
+{% extends './layout.html' %}
+
+{% block content %}
+  <div class="form-group" style="margin-top: 100px; display: flex;align-items: center;justify-content: center">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit" name="action" class="btn btn-primary mb-2">submit</button>
+        </form>
+    </div>
+
+
+
+    {% endblock %}

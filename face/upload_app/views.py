@@ -3,33 +3,27 @@ import uuid
 import requests as RQ
 from django.shortcuts import render
 from .forms import FaceFormRegister
-# --------Для ресайза---------
-from PIL import Image
-from io import BytesIO
-
-
-# from face.upload_app.take_db_response import take_db_data
 
 
 def auth(request):
-    valid = False
+    valid = True
     if request.method == 'GET':
         face_token_ch = request.GET.get('password', False)
-        # if face_token_ch:
-        #     try:
-        #         data_from_db = take_db_data(face_token_ch)
-        #     except Exception as e:
-        #         return render(request, 'auth.html',
-        #                       {'prov': 'Сервер недоступен', "valid": valid})
-        #     if data_from_db['Result'] == 'SUCCES':
-        #         valid = True
-        #
-        #     if valid:
-        #         Id = data_from_db['DESC']
-        return render(request, 'auth.html',
+        if face_token_ch:
+            try:
+                data_from_db = take_db_data(face_token_ch)
+            except Exception as e:
+                return render(request, './upload_app/auth.html',
+                              {'prov': f'Сервер недоступен', "valid": valid})
+            if data_from_db['Result'] == 'SUCCES':
+                valid = True
+
+            if valid:
+                Id = data_from_db['DESC']
+                return render(request, './upload_app/auth.html',
                       {'prov': 'Ваш код работает исправно', "valid": 'True', "id": f'{31}'})
-        # else:
-        #     return render(request, 'auth.html', {'prov': data_from_db['DESC'], "valid": valid})
+            else:
+                return render(request, './upload_app/auth.html', {'prov': data_from_db['DESC'], "valid": valid})
 
     if request.method == 'POST':
 
@@ -39,31 +33,28 @@ def auth(request):
         if confidence:
             try:
                 img64 = img_Base64(img)
-                with open("examp.txt", "wb") as f:
-                    f.write(img64)
-
                 try:
                     print('Otpravilos')
-                    # responseVov = RQ.post('http://192.168.48.114:8080/docreateguest', data={
-                    #     "ID": ID,
-                    #     "img64": img64
-                    # })
-                    # print(responseVov.json())
+                    responseVov = RQ.post('http://192.168.48.114:8080/docreateguest', data={
+                        "ID": ID,
+                        "img64": img64
+                    })
+                    print(responseVov.json())
                 except Exception as e:
-                    return render(request, 'auth.html', {'prov': 'Ошибка на сервере Вовы', "valid": "0", "id": f'{ID}'})
+                    return render(request, './upload_app/auth.html', {'prov': 'Ошибка на сервере Вовы', "valid": "0", "id": f'{ID}'})
             except Exception as e:
-                return render(request, 'auth.html',
+                return render(request, './upload_app/auth.html',
                               {'prov': 'Ошибка кодирования в Base64', "valid": "0", "id": f'{ID}'})
 
-            return render(request, 'auth.html', {'prov': 'Отправил запрос к вове', "succes": True})
-        return render(request, 'auth.html',
+            return render(request, './upload_app/auth.html', {'prov': 'Отправил запрос к вове', "succes": True})
+        return render(request, './upload_app/auth.html',
                       {'prov': f'Не удалось найти лицо, пожалуйста отправьте другое фото', "valid": "0", "id": f'{ID}'})
 
-    return render(request, 'auth.html', {'prov': 'Blyt2'})
+    return render(request, './upload_app/auth.html', {'prov': 'Blyt2'})
 
 
 def index(request):
-    return render(request, 'index.html', {'prov': 'Oshibka', 'form': FaceFormRegister()})
+    return render(request, './upload_app/auth.html', {'prov': f'Null', "valid": "0"})
 
 
 # ----------------------Временное решение с Base64-----------------
@@ -87,7 +78,33 @@ def img_Base64(imgMem):
 
 
 # ----------------------Временное решение Переворота изображения------------
-import PIL.ImageOps
+def fix_orientation(image, orientation):
+
+    if type(orientation) is list:
+        orientation = orientation[0]
+
+    if orientation == 1:
+        pass
+    elif orientation == 2:
+        image = cv2.flip(image, 0)
+    elif orientation == 3:
+        image = cv2.rotate(image, cv2.ROTATE_180)
+    elif orientation == 4:
+        image = cv2.flip(image, 1)
+    elif orientation == 5:
+        image = cv2.flip(image, 0)
+        image = cv2.rotate(image, cv2.ROTATE_90_COUNTERCLOCKWISE)
+    elif orientation == 6:
+        image = cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE)
+    elif orientation == 7:
+        image = cv2.flip(image, 0)
+        image = cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE)
+    elif orientation == 8:
+        image = cv2.rotate(image, cv2.ROTATE_90_COUNTERCLOCKWISE)
+    elif orientation == 9:
+        image = cv2.flip(image, -1)
+
+    return image
 
 # ----------------------Конец временного решения Переворота изображения----------
 
@@ -138,51 +155,20 @@ def isFace_in_img(imgMem):
                 mouths = mouth_cascade.detectMultiScale(img, 1.1, 19)
                 if mouths != ():
                     for (mx, my, mw, mh) in mouths:
-                        count = 0
+                        count_ey = 0
+                        count_my_ey = False
                         for (ex, ey, ew, eh) in eyes:
-                            if my > ey:
-                                if 160 < ey < 320:
-                                    count = count+1
-                                    if count ==2:
+                            if ey - my > 60:
+                                count_my_ey = True
+                            print(ey, my)
+                            if True:#140 < ey < 320:
+                                count_ey = count_ey+1
+                                if count_ey ==2:
+                                    if True :#count_my_ey:
                                         return img, True
     return 12, False
 
 
-def fix_orientation(image, orientation):
-    # 1 = Horizontal(normal)
-    # 2 = Mirror horizontal
-    # 3 = Rotate 180
-    # 4 = Mirror vertical
-    # 5 = Mirror horizontal and rotate 270 CW
-    # 6 = Rotate 90 CW
-    # 7 = Mirror horizontal and rotate 90 CW
-    # 8 = Rotate 270 CW
-
-    if type(orientation) is list:
-        orientation = orientation[0]
-
-    if orientation == 1:
-        pass
-    elif orientation == 2:
-        image = cv2.flip(image, 0)
-    elif orientation == 3:
-        image = cv2.rotate(image, cv2.ROTATE_180)
-    elif orientation == 4:
-        image = cv2.flip(image, 1)
-    elif orientation == 5:
-        image = cv2.flip(image, 0)
-        image = cv2.rotate(image, cv2.ROTATE_90_COUNTERCLOCKWISE)
-    elif orientation == 6:
-        image = cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE)
-    elif orientation == 7:
-        image = cv2.flip(image, 0)
-        image = cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE)
-    elif orientation == 8:
-        image = cv2.rotate(image, cv2.ROTATE_90_COUNTERCLOCKWISE)
-    elif orientation == 9:
-        image = cv2.flip(image, -1)
-
-    return image
 
 
 # ------------------------Конец временного решения с OPenCV---------------------------
@@ -235,7 +221,7 @@ def take_db_data(code):
         try:
             resp = execute_read_query(connection, db_req)[0][0]
         except Exception:
-            json.loads('{"Result":"ERROR", "DESC":"Такого кода не существует"}')
+            return json.loads('{"Result":"ERROR", "DESC":"Такого кода не существует"}')
     except Exception as e:
         return json.loads('{"Result":"ERROR", "DESC":"Сервер недоступен, повторите позднее"}')
     return json.loads('{"Result":"SUCCES", "DESC":"' + str(resp) + '"}')
@@ -245,7 +231,7 @@ def take_db_data(code):
 
 
 def index(request):
-    return render(request, 'index.html', {'prov': 'Oshibka', 'form': FaceFormRegister()})
+    return render(request, './upload_app/index.html', {'prov': 'Oshibka', 'form': FaceFormRegister()})
 #     face = Face.objects.all()
 #
 #     if request.method == 'GET':
