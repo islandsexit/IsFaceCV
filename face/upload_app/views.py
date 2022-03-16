@@ -10,20 +10,21 @@ def auth(request):
     if request.method == 'GET':
         face_token_ch = request.GET.get('password', False)
         if face_token_ch:
-            try:
-                data_from_db = take_db_data(face_token_ch)
-            except Exception as e:
-                return render(request, './upload_app/auth.html',
-                              {'prov': f'Сервер недоступен', "valid": valid})
-            if data_from_db['Result'] == 'SUCCES':
-                valid = True
+            # try:
+            #     data_from_db = take_db_data(face_token_ch)
+            #     print(data_from_db)
+            # except Exception as e:
+            #     return render(request, './upload_app/auth.html',
+            #                   {'prov': f'Сервер недоступен', "valid": valid})
+            # if data_from_db['Result'] == 'SUCCES':
+            #     valid = True
 
             if valid:
-                Id = data_from_db['DESC']
+                # Id = data_from_db['DESC']
                 return render(request, './upload_app/auth.html',
                       {'prov': 'Ваш код работает исправно', "valid": 'True', "id": f'{31}'})
-            else:
-                return render(request, './upload_app/auth.html', {'prov': data_from_db['DESC'], "valid": valid})
+            # else:
+                # return render(request, './upload_app/auth.html', {'header': data_from_db['DESC'], "valid": valid})
 
     if request.method == 'POST':
 
@@ -48,9 +49,9 @@ def auth(request):
 
             return render(request, './upload_app/auth.html', {'prov': 'Отправил запрос к вове', "succes": True})
         return render(request, './upload_app/auth.html',
-                      {'prov': f'Не удалось найти лицо, пожалуйста отправьте другое фото', "valid": "0", "id": f'{ID}'})
+                      {'prov': f'Не удалось найти лицо, пожалуйста отправьте другое фото', "valid": "0", "id": f'{ID}', "no_face":"На фото не было найдено лицо"})
 
-    return render(request, './upload_app/auth.html', {'prov': 'Blyt2'})
+    return render(request, './upload_app/auth.html', {'header': 'Введите код приглашения'})
 
 
 def index(request):
