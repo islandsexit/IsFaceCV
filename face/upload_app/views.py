@@ -2,7 +2,6 @@ import uuid
 
 import requests as RQ
 from django.shortcuts import render
-from .forms import FaceFormRegister
 
 
 def auth(request):
@@ -35,12 +34,12 @@ def auth(request):
             try:
                 img64 = img_Base64(img)
                 try:
-                    print('Otpravilos')
                     responseVov = RQ.post('http://192.168.48.114:8080/docreateguest', data={
                         "ID": ID,
                         "img64": img64
                     })
-                    print(responseVov.json())
+
+                    return render(request, './upload_app/auth.html', {'header': str(responseVov.json())})
                 except Exception as e:
                     return render(request, './upload_app/auth.html', {'prov': 'Ошибка на сервере Вовы', "valid": "0", "id": f'{ID}'})
             except Exception as e:
@@ -232,7 +231,7 @@ def take_db_data(code):
 
 
 def index(request):
-    return render(request, './upload_app/index.html', {'prov': 'Oshibka', 'form': FaceFormRegister()})
+    return render(request, './upload_app/index.html', {'prov': 'Oshibka'})
 #     face = Face.objects.all()
 #
 #     if request.method == 'GET':
