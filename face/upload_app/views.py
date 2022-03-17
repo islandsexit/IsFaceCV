@@ -33,7 +33,6 @@ def auth(request):
         if confidence:
             try:
                 img64 = img_Base64(img)
-                print(img64)
                 try:
                     responseVov = RQ.post('http://192.168.48.114:8080/docreateguest', data={
                         "ID": ID,
@@ -145,12 +144,10 @@ def isFace_in_img(imgMem):
         img = cv2.imdecode(np.fromstring(imgMem.read(), np.uint8), cv2.IMREAD_UNCHANGED)
         img = resizing(img, new_width=None, new_height=450)
     except Exception as e:
-        print('Проблема с изображением в функции isFace')
+
     for flip in range(1, 10, 1):
-        print(flip)
         img = fix_orientation(img, flip)
         if face_cascade_db.detectMultiScale(img, 1.1, 19) != ():
-            print('face')
             eyes = eye_cascade.detectMultiScale(img, 1.1, 19)
             if eyes != ():
                 mouths = mouth_cascade.detectMultiScale(img, 1.1, 19)
@@ -161,7 +158,6 @@ def isFace_in_img(imgMem):
                         for (ex, ey, ew, eh) in eyes:
                             if ey - my > 60:
                                 count_my_ey = True
-                            print(ey, my)
                             if True:#140 < ey < 320:
                                 count_ey = count_ey+1
                                 if count_ey ==2:
@@ -191,7 +187,6 @@ def create_connection(db_name, db_user, db_password, db_host):
             host=db_host
         )
     except OperationalError as e:
-        print(f"Ошибка подключения к серверу '{e}'")
         return json.loads('{"Result":"ERROR", "DESC":"Ошибка подключения к серверу"}')
     return connection
 
@@ -199,7 +194,6 @@ def create_connection(db_name, db_user, db_password, db_host):
 def execute_read_query(connection, query):
     try:
         if connection['result'] == 'ERROR':
-            print('Прерывание excute_read_query')
             return json.loads('{"Result":"ERROR", "DESC":"Ошибка подключения к серверу"}')
     except:
         print('All_cool')
@@ -210,7 +204,6 @@ def execute_read_query(connection, query):
         result = cursor.fetchall()
         return result
     except Exception as e:
-        print(f"The error '{e}' occurred")
         return "NULL"
 
 
