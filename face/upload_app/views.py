@@ -63,6 +63,7 @@ import base64
 
 def img_Base64(imgMem):
     try:
+        print('start base64')
         name_img = str(uuid.uuid4()) + '.png'
         print(name_img)
         cv2.imwrite(name_img, imgMem)
