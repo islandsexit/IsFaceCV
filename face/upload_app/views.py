@@ -21,7 +21,7 @@ def auth(request):
             if valid:
                 # Id = data_from_db['DESC']
                 return render(request, './upload_app/auth.html',
-                      {'prov': 'Ваш код работает исправно', "valid": 'True', "id": f'{31}'})
+                      {'name': 'Добрый день, Иван, добавьте ваше фото', "valid": 'True', "id": f'{31}'})
             # else:
                 # return render(request, './upload_app/auth.html', {'header': data_from_db['DESC'], "valid": valid})
 
@@ -36,17 +36,18 @@ def auth(request):
                 try:
                     responseVov = RQ.post('http://192.168.48.114:8080/docreateguest', data={
                         "ID": ID,
-                        "img64": img64
-                    })
+                        "img64": img64,
+                        "name":"Иван"
+                        })
 
                     return render(request, './upload_app/auth.html', {'header': str(responseVov.json())+" img: "+str(img64)})
                 except Exception as e:
-                    return render(request, './upload_app/auth.html', {'prov': 'Ошибка на сервере Вовы', "valid": "0", "id": f'{ID}'})
+                    return render(request, './upload_app/auth.html', {'no_face': 'Ошибка на сервере Вовы', "valid": "0", "id": f'{31}'})
             except Exception as e:
                 return render(request, './upload_app/auth.html',
-                              {'prov': 'Ошибка кодирования в Base64', "valid": "0", "id": f'{ID}'})
+                              {'no_face': 'Ошибка кодирования в Base64', "valid": "0", "id": f'{ID}'})
 
-            return render(request, './upload_app/auth.html', {'prov': 'Отправил запрос к вове', "succes": True})
+            return render(request, './upload_app/auth.html', {'prov': 'Отправил запрос к вове', "succes": "True"})
         return render(request, './upload_app/auth.html',
                       {'prov': f'Не удалось найти лицо, пожалуйста отправьте другое фото', "valid": "0", "id": f'{ID}', "no_face":"На фото не было найдено лицо"})
 
@@ -153,24 +154,27 @@ def isFace_in_img(imgMem):
         img = resizing(img, new_width=None, new_height=450)
     except Exception as e:
         print('error')
-    for flip in range(1, 10, 1):
-        img = fix_orientation(img, flip)
-        if face_cascade_db.detectMultiScale(img, 1.1, 19) != ():
-            eyes = eye_cascade.detectMultiScale(img, 1.1, 19)
-            if eyes != ():
-                mouths = mouth_cascade.detectMultiScale(img, 1.1, 19)
-                if mouths != ():
-                    for (mx, my, mw, mh) in mouths:
-                        count_ey = 0
-                        count_my_ey = False
-                        for (ex, ey, ew, eh) in eyes:
-                            if ey - my > 60:
-                                count_my_ey = True
-                            if True:#140 < ey < 320:
-                                count_ey = count_ey+1
-                                if count_ey ==2:
-                                    if True :#count_my_ey:
-                                        return img, True
+    try:    
+        for flip in range(1, 10, 1):
+            img = fix_orientation(img, flip)
+            if face_cascade_db.detectMultiScale(img, 1.1, 19) != ():
+                eyes = eye_cascade.detectMultiScale(img, 1.1, 19)
+                if eyes != ():
+                    mouths = mouth_cascade.detectMultiScale(img, 1.1, 19)
+                    if mouths != ():
+                        for (mx, my, mw, mh) in mouths:
+                            count_ey = 0
+                            count_my_ey = False
+                            for (ex, ey, ew, eh) in eyes:
+                                if ey - my > 60:
+                                    count_my_ey = True
+                                if True:#140 < ey < 320:
+                                    count_ey = count_ey+1
+                                    if count_ey ==2:
+                                        if True :#count_my_ey:
+                                            return img, True
+    except Exception as e:
+        return 12, False
     return 12, False
 
 
