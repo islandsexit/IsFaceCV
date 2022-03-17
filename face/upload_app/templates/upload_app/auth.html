@@ -26,8 +26,8 @@
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
-	
-     <form action="/checkin" method="POST" enctype="multipart/form-data" class="form-inline md-form">
+
+     <form action="" method="POST" enctype="multipart/form-data" class="form-inline md-form">
         {% csrf_token %}
          <main class="main_full">
 	<div class="container">
@@ -53,8 +53,10 @@
         transform: translate(-50%, -50%);background:#00b4ef;" class="btn btn-primary btn-submit">Загрузить изображение</button>
         </div>
 	</div>
+
 </main>
          <input name="id" style="display:none;" value="{{id}}">
+         <input name="name" style="display:none;" value="{{name}}">
      </form>
 <script>
 $( document ).ready(function() {

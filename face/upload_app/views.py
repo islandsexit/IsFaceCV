@@ -19,15 +19,17 @@ def auth(request):
             #     valid = True
 
             if valid:
-                # Id = data_from_db['DESC']
+                # Id = data_from_db['id']
+                # name = data_from_db['name']
                 return render(request, './upload_app/auth.html',
-                      {'name': 'Добрый день, Иван, добавьте ваше фото', "valid": 'True', "id": f'{31}'})
+                              {'name': 'Добрый день, Иван, добавьте ваше фото', "valid": 'True', "id": f'{31}'})
             # else:
-                # return render(request, './upload_app/auth.html', {'header': data_from_db['DESC'], "valid": valid})
+            # return render(request, './upload_app/auth.html', {'header': data_from_db['DESC'], "valid": valid})
 
     if request.method == 'POST':
 
         ID = request.POST['id']
+        name = request.POST.get('name')
         file = request.FILES['file_img']
         img, confidence = isFace_in_img(file)
         if confidence:
@@ -37,19 +39,22 @@ def auth(request):
                     responseVov = RQ.post('http://192.168.48.114:8080/docreateguest', data={
                         "ID": ID,
                         "img64": img64,
-                        "name":"Иван"
-                        })
+                        "name": name
+                    })
 
-                    return render(request, './upload_app/auth.html', {'header': str(responseVov.json())+" img: "+str(img64)})
+                    return render(request, './upload_app/auth.html',
+                                  {'header': str(responseVov.json()) + " img: " + str(name)})
                 except Exception as e:
-                    return render(request, './upload_app/auth.html', {'no_face': 'Ошибка на сервере Вовы', "valid": "0", "id": f'{31}'})
+                    return render(request, './upload_app/auth.html',
+                                  {'no_face': 'Ошибка на сервере Вовы', "valid": "0", "id": f'{31}'})
             except Exception as e:
                 return render(request, './upload_app/auth.html',
                               {'no_face': 'Ошибка кодирования в Base64', "valid": "0", "id": f'{ID}'})
 
-            return render(request, './upload_app/auth.html', {'prov': 'Отправил запрос к вове', "succes": "True"})
+            # return render(request, './upload_app/auth.html', {'prov': 'Отправил запрос к вове', "succes": "True"})
         return render(request, './upload_app/auth.html',
-                      {'prov': f'Не удалось найти лицо, пожалуйста отправьте другое фото', "valid": "0", "id": f'{ID}', "no_face":"На фото не было найдено лицо"})
+                      {'prov': f'Не удалось найти лицо, пожалуйста отправьте другое фото', "valid": "0", "id": f'{ID}',
+                       "no_face": "На фото не было найдено лицо"})
 
     return render(request, './upload_app/auth.html', {'header': 'Введите код приглашения'})
 
@@ -63,23 +68,22 @@ import base64
 
 
 def img_Base64(imgMem):
-    
     try:
-        
-        name_img = str('/home/vig/django/IsFaceCV/face/upload_app/temp/')+str(uuid.uuid4()) + '.png'
-        
+
+        name_img = str('/home/vig/django/IsFaceCV/face/upload_app/temp/') + str(uuid.uuid4()) + '.png'
+
         cv2.imwrite(name_img, imgMem)
-        
+
         with open(name_img, "rb") as image_file:
-   
+
             encoded_string = base64.b64encode(image_file.read())
-    
+
         os.remove(name_img)
-    
+
         return encoded_string
     except Exception as e:
         print(e)
-    
+
         return None
 
 
@@ -88,7 +92,6 @@ def img_Base64(imgMem):
 
 # ----------------------Временное решение Переворота изображения------------
 def fix_orientation(image, orientation):
-
     if type(orientation) is list:
         orientation = orientation[0]
 
@@ -114,6 +117,7 @@ def fix_orientation(image, orientation):
         image = cv2.flip(image, -1)
 
     return image
+
 
 # ----------------------Конец временного решения Переворота изображения----------
 
@@ -154,7 +158,7 @@ def isFace_in_img(imgMem):
         img = resizing(img, new_width=None, new_height=450)
     except Exception as e:
         print('error')
-    try:    
+    try:
         for flip in range(1, 10, 1):
             img = fix_orientation(img, flip)
             if face_cascade_db.detectMultiScale(img, 1.1, 19) != ():
@@ -168,16 +172,14 @@ def isFace_in_img(imgMem):
                             for (ex, ey, ew, eh) in eyes:
                                 if ey - my > 60:
                                     count_my_ey = True
-                                if True:#140 < ey < 320:
-                                    count_ey = count_ey+1
-                                    if count_ey ==2:
-                                        if True :#count_my_ey:
+                                if True:  # 140 < ey < 320:
+                                    count_ey = count_ey + 1
+                                    if count_ey == 2:
+                                        if True:  # count_my_ey:
                                             return img, True
     except Exception as e:
         return 12, False
     return 12, False
-
-
 
 
 # ------------------------Конец временного решения с OPenCV---------------------------
@@ -330,4 +332,3 @@ def index(request):
 #
 #
 #     #return HttpResponse('mmmmmm')
-
