@@ -40,8 +40,9 @@ def auth(request):
                         "ID": ID,
                         "img64": img64,
                         "name": name
-                    })
 
+                    })
+                    print(name)
                     return render(request, './upload_app/auth.html',
                                   {'header': str(responseVov.json()) + " img: " + str(name)})
                 except Exception as e:
@@ -225,14 +226,16 @@ def take_db_data(code):
     try:
         connection = create_connection('profiledb', 'sb_pass', 'QNLPGMWWhh2q', '192.168.35.197')
         code = code
-        db_req = f"SELECT id FROM public.requests where now() between active_from and active_to and invite_code = {code}"
+        db_req = f"SELECT id, name, last_name, middle_name FROM public.requests where now() between active_from and active_to and invite_code = {code}"
         try:
-            resp = execute_read_query(connection, db_req)[0][0]
+            id = execute_read_query(connection, db_req)[0][0]
+            name = execute_read_query(connection, db_req)[0][2] + ' ' + execute_read_query(connection, db_req)[0][
+                1] + ' ' + execute_read_query(connection, db_req)[0][3]
         except Exception:
             return json.loads('{"Result":"ERROR", "DESC":"Такого кода не существует"}')
     except Exception as e:
         return json.loads('{"Result":"ERROR", "DESC":"Сервер недоступен, повторите позднее"}')
-    return json.loads('{"Result":"SUCCES", "DESC":"' + str(resp) + '"}')
+    return json.loads('{"Result":"SUCCES", "id":"' + str(id) + '", "Name":"' + str(name) + '"}')
 
 
 # ----------------------------Конец временного решения--------------

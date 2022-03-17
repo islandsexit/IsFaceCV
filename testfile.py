@@ -150,7 +150,7 @@ def take_db_data(code):
     try:
         connection = create_connection('profiledb', 'sb_pass', 'QNLPGMWWhh2q', '192.168.35.197')
         code = code
-        db_req = f"SELECT id, name, last_name, middle_name FROM public.requests "
+        db_req = f"SELECT id, name, last_name, middle_name FROM public.requests where now() between active_from and active_to and invite_code = {code}"
         try:
             id = execute_read_query(connection, db_req)[0][0]
             name = execute_read_query(connection, db_req)[0][2] + ' ' + execute_read_query(connection, db_req)[0][
