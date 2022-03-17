@@ -144,7 +144,7 @@ def isFace_in_img(imgMem):
         img = cv2.imdecode(np.fromstring(imgMem.read(), np.uint8), cv2.IMREAD_UNCHANGED)
         img = resizing(img, new_width=None, new_height=450)
     except Exception as e:
-
+        print('error')
     for flip in range(1, 10, 1):
         img = fix_orientation(img, flip)
         if face_cascade_db.detectMultiScale(img, 1.1, 19) != ():
