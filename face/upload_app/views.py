@@ -62,23 +62,23 @@ import base64
 
 
 def img_Base64(imgMem):
-    print('starting Base64 encode')
+    
     try:
-        print('start base64')
-        name_img = str('./upload_app/temp/')+str(uuid.uuid4()) + '.png'
-        print(name_img)
+        
+        name_img = str('/home/vig/django/IsFaceCV/face/upload_app/temp/')+str(uuid.uuid4()) + '.png'
+        
         cv2.imwrite(name_img, imgMem)
-        print('image written')
+        
         with open(name_img, "rb") as image_file:
-            print(image_file)
+   
             encoded_string = base64.b64encode(image_file.read())
-        print("image readed")
+    
         os.remove(name_img)
-        print("image removed")
+    
         return encoded_string
     except Exception as e:
         print(e)
-        print('exception in base64 func')
+    
         return None
 
 
@@ -326,3 +326,4 @@ def index(request):
 #
 #
 #     #return HttpResponse('mmmmmm')
+
