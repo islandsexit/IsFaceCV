@@ -64,10 +64,15 @@ import base64
 def img_Base64(imgMem):
     try:
         name_img = str(uuid.uuid4()) + '.png'
+        print(name_img)
         cv2.imwrite(name_img, imgMem)
+        print('image written')
         with open(name_img, "rb") as image_file:
+            print(image_file)
             encoded_string = base64.b64encode(image_file.read())
+        print("image readed")
         os.remove(name_img)
+        print("image removed")
         return encoded_string
     except Exception as e:
         print(e)
