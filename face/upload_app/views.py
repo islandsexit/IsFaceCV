@@ -62,6 +62,7 @@ import base64
 
 
 def img_Base64(imgMem):
+    print('starting Base64 encode')
     try:
         print('start base64')
         name_img = str('./upload_app/temp/')+str(uuid.uuid4()) + '.png'
@@ -77,6 +78,7 @@ def img_Base64(imgMem):
         return encoded_string
     except Exception as e:
         print(e)
+        print('exception in base64 func')
         return None
 
 
