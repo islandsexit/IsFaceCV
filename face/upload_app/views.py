@@ -33,6 +33,7 @@ def auth(request):
         if confidence:
             try:
                 img64 = img_Base64(img)
+                print(img64)
                 try:
                     responseVov = RQ.post('http://192.168.48.114:8080/docreateguest', data={
                         "ID": ID,
