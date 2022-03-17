@@ -39,7 +39,7 @@ def auth(request):
                         "img64": img64
                     })
 
-                    return render(request, './upload_app/auth.html', {'header': str(responseVov.json())})
+                    return render(request, './upload_app/auth.html', {'header': str(responseVov.json())+" img: "+str(img64)})
                 except Exception as e:
                     return render(request, './upload_app/auth.html', {'prov': 'Ошибка на сервере Вовы', "valid": "0", "id": f'{ID}'})
             except Exception as e:
