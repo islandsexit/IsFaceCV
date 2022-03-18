@@ -5,33 +5,35 @@ from django.shortcuts import render
 
 
 def auth(request):
-    valid = True
+    valid = False
     if request.method == 'GET':
         face_token_ch = request.GET.get('password', False)
         if face_token_ch:
-            # try:
-            #     data_from_db = take_db_data(face_token_ch)
-            #     print(data_from_db)
-            # except Exception as e:
-            #     return render(request, './upload_app/auth.html',
-            #                   {'prov': f'Сервер недоступен', "valid": valid})
-            # if data_from_db['Result'] == 'SUCCES':
-            #     valid = True
+            try:
+                data_from_db = take_db_data(face_token_ch)
+                print(data_from_db)
+            except Exception as e:
+                return render(request, './upload_app/auth.html',
+                              {'prov': f'Сервер недоступен', "valid": valid})
+            if data_from_db['Result'] == 'SUCCES':
+                valid = True
 
             if valid:
-                # Id = data_from_db['id']
-                # name = data_from_db['name']
+                Id = data_from_db['id']
+                name = data_from_db['name']
                 return render(request, './upload_app/auth.html',
-                              {'name': 'Добрый день, Иван, добавьте ваше фото', "valid": 'True', "id": f'{31}'})
-            # else:
-            # return render(request, './upload_app/auth.html', {'header': data_from_db['DESC'], "valid": valid})
+                              {'name': f'{name}', "valid": 'True', "id": f'{Id}', "password":f'{face_token_ch}'})
+            else:
+                return render(request, './upload_app/auth.html', {"valid": valid})
 
     if request.method == 'POST':
-
+        face_token_ch = request.POST.get('password')
         ID = request.POST['id']
         name = request.POST.get('name')
         file = request.FILES['file_img']
         img, confidence = isFace_in_img(file)
+        if take_db_data(face_token_ch)['Result'] != 'SUCCES':
+            return render(request, './upload_app/auth.html', {'header': 'ОШИБКА'})
         if confidence:
             try:
                 img64 = img_Base64(img)
@@ -47,14 +49,14 @@ def auth(request):
                                   {'header': str(responseVov.json()) + " img: " + str(name)})
                 except Exception as e:
                     return render(request, './upload_app/auth.html',
-                                  {'no_face': 'Ошибка на сервере Вовы', "valid": "0", "id": f'{31}'})
+                                  {'no_face': 'Ошибка на сервере Вовы', "valid": "0", "id": f'{ID}'})
             except Exception as e:
                 return render(request, './upload_app/auth.html',
                               {'no_face': 'Ошибка кодирования в Base64', "valid": "0", "id": f'{ID}'})
 
             # return render(request, './upload_app/auth.html', {'prov': 'Отправил запрос к вове', "succes": "True"})
         return render(request, './upload_app/auth.html',
-                      {'prov': f'Не удалось найти лицо, пожалуйста отправьте другое фото', "valid": "0", "id": f'{ID}',
+                      {"name":f"{name}", "valid": "0", "id": f'{ID}',
                        "no_face": "На фото не было найдено лицо"})
 
     return render(request, './upload_app/auth.html', {'header': 'Введите код приглашения'})
@@ -72,6 +74,7 @@ def img_Base64(imgMem):
     try:
 
         name_img = str('/home/vig/django/IsFaceCV/face/upload_app/temp/') + str(uuid.uuid4()) + '.png'
+        # name_img = str(uuid.uuid4()) + '.png'
 
         cv2.imwrite(name_img, imgMem)
 
@@ -162,22 +165,28 @@ def isFace_in_img(imgMem):
     try:
         for flip in range(1, 10, 1):
             img = fix_orientation(img, flip)
-            if face_cascade_db.detectMultiScale(img, 1.1, 19) != ():
-                eyes = eye_cascade.detectMultiScale(img, 1.1, 19)
-                if eyes != ():
-                    mouths = mouth_cascade.detectMultiScale(img, 1.1, 19)
-                    if mouths != ():
-                        for (mx, my, mw, mh) in mouths:
-                            count_ey = 0
-                            count_my_ey = False
-                            for (ex, ey, ew, eh) in eyes:
-                                if ey - my > 60:
-                                    count_my_ey = True
-                                if True:  # 140 < ey < 320:
-                                    count_ey = count_ey + 1
-                                    if count_ey == 2:
-                                        if True:  # count_my_ey:
-                                            return img, True
+            faces = face_cascade_db.detectMultiScale(img, 1.1, 19)
+            if faces != ():
+                for (x, y, w, h) in faces:
+                    height_face_1_3=int(h/3)
+                    height_face_1_6 = int(h / 6)
+                    weight_face_1_6=int(w/6)
+                    img_face = img[y-height_face_1_3:y+h+height_face_1_6, x-weight_face_1_6:x+w+weight_face_1_6]
+                    eyes = eye_cascade.detectMultiScale(img, 1.1, 19)
+                    if eyes != ():
+                        mouths = mouth_cascade.detectMultiScale(img, 1.1, 19)
+                        if mouths != ():
+                            for (mx, my, mw, mh) in mouths:
+                                count_ey = 0
+                                count_my_ey = False
+                                for (ex, ey, ew, eh) in eyes:
+                                    if ey - my > 60:
+                                        count_my_ey = True
+                                    if True:  # 140 < ey < 320:
+                                        count_ey = count_ey + 1
+                                        if count_ey == 2:
+                                            if True:  # count_my_ey:
+                                                return img_face, True
     except Exception as e:
         return 12, False
     return 12, False
@@ -235,7 +244,7 @@ def take_db_data(code):
             return json.loads('{"Result":"ERROR", "DESC":"Такого кода не существует"}')
     except Exception as e:
         return json.loads('{"Result":"ERROR", "DESC":"Сервер недоступен, повторите позднее"}')
-    return json.loads('{"Result":"SUCCES", "id":"' + str(id) + '", "Name":"' + str(name) + '"}')
+    return json.loads('{"Result":"SUCCES", "id":"' + str(id) + '", "name":"' + str(name) + '"}')
 
 
 # ----------------------------Конец временного решения--------------

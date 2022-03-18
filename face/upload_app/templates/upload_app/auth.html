@@ -57,6 +57,7 @@
 </main>
          <input name="id" style="display:none;" value="{{id}}">
          <input name="name" style="display:none;" value="{{name}}">
+         <input name="password" style="display:none;" value="{{password}}">
      </form>
 <script>
 $( document ).ready(function() {
@@ -68,7 +69,7 @@ $( document ).ready(function() {
 		var ext = btnUpload.val().split('.').pop().toLowerCase();
 		if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
 			$(".error_msg").text("Не изображение");
-		} else if(document.getElementById('upload_file').files[0].size > 3*1024*1024){
+		} else if(document.getElementById('upload_file').files[0].size > 10*1024*1024){
 			$(".error_msg").text("Слишком большой файл");
 		}
 		else {
