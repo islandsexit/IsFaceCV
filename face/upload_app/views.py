@@ -3,6 +3,7 @@ from .modules.face_validation import img_Base64
 import requests as RQ
 from django.shortcuts import render
 from .modules.db import take_db_data
+from .models import Requests
 
 
 def auth(request):
@@ -10,6 +11,7 @@ def auth(request):
 
     #-----------------GET-------------------------
     if request.method == 'GET':
+        
 
         # берем код для входа
         face_token_ch = request.GET.get('password', False)

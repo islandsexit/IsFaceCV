@@ -1,28 +1,34 @@
+# This is an auto-generated Django model module.
+# You'll have to do the following manually to clean this up:
+#   * Rearrange models' order
+#   * Make sure each model has one field with primary_key=True
+#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
+#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
+# Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
 
+class Requests(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    last_name = models.CharField(max_length=50, blank=True, null=True)
+    name = models.CharField(max_length=50, blank=True, null=True)
+    middle_name = models.CharField(max_length=50, blank=True, null=True)
+    active = models.BooleanField(blank=True, null=True)
+    active_from = models.DateField(blank=True, null=True)
+    active_to = models.DateField(blank=True, null=True)
+    checked = models.BooleanField(blank=True, null=True)
+    deleted = models.BooleanField(blank=True, null=True)
+    invite_code = models.IntegerField(blank=True, null=True)
+    check_in = models.BooleanField(blank=True, null=True)
+    photo_url = models.TextField(blank=True, null=True)
+    sms_phone = models.CharField(max_length=50, blank=True, null=True)
+    sms_sent = models.BooleanField(blank=True, null=True)
+    sms_status = models.IntegerField(blank=True, null=True)
+    sms_id = models.CharField(max_length=50, blank=True, null=True)
+    is_sms = models.BooleanField(blank=True, null=True)
 
-# Create your models here.
-
-# class FaceToken(models.Model):
-#     # face_id_ch = models.CharField('idFace', help_text='Code', max_length=6, blank=False, default=None)
-#     # face_name_ch = models.CharField('faceName', max_length=30, help_text='Name', blank=False, default=None)
-#     # face_img = models.ImageField('faceImg', upload_to='images/',help_text='Загрузите фото')
-#     face_token_ch = models.CharField('faceToken', max_length=6, help_text='Токен', blank=False,
-#                                      default=None)
-#     # face_token_valid_bol = models.BooleanField('face_valid', help_text='Токен действующий?', blank=False, default=None)
-#     # face_group_ch = models.CharField('face_group', help_text='Организация', max_length=50, blank=False, default=None)
-#     # face_worker_bol = models.BooleanField('face_worker', help_text='Постоянный работник?', blank=False, default=None)
-#
-#     def __str__(self):
-#         return self.face_token_ch
-#
-#     # class Meta:
-#     #     constraints = [
-#     #         models.CheckConstraint(
-#     #             check=models.Q(face_token_int__length__gte=6),
-#     #             name="%(app_label)s_%(class)s_title_length",
-#     #         )
-#     #     ]
+    class Meta:
+        managed = False
+        db_table = 'requests'
 
 
