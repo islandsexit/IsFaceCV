@@ -1,9 +1,11 @@
+from logging import raiseExceptions
 from .modules.face_validation import isFace_in_img
 from .modules.face_validation import img_Base64
 import requests as RQ
 from django.shortcuts import render
-from .modules.db import take_db_data
-from .models import Requests
+from .modules.db import active_code
+
+
 
 
 def auth(request):
@@ -17,27 +19,25 @@ def auth(request):
         face_token_ch = request.GET.get('password', False)
         
         # если отправился
-        if face_token_ch:
-
+        if face_token_ch and len(face_token_ch)==6:
+            print('a')
             try:
-                data_from_db = take_db_data(face_token_ch)
-                print(data_from_db)
+                active, person, name = active_code(face_token_ch)
+                if True:#active:
+                    return render(request, './upload_app/auth.html',{'name': f'{name}', "valid": 'True', "id": f'{person.id}', "password":f'{face_token_ch}'})
+                else:
+                    return render(request, './upload_app/auth.html',{'header': f'Такого кода не существует', "valid": valid})
+                
 
             except Exception as e:
+                print(e)
                 return render(request, './upload_app/auth.html',
-                              {'prov': f'Сервер недоступен', "valid": valid})
+                              {'header': f'Такого кода не существует', "valid": valid})
 
-            if data_from_db['Result'] == 'SUCCES':
-                valid = True
 
-            if valid:
-                Id = data_from_db['id']
-                name = data_from_db['name']
 
-                return render(request, './upload_app/auth.html',
-                              {'name': f'{name}', "valid": 'True', "id": f'{Id}', "password":f'{face_token_ch}'})
-            else:
-                return render(request, './upload_app/auth.html', {"valid": valid})
+        else:
+            return render(request, './upload_app/auth.html', {"valid": 0})
 
 
     #---------------------POST----------------------------
@@ -46,12 +46,17 @@ def auth(request):
         ID = request.POST['id']
         name = request.POST.get('name')
         file = request.FILES['file_img']
-        data_from_db = take_db_data(face_token_ch)
+        try:
+            active, person, name = active_code(face_token_ch)
+            if False:#active != True:
+                raise Exception('Не активный код') 
+
+        except e as Exception: 
+            print(e)
+            return render(request, './upload_app/auth.html', {'header': 'ОШИБКА'})
+
         img, confidence = isFace_in_img(file)
 
-        if data_from_db['Result'] != 'SUCCES':
-            print(data_from_db)
-            return render(request, './upload_app/auth.html', {'header': 'ОШИБКА'})
 
         if confidence:
 
@@ -60,7 +65,7 @@ def auth(request):
 
                 try:
                     responseVov = RQ.post('http://192.168.48.114:8080/docreateguest', data={
-                        "ID": ID,
+                        "ID": person.id,
                         "img64": img64,
                         "name": name
 
@@ -71,14 +76,14 @@ def auth(request):
 
                 except Exception as e:
                     return render(request, './upload_app/auth.html',
-                                  {'no_face': 'Ошибка на сервере Вовы', "valid": "0", "id": f'{ID}'})
+                                  {'no_face': 'Ошибка на сервере Вовы', "valid": "0", "id": f'{person.id}'})
 
             except Exception as e:
                 return render(request, './upload_app/auth.html',
-                              {'no_face': 'Ошибка кодирования в Base64', "valid": "0", "id": f'{ID}'})
+                              {'no_face': 'Ошибка кодирования в Base64', "valid": "0", "id": f'{person.id}'})
 
         return render(request, './upload_app/auth.html',
-                      {"name":f"{name}", "valid": "0", "id": f'{ID}',
+                      {"name":f"{name}", "valid": "0", "id": f'{person.id}',
                        "no_face": "На фото не было найдено лицо"})
 
     return render(request, './upload_app/auth.html', {'header': 'Введите код приглашения'})
