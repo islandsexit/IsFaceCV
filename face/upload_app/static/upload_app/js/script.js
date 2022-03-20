@@ -52,15 +52,25 @@ $(document).ready(function () {
 					xhr.upload.addEventListener('progress',e=>{
 						// console.log(e)
 						if (e.lengthComputable){
+							
 							const percent = Math.floor(e.loaded / e.total * 100); 
+							if(percent==100){
+								percent = 89
+							}
 							console.log(percent)
-							loading[0].style.width = percent + '%';
 							console.log(loading[0].style.width)
+							if (percent < 90){
+							
+							loading[0].style.width = percent + '%';
+							
+							}
+							
 						}
 					})
 					return xhr
 				},
 				success: function(response){
+					loading[0].style.width = 100 + '%';
 					console.log(response)
 					btnOuter.addClass("file_uploaded");
 					$("#uploaded_view").append('<img src="' + uploadedFileURL + '" />').addClass("show")
@@ -97,9 +107,9 @@ $(document).ready(function () {
 
 
 
-	btn_submit.addEventListener('click', () => {
+	// btn_submit.addEventListener('click', () => {
 		
-	})
+	// })
 
 
 
