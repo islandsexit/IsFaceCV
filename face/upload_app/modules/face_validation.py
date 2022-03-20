@@ -34,10 +34,11 @@ def resizing(img, new_width=None, new_height=None, interp=cv2.INTER_LINEAR):
 
 def isFace_in_img(imgMem):
     try:
-        img = cv2.imdecode(np.fromstring(imgMem.read(), np.uint8), cv2.IMREAD_UNCHANGED)
+        
+        img = cv2.imdecode(np.fromstring(imgMem.file.read(), np.uint8), cv2.IMREAD_UNCHANGED)
         img = resizing(img, new_width=None, new_height=450)
     except Exception as e:
-        print('error')
+        print(e)
     try:
         for flip in range(1, 10, 1):
             img = fix_orientation(img, flip)
@@ -64,6 +65,7 @@ def isFace_in_img(imgMem):
                                             if True:  # count_my_ey:
                                                 return img_face, True
     except Exception as e:
+        print(e)
         return 12, False
     return 12, False
 
@@ -113,7 +115,7 @@ def img_Base64(imgMem):
             encoded_string = base64.b64encode(image_file.read())
 
         os.remove(name_img)
-
+        
         return encoded_string
     except Exception as e:
         print(e)

@@ -31,7 +31,7 @@
 
 
 
-<form action="" method="POST" enctype="multipart/form-data" class="form-inline md-form", id="uplForm">
+<form action="/checkin" method="POST" enctype="multipart/form-data" class="form-inline md-form", id="uplForm">
     {% csrf_token %}
     <main class="main_full">
         <div class="container">
@@ -47,12 +47,12 @@
             </div>
             <div class="error_msg">{{no_face}}</div>
             <div class="uploaded_file_view" id="uploaded_view">
-                <span class="file_remove">X</span>
+                <!-- <span class="file_remove">X</span> -->
 
             </div>
             <div>
-                <button type="submit" name="upload_image" id="btn_submit" style="position: absolute;left: 50%;margin-right: -50%;transform: translate(-50%, -50%);background:#00b4ef;"
-                 class="btn btn-primary btn-submit">Загрузить изображение</button>
+                <!-- <button type="submit" name="upload_image" id="btn_submit" style="position: absolute;left: 50%;margin-right: -50%;transform: translate(-50%, -50%);background:#00b4ef;"
+                 class="btn btn-primary btn-submit">Загрузить изображение</button> -->
             </div>
             <div id="progress-box" class="not_vivible">
 

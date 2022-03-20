@@ -7,64 +7,106 @@ from .modules.db import active_code
 from django.http import JsonResponse
 
 
-
-
 def auth(request):
     valid = False
 
     if request.is_ajax():
-        return JsonResponse({'message':f'{request.POST, request.FILES}'})
+        face_token_ch = request.POST.get('password')
+        ID = request.POST['id']
+        name = request.POST.get('name')
+        file = request.FILES['upload_file']
+        try:
+            active, person, name = active_code(face_token_ch)
+            if False:  # active != True:
+                raise Exception('Не активный код')
 
-    #-----------------GET-------------------------
-    if request.method == 'GET':
-        
+        except e as Exception:
+            print(e)
+            return render(request, './upload_app/auth.html', {'header': 'ОШИБКА'})
 
-        # берем код для входа
-        face_token_ch = request.GET.get('password', False)
-        
-        # если отправился
-        if face_token_ch and len(face_token_ch)==6:
-            print('a')
+        img, confidence = isFace_in_img(file)
+        if confidence:
+
             try:
-                active, person, name = active_code(face_token_ch)
-                if True:#active:
-                    return render(request, './upload_app/auth.html',{'name': f'{name}', "valid": 'True', "id": f'{person.id}', "password":f'{face_token_ch}'})
-                else:
-                    return render(request, './upload_app/auth.html',{'header': f'Такого кода не существует', "valid": valid})
-                
+                img64 = img_Base64(img)
+
+                try:
+                    print('отправляю запрос')
+                    # responseVov = RQ.post('http://192.168.48.114:8080/docreateguest', data={
+                    #     "ID": person.id,
+                    #     "img64": img64,
+                    #     "name": name
+
+                    # })
+                    return JsonResponse({'result':f'SUCCESS','msg':f'Фото добавлено'})
+                    # return render(request, './upload_app/auth.html',
+                    #               {'header': str(responseVov.json()) + " img: " + str(name)})
+                    
+
+                except :
+                    # return render(request, './upload_app/auth.html',
+                    #               {'no_face': 'Ошибка на сервере Вовы', "valid": "0", "id": f'{person.id}'})
+                    return JsonResponse({'result':f'ERROR','msg':f'Ошибка на сервере Вовы'})
 
             except:
                 
+                # return render(request, './upload_app/auth.html',
+                #               {'no_face': 'Ошибка кодирования в Base64', "valid": "0", "id": f'{person.id}'})
+                return JsonResponse({'result':f'ERROR','msg':f'Ошибка кодирования Base64'})
+
+        # return render(request, './upload_app/auth.html',
+        #               {"name": f"{name}", "valid": "0", "id": f'{person.id}',
+        #                "no_face": "На фото не было найдено лицо"})
+        return JsonResponse({'result':f'ERROR','msg':f'На фото не было найдено лицо'})
+
+        return JsonResponse({'message': f'{request.POST, request.FILES}'})
+
+    # -----------------GET-------------------------
+    if request.method == 'GET':
+
+        # берем код для входа
+        face_token_ch = request.GET.get('password', False)
+
+        # если отправился
+        if face_token_ch and len(face_token_ch) == 6:
+            print('a')
+            try:
+                active, person, name = active_code(face_token_ch)
+                if True:  # active:
+                    return render(request, './upload_app/auth.html', {'name': f'{name}', "valid": 'True', "id": f'{person.id}', "password": f'{face_token_ch}'})
+                else:
+                    return render(request, './upload_app/auth.html', {'header': f'Такого кода не существует', "valid": valid})
+
+            except:
+
                 return render(request, './upload_app/auth.html',
                               {'header': f'Такого кода не существует', "valid": valid})
 
-
-
         else:
-            return render(request, './upload_app/auth.html', {'header':'Введите код',"valid": 0})
+            return render(request, './upload_app/auth.html', {'header': 'Введите код', "valid": 0})
 
-
-    #---------------------POST----------------------------
+    # ---------------------POST----------------------------
     if request.method == 'POST':
         face_token_ch = request.POST.get('password')
         ID = request.POST['id']
         name = request.POST.get('name')
         file = request.FILES['file_img']
+        print(file)
         try:
             active, person, name = active_code(face_token_ch)
-            if False:#active != True:
-                raise Exception('Не активный код') 
+            if False:  # active != True:
+                raise Exception('Не активный код')
 
-        except e as Exception: 
+        except e as Exception:
             print(e)
             return render(request, './upload_app/auth.html', {'header': 'ОШИБКА'})
 
         img, confidence = isFace_in_img(file)
 
-
         if confidence:
 
             try:
+
                 img64 = img_Base64(img)
 
                 try:
@@ -83,20 +125,16 @@ def auth(request):
                                   {'no_face': 'Ошибка на сервере Вовы', "valid": "0", "id": f'{person.id}'})
 
             except Exception as e:
+                print(e)
                 return render(request, './upload_app/auth.html',
                               {'no_face': 'Ошибка кодирования в Base64', "valid": "0", "id": f'{person.id}'})
 
         return render(request, './upload_app/auth.html',
-                      {"name":f"{name}", "valid": "0", "id": f'{person.id}',
+                      {"name": f"{name}", "valid": "0", "id": f'{person.id}',
                        "no_face": "На фото не было найдено лицо"})
 
     return render(request, './upload_app/auth.html', {'header': 'Введите код приглашения'})
 
 
-
-
-
-
 def index(request):
     return render(request, './upload_app/auth.html', {'prov': f'Null', "valid": "0"})
-

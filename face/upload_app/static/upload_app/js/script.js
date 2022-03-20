@@ -10,6 +10,7 @@ $(document).ready(function () {
 	const password = document.getElementById('password')
 	const uploadForm = document.getElementById('uplForm')
 	const bar = document.getElementsByClassName('processing_bar')
+	const error_msg = document.getElementsByClassName('error_msg')
 
 
 	var btnUpload = $("#upload_file"),
@@ -53,7 +54,7 @@ $(document).ready(function () {
 						// console.log(e)
 						if (e.lengthComputable){
 							
-							const percent = Math.floor(e.loaded / e.total * 100); 
+							var percent = Math.floor(e.loaded / e.total * 100); 
 							if(percent==100){
 								percent = 89
 							}
@@ -73,8 +74,25 @@ $(document).ready(function () {
 					loading[0].style.width = 100 + '%';
 					console.log(response)
 					btnOuter.addClass("file_uploaded");
-					$("#uploaded_view").append('<img src="' + uploadedFileURL + '" />').addClass("show")
+					// $("#uploaded_view").append('<img src="' + uploadedFileURL + '" />').addClass("show")
 					$("#btn_submit").removeClass("btn-submit")
+					$(".error_msg").text(response['msg'])
+					if (response['result']=='ERROR'){
+						setTimeout(function () {
+							location.reload(false);
+							 }, 2000);
+					
+					}
+					else{
+						error_msg[0].style.color='green'
+						$(".error_msg").text(response['msg'])
+						// setTimeout(function () {
+						// 	window.location('/checkin');
+						// 	 }, 2000);
+						
+						
+					}
+					
 				},
 				error: function(error){
 					console.log(error)
