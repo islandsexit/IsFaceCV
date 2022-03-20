@@ -4,12 +4,16 @@ from .modules.face_validation import img_Base64
 import requests as RQ
 from django.shortcuts import render
 from .modules.db import active_code
+from django.http import JsonResponse
 
 
 
 
 def auth(request):
     valid = False
+
+    if request.is_ajax():
+        return JsonResponse({'message':f'{request.POST, request.FILES}'})
 
     #-----------------GET-------------------------
     if request.method == 'GET':
