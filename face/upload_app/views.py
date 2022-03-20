@@ -29,15 +29,15 @@ def auth(request):
                     return render(request, './upload_app/auth.html',{'header': f'Такого кода не существует', "valid": valid})
                 
 
-            except Exception as e:
-                print(e)
+            except:
+                
                 return render(request, './upload_app/auth.html',
                               {'header': f'Такого кода не существует', "valid": valid})
 
 
 
         else:
-            return render(request, './upload_app/auth.html', {"valid": 0})
+            return render(request, './upload_app/auth.html', {'header':'Введите код',"valid": 0})
 
 
     #---------------------POST----------------------------
