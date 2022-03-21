@@ -1,6 +1,6 @@
 
 $(document).ready(function () {
-	console.log("ready DOM");
+	console.log("ready DOMMM");
 
 	const progressBox = document.getElementById('progress-box')
 	const btn_submit = document.getElementById('btn_submit')
@@ -11,8 +11,9 @@ $(document).ready(function () {
 	const uploadForm = document.getElementById('uplForm')
 	const bar = document.getElementsByClassName('processing_bar')
 	const error_msg = document.getElementsByClassName('error_msg')
-
-
+	const status_bar = document.getElementsByClassName('status_uploading')
+	status_bar[0].style.width = 50+'%';
+	console.log(status_bar[0].style)
 	var btnUpload = $("#upload_file"),
 		btnOuter = $(".button_outer");
 	btnUpload.on("change", function (e) {

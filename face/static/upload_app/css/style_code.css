@@ -1,9 +1,22 @@
 
 body {
-    /* display: flex; */
+    display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     height: 100vh;
+}
+
+.row{
+    
+}
+.container{
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    position: absolute;
+    top: 31%;
+    flex-direction: column;
+    
 }
 
 .kv-avatar .krajee-default.file-preview-frame,.kv-avatar .krajee-default.file-preview-frame:hover {

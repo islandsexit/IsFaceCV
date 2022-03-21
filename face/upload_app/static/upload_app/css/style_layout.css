@@ -1,4 +1,4 @@
-/* .body{
+.body{
     display: block;
 }
 
@@ -7,15 +7,16 @@
     background: #00b4ef;
     border-radius: 30px;
     text-align: center;
-    height: 50px;
-    width: 200px;
+    height: 10px;
+    width: 10%;
     display: inline-block;
     transition: .2s;
     position: relative;
     overflow: hidden;
+    margin-right: auto;
 }
 
-.status_uploading {
+/* .status_uploading {
     transform: rotate(180deg);
     flex: 0 5vw;
     order: -1;
@@ -25,4 +26,6 @@
     margin-left:4vh;
     margin-right:4vh;
     background: #ccc;
-} */
+} 
+dddddddddddddddddddd
+*/ 
