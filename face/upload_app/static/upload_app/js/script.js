@@ -86,7 +86,7 @@ $(document).ready(function () {
 					if (response['result']=='ERROR'){
 						setTimeout(function () {
 							location.reload(false);
-							 }, 2000);
+							 }, 3000);
 					
 					}
 					else{
