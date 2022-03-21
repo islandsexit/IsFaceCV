@@ -6,9 +6,6 @@ body {
     height: 100vh;
 }
 
-.row{
-    
-}
 .container{
     display: flex;
     /* align-items: center; */

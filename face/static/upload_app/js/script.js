@@ -64,8 +64,13 @@ $(document).ready(function () {
 							if (percent < 90){
 							
 							loading[0].style.width = percent + '%';
+							if (percent>50){
+								status_bar[0].style.width = percent +'%';
+								
+							}
 							
 							}
+
 							
 						}
 					})
@@ -75,6 +80,7 @@ $(document).ready(function () {
 					loading[0].style.width = 100 + '%';
 					console.log(response)
 					btnOuter.addClass("file_uploaded");
+					status_bar[0].style.display = 'none'
 					// $("#uploaded_view").append('<img src="' + uploadedFileURL + '" />').addClass("show")
 					$("#btn_submit").removeClass("btn-submit")
 					$(".error_msg").text(response['msg'])

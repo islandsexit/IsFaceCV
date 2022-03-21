@@ -81,11 +81,12 @@ body {
     height: 100%;
     border-radius: 30px;
     background: #00b4ef;
-    /* transition: 3s; */
+    transition: .8s;
 }
 
 .file_uploading .processing_bar {
     width: 1%;
+    transition: .8s;
 }
 
 .success_box {

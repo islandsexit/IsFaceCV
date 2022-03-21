@@ -35,6 +35,7 @@ def auth(request):
 
             try:
                 img64 = img_Base64(img)
+                print(img64)
 
                 try:
                     print('отправляю запрос')
