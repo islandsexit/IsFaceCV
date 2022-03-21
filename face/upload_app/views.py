@@ -44,7 +44,11 @@ def auth(request):
                         "name": name
 
                     })
-                    return JsonResponse({'result':f'SUCCESS','msg':f'Фото добавлено'})
+                    responseServ = responseVov.json()
+                    result = responseServ['SUCCESS']
+                    msg = responseServ['DESC']
+                    
+                    return JsonResponse({'result':f'{result}','msg':f'{msg}'})
                     # return render(request, './upload_app/auth.html',
                     #               {'header': str(responseVov.json()) + " img: " + str(name)})
                     
