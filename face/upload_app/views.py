@@ -1,6 +1,5 @@
 from logging import raiseExceptions
 
-from sympy import re
 from .modules.face_validation import isFace_in_img
 from .modules.face_validation import img_Base64
 import requests as RQ
