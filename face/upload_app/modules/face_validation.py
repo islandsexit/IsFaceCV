@@ -105,8 +105,8 @@ def fix_orientation(image, orientation):
 def img_Base64(imgMem):
     try:
 
-        #name_img = str('/home/vig/django/IsFaceCV/face/upload_app/temp/') + str(uuid.uuid4()) + '.png'
-        name_img = str(uuid.uuid4()) + '.png'
+        name_img = str('/home/vig/django/IsFaceCV/face/upload_app/temp/') + str(uuid.uuid4()) + '.png'
+        #name_img = str(uuid.uuid4()) + '.png'
 
         cv2.imwrite(name_img, imgMem)
 

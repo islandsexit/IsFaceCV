@@ -38,12 +38,12 @@ def auth(request):
 
                 try:
                     print('отправляю запрос')
-                    # responseVov = RQ.post('http://192.168.48.114:8080/docreateguest', data={
-                    #     "ID": person.id,
-                    #     "img64": img64,
-                    #     "name": name
+                    responseVov = RQ.post('http://192.168.48.114:8080/docreateguest', data={
+                        "ID": person.id,
+                        "img64": img64,
+                        "name": name
 
-                    # })
+                    })
                     return JsonResponse({'result':f'SUCCESS','msg':f'Фото добавлено'})
                     # return render(request, './upload_app/auth.html',
                     #               {'header': str(responseVov.json()) + " img: " + str(name)})
