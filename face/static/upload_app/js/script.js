@@ -83,10 +83,11 @@ $(document).ready(function () {
 					// $("#uploaded_view").append('<img src="' + uploadedFileURL + '" />').addClass("show")
 					$("#btn_submit").removeClass("btn-submit")
 					$(".error_msg").text(response['msg'])
+					loading[0].style.display = 'none';
 					if (response['result']=='ERROR'){
 						setTimeout(function () {
 							location.reload(false);
-							 }, 2000);
+							 }, 3000);
 					
 					}
 					else{
