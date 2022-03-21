@@ -77,13 +77,13 @@ $(document).ready(function () {
 					return xhr
 				},
 				success: function(response){
-					loading[0].style.width = 100 + '%';
+					status_bar[0].style.width = 100 + '%';
 					console.log(response)
 					btnOuter.addClass("file_uploaded");
 					// $("#uploaded_view").append('<img src="' + uploadedFileURL + '" />').addClass("show")
 					$("#btn_submit").removeClass("btn-submit")
 					$(".error_msg").text(response['msg'])
-					loading[0].style.display = 'none';
+					status_bar[0].style.display = 'none';
 					if (response['result']=='ERROR'){
 						setTimeout(function () {
 							location.reload(false);
