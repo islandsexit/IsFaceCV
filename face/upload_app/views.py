@@ -5,6 +5,11 @@ import requests as RQ
 from django.shortcuts import render
 from .modules.db import active_code
 from django.http import JsonResponse
+from django.shortcuts import HttpResponse
+
+
+def is_ajax(request):
+    return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
 
 
 def auth(request):
