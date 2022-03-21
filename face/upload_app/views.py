@@ -45,7 +45,7 @@ def auth(request):
 
                     })
                     responseServ = responseVov.json()
-                    result = responseServ['SUCCESS']
+                    result = responseServ['RESULT']
                     msg = responseServ['DESC']
                     
                     return JsonResponse({'result':f'{result}','msg':f'{msg}'})
