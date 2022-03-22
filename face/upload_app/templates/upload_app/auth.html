@@ -37,12 +37,20 @@
         <div class="container">
             <div class="panel">
                 <div class="button_outer">
-                    <div class="btn_upload">
+                    <div class="success_box"></div>
+                    <div class="btn_upload" >
+                        <div id='input_div'>
                         <input type="file" id="upload_file" accept=".png, .jpg, .jpeg" name="file_img">
                         Ваше фото
+                        </div>
+                        <div id='spinner'>
+                        <span class="spinner-border spinner-border-sm " id='spinner1' role="status" aria-hidden="true"></span>
+                        <span class="sr-only " id='spinner2' >Loading...</span>
+                        </div>
+                    </div>
                     </div>
                     <div class="processing_bar" style='display:none;'></div>
-                    <div class="success_box"></div>
+                    
                 </div>
             </div>
             <div class="error_msg">{{no_face}}</div>

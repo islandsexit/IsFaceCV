@@ -1,5 +1,6 @@
 
 $(document).ready(function () {
+
 	console.log("ready DOMMM");
 
 	const progressBox = document.getElementById('progress-box')
@@ -12,6 +13,7 @@ $(document).ready(function () {
 	const bar = document.getElementsByClassName('processing_bar')
 	const error_msg = document.getElementsByClassName('error_msg')
 	const status_bar = document.getElementsByClassName('status_uploading')
+	document.getElementById('spinner').style.display = 'none'
 	status_bar[0].style.width = 50+'%';
 	console.log(status_bar[0].style)
 	var btnUpload = $("#upload_file"),
@@ -26,9 +28,10 @@ $(document).ready(function () {
 		}
 		else {
 			$(".error_msg").text("");
-
-			btnOuter.addClass("file_uploading");
 			const loading = document.getElementsByClassName('processing_bar')
+			// btnOuter.addClass("file_uploading");
+			document.getElementById('input_div').style.display = 'none'
+			document.getElementById('spinner').style.display = 'block'
 
 			const uploadedFile = e.target.files[0];
 			
@@ -77,17 +80,19 @@ $(document).ready(function () {
 					return xhr
 				},
 				success: function(response){
-					loading[0].style.width = 100 + '%';
+					document.getElementById('input_div').style.display = 'block'
+					document.getElementById('spinner').style.display='none'
+					status_bar[0].style.width = 100 + '%';
 					console.log(response)
 					btnOuter.addClass("file_uploaded");
 					// $("#uploaded_view").append('<img src="' + uploadedFileURL + '" />').addClass("show")
 					$("#btn_submit").removeClass("btn-submit")
 					$(".error_msg").text(response['msg'])
-					loading[0].style.display = 'none';
+					status_bar[0].style.display = 'none';
 					if (response['result']=='ERROR'){
 						setTimeout(function () {
 							location.reload(false);
-							 }, 3000);
+							 }, 300000);
 					
 					}
 					else{
@@ -102,7 +107,16 @@ $(document).ready(function () {
 					
 				},
 				error: function(error){
-					console.log(error)
+					document.getElementById('spinner').style.display='none'
+					status_bar[0].style.width = 100 + '%';
+					console.log(response)
+					btnOuter.addClass("file_uploaded");
+					// $("#uploaded_view").append('<img src="' + uploadedFileURL + '" />').addClass("show")
+					$("#btn_submit").removeClass("btn-submit")
+					$(".error_msg").text('Ошибка отпраки фото на сервер')
+					setTimeout(function () {
+						location.reload(false);
+						 }, 3000);
 				},
 				cache: false,
 				contentType:false,
