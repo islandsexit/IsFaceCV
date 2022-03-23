@@ -26,7 +26,7 @@ def auth(request):
             if False:  # active != True:
                 raise Exception('Не активный код')
 
-        except e as Exception:
+        except Exception as e:
             print(e)
             return render(request, './upload_app/auth.html', {'header': 'ОШИБКА'})
 

@@ -3,19 +3,19 @@ $(document).ready(function () {
 
 	console.log("ready DOMMM");
 
-	const progressBox = document.getElementById('progress-box')
+	// const progressBox = document.getElementById('progress-box')
 	const btn_submit = document.getElementById('btn_submit')
 	const csrf = document.getElementsByName('csrfmiddlewaretoken')
 	const id = document.getElementById('id')
 	const name = document.getElementById('name')
 	const password = document.getElementById('password')
 	const uploadForm = document.getElementById('uplForm')
-	const bar = document.getElementsByClassName('processing_bar')
-	const error_msg = document.getElementsByClassName('error_msg')
-	const status_bar = document.getElementsByClassName('status_uploading')
+	// const bar = document.getElementsByClassName('processing_bar')
+	// const error_msg = document.getElementsByClassName('error_msg')
+	// const status_bar = document.getElementsByClassName('status_uploading')
 	document.getElementById('spinner').style.display = 'none'
-	status_bar[0].style.width = 50+'%';
-	console.log(status_bar[0].style)
+	// status_bar[0].style.width = 50+'%';
+	// console.log(status_bar[0].style)
 	var btnUpload = $("#upload_file"),
 		btnOuter = $(".button_outer");
 	btnUpload.on("change", function (e) {
@@ -41,7 +41,7 @@ $(document).ready(function () {
 			fd.append('upload_file', uploadedFile)
 			fd.append('id', id.value)
 			fd.append('name', name.value)
-			fd.append('password', password.value)
+			fd.append('invite_code', password.value)
 			var uploadedFileURL = URL.createObjectURL(uploadedFile)
 			
 			$.ajax({
@@ -56,39 +56,39 @@ $(document).ready(function () {
 					const xhr = new window.XMLHttpRequest();
 					xhr.upload.addEventListener('progress',e=>{
 						// console.log(e)
-						if (e.lengthComputable){
+						// if (e.lengthComputable){
 							
-							var percent = Math.floor(e.loaded / e.total * 100); 
-							if(percent==100){
-								percent = 89
-							}
-							console.log(percent)
-							console.log(loading[0].style.width)
-							if (percent < 90){
+						// 	var percent = Math.floor(e.loaded / e.total * 100); 
+						// 	if(percent==100){
+						// 		percent = 89
+						// 	}
+						// 	console.log(percent)
+						// 	console.log(loading[0].style.width)
+						// 	if (percent < 90){
 							
-							loading[0].style.width = percent + '%';
-							if (percent>50){
-								status_bar[0].style.width = percent +'%';
+						// 	loading[0].style.width = percent + '%';
+						// 	if (percent>50){
+						// 		status_bar[0].style.width = percent +'%';
 								
-							}
+						// 	}
 							
-							}
+						// 	}
 
 							
-						}
+						// }
 					})
 					return xhr
 				},
 				success: function(response){
 					document.getElementById('input_div').style.display = 'block'
 					document.getElementById('spinner').style.display='none'
-					status_bar[0].style.width = 100 + '%';
+					// status_bar[0].style.width = 100 + '%';
 					console.log(response)
 					btnOuter.addClass("file_uploaded");
 					// $("#uploaded_view").append('<img src="' + uploadedFileURL + '" />').addClass("show")
 					$("#btn_submit").removeClass("btn-submit")
 					$(".error_msg").text(response['msg'])
-					status_bar[0].style.display = 'none';
+					// status_bar[0].style.display = 'none';
 					if (response['result']=='ERROR'){
 						setTimeout(function () {
 							location.reload(false);

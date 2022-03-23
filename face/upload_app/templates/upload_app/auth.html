@@ -1,92 +1,85 @@
-{% extends './layout.html' %}
+{% comment %} {% extends './layout.html' %} {% endcomment %}
 {% load static %}
 
 
-{% block content %}
+{% if valid%}
 
-{% if not valid %}
-<div class="container">
-    <div class="row">
-
-        <div class="container-fluid">
-            <form class="form-horizontal" action="/checkin" method="GET" enctype="multipart/form-data"
-                oninput="6===event.target.value.length&amp;&amp;this.submit()">
-                <span class="heading">{{header}}</span>
-                <div class="form-group help">
-                    <input type="text" class="form-control" id="password" name="password" placeholder="Код приглашения"
-                        maxlength="6" pattern="[0-9]*" inputmode="numeric" x-inputmode="numeric" data-error=""
-                        oninput="this.value=this.value.replace(/[^0-9]/,&quot;&quot;)">
-                    <i class="fa fa-envelope-o"></i>
-                    <a href="" class="fa fa-question-circle"></a>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-default">ВХОД</button>
-                </div>
-            </form>
-        </div>
-
-    </div><!-- /.row -->
-</div>
-{% else %}
-
-
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=yes">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" /> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" /> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/jquery.inputmask.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-mockjax@2.2.2/src/jquery.mockjax.min.js"></script>
+    <link rel="stylesheet" href = {% static 'upload_app/css/style_uploading.css' %} />
+<script src={% static 'upload_app/js/script.js' %} defer></script>
+    {% comment %} <script src="script.js"></script> {% endcomment %}
+    <title>Document</title>
+</head>
+<body>
+  <div class="content">
+    <div class="container">
+        <h1>Добавьте фото лица</h1>
 <form action="/checkin" method="POST" enctype="multipart/form-data" class="form-inline md-form", id="uplForm">
-    {% csrf_token %}
-    <main class="main_full">
-        <div class="container">
-            <div class="panel">
-                <div class="button_outer">
-                    <div class="success_box"></div>
-                    <div class="btn_upload" >
-                        <div id='input_div'>
-                        <input type="file" id="upload_file" accept=".png, .jpg, .jpeg" name="file_img">
-                        Ваше фото
-                        </div>
-                        <div id='spinner'>
-                        <span class="spinner-border spinner-border-sm " id='spinner1' role="status" aria-hidden="true"></span>
-                        <span class="sr-only " id='spinner2' >Loading...</span>
-                        </div>
-                    </div>
-                    </div>
-                    <div class="processing_bar" style='display:none;'></div>
-                    
-                </div>
-            </div>
-            <div class="error_msg">{{no_face}}</div>
-            <div class="uploaded_file_view" id="uploaded_view">
-                <!-- <span class="file_remove">X</span> -->
+  {% csrf_token %}
 
-            </div>
-            <div>
-                <!-- <button type="submit" name="upload_image" id="btn_submit" style="position: absolute;left: 50%;margin-right: -50%;transform: translate(-50%, -50%);background:#00b4ef;"
-                 class="btn btn-primary btn-submit">Загрузить изображение</button> -->
-            </div>
-            <div id="progress-box" class="not_vivible">
+          <div class="panel" style="margin: 50px auto 40px;">
+              <div class="button_outer">
+                  <div class="success_box"></div>
+                  <div class="btn_upload" >
+                      <div id='input_div' style="padding: 5px;">
+                      <input type="file" id="upload_file" accept=".png, .jpg, .jpeg" name="file_img">
+                      Ваше фото
+                      </div>
+                      <div id='spinner'>
+                      <span class="spinner-border spinner-border-sm " id='spinner1' role="status" aria-hidden="true"></span>
+                      <span class="sr-only " id='spinner2' ></span>
+                      </div>
+                  </div>
+                  </div>
+                  <div class="processing_bar" style='display:none;'></div>
+                  
+              </div>
+              <div class="error_msg">{{no_face}}</div>
+          </div>
+          
+          <!-- <div class="uploaded_file_view" id="uploaded_view"> -->
+              <!-- <span class="file_remove">X</span> -->
 
-            </div>
-        </div>
+          </div>
+          <div>
+              <!-- <button type="submit" name="upload_image" id="btn_submit" style="position: absolute;left: 50%;margin-right: -50%;transform: translate(-50%, -50%);background:#00b4ef;"
+               class="btn btn-primary btn-submit">Загрузить изображение</button> -->
+          </div>
+          <div id="progress-box" class="not_vivible">
 
-    </main>
-    <input id="id" name="id" style="display:none;" value="{{id}}">
-    <input id="name" name="name" style="display:none;" value="{{name}}">
-    <input id="password" name="invite_code" style="display:none;" value="{{password}}">
+          </div>
+
+  <input id="id" name="id" style="display:none;" value="{{id}}">
+  <input id="name" name="name" style="display:none;" value="{{name}}">
+  <input id="password" name="invite_code" style="display:none;" value="{{password}}">
 </form>
 
-
-{% endif %}
-
-
-
-
-
-{%if not valid %}
-<link rel="stylesheet" href = {% static 'upload_app/css/style_code.css' %} />
-{% else %}
-<link rel="stylesheet" href = {% static 'upload_app/css/style_uploading.css' %} />
-<script src={% static 'upload_app/js/script.js' %} defer></script>
-
-{% endif %}
+      </div>
+  </div>
+  <form id="form-horizontal" action="/checkin" method="GET" enctype="multipart/form-data" style="display:none;" >
+    <input type="text" class="form-control" id="password" value="0">
+    <button type="submit" class="btn btn-default" id="btn_sbm"></button>
+  </form>
+</body>
+</html>
 
 
-{% endblock %}
+
+
+
+
+
+
+{% endif%}
