@@ -37,7 +37,7 @@ $(document).ready(function () {
 			
 			const fd = new FormData;
 
-			fd.append('csrfmiddlewaretoken', csrf[0].value)
+			// fd.append('csrfmiddlewaretoken', csrf[0].value)
 			fd.append('upload_file', uploadedFile)
 			fd.append('id', id.value)
 			fd.append('name', name.value)
@@ -55,6 +55,10 @@ $(document).ready(function () {
 				xhr: function(){
 					const xhr = new window.XMLHttpRequest();
 					xhr.upload.addEventListener('progress',e=>{
+						$("#h1_text").addClass('extra_h1')
+						setTimeout(function(){
+							$("#h1_text").removeClass('extra_h1')
+						},100)
 						// console.log(e)
 						// if (e.lengthComputable){
 							
@@ -109,8 +113,8 @@ $(document).ready(function () {
 				},
 				error: function(error){
 					document.getElementById('spinner').style.display='none'
-					status_bar[0].style.width = 100 + '%';
-					console.log(response)
+					// status_bar[0].style.width = 100 + '%';
+					
 					btnOuter.addClass("file_uploaded");
 					// $("#uploaded_view").append('<img src="' + uploadedFileURL + '" />').addClass("show")
 					$("#btn_submit").removeClass("btn-submit")

@@ -217,6 +217,18 @@ input {
     width: 50%;
     margin: 20px auto 0;
     padding: 0;
+    transition: 0.1s;
+}
+
+.container .extra_h1::after{
+    display: block;
+    background: #000;
+    content: '';
+    height: 3px;
+    width: 60%;
+    margin: 20px auto 0;
+    padding: 0;
+    transition: 0.1s;
 }
 
 .button--primary[disabled] {
@@ -346,7 +358,7 @@ input {
 .file_uploaded {
     margin-top: 0;
     width: 50px;
-    background: #663faa;
+    background: #00b4ef;
     height: 50px;
 }
 
@@ -390,6 +402,7 @@ input {
 }
 
 .error_msg {
+    margin-top:35px;
     text-align: center;
     color: #f00
 }
