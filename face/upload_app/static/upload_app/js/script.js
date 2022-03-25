@@ -6,12 +6,13 @@ $(document).ready(function () {
 	// const progressBox = document.getElementById('progress-box')
 	const btn_submit = document.getElementById('btn_submit')
 	const csrf = document.getElementsByName('csrfmiddlewaretoken')
+	console.log(csrf[0].value)
 	const id = document.getElementById('id')
 	const name = document.getElementById('name')
 	const password = document.getElementById('password')
 	const uploadForm = document.getElementById('uplForm')
 	// const bar = document.getElementsByClassName('processing_bar')
-	// const error_msg = document.getElementsByClassName('error_msg')
+	const error_msg = document.getElementsByClassName('error_msg')
 	// const status_bar = document.getElementsByClassName('status_uploading')
 	document.getElementById('spinner').style.display = 'none'
 	// status_bar[0].style.width = 50+'%';
@@ -37,12 +38,12 @@ $(document).ready(function () {
 			
 			const fd = new FormData;
 
-			// fd.append('csrfmiddlewaretoken', csrf[0].value)
+			fd.append('csrfmiddlewaretoken', csrf[0].value)
 			fd.append('upload_file', uploadedFile)
 			fd.append('id', id.value)
 			fd.append('name', name.value)
 			fd.append('invite_code', password.value)
-			var uploadedFileURL = URL.createObjectURL(uploadedFile)
+			//var uploadedFileURL = URL.createObjectURL(uploadedFile)
 			
 			$.ajax({
 				type:'POST',

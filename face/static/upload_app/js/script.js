@@ -6,12 +6,13 @@ $(document).ready(function () {
 	// const progressBox = document.getElementById('progress-box')
 	const btn_submit = document.getElementById('btn_submit')
 	const csrf = document.getElementsByName('csrfmiddlewaretoken')
+	console.log(csrf[0].value)
 	const id = document.getElementById('id')
 	const name = document.getElementById('name')
 	const password = document.getElementById('password')
 	const uploadForm = document.getElementById('uplForm')
 	// const bar = document.getElementsByClassName('processing_bar')
-	// const error_msg = document.getElementsByClassName('error_msg')
+	const error_msg = document.getElementsByClassName('error_msg')
 	// const status_bar = document.getElementsByClassName('status_uploading')
 	document.getElementById('spinner').style.display = 'none'
 	// status_bar[0].style.width = 50+'%';
@@ -42,7 +43,7 @@ $(document).ready(function () {
 			fd.append('id', id.value)
 			fd.append('name', name.value)
 			fd.append('invite_code', password.value)
-			var uploadedFileURL = URL.createObjectURL(uploadedFile)
+			//var uploadedFileURL = URL.createObjectURL(uploadedFile)
 			
 			$.ajax({
 				type:'POST',
@@ -55,6 +56,10 @@ $(document).ready(function () {
 				xhr: function(){
 					const xhr = new window.XMLHttpRequest();
 					xhr.upload.addEventListener('progress',e=>{
+						$("#h1_text").addClass('extra_h1')
+						setTimeout(function(){
+							$("#h1_text").removeClass('extra_h1')
+						},100)
 						// console.log(e)
 						// if (e.lengthComputable){
 							
@@ -109,8 +114,8 @@ $(document).ready(function () {
 				},
 				error: function(error){
 					document.getElementById('spinner').style.display='none'
-					status_bar[0].style.width = 100 + '%';
-					console.log(response)
+					// status_bar[0].style.width = 100 + '%';
+					
 					btnOuter.addClass("file_uploaded");
 					// $("#uploaded_view").append('<img src="' + uploadedFileURL + '" />').addClass("show")
 					$("#btn_submit").removeClass("btn-submit")
