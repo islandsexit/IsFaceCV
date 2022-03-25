@@ -57,7 +57,7 @@ def isFace_in_img(imgMem):
                                 count_ey = 0
                                 count_my_ey = False
                                 for (ex, ey, ew, eh) in eyes:
-                                    if ey - my > 60:
+                                    if True:#ey - my > 60:
                                         count_my_ey = True
                                     if True:  # 140 < ey < 320:
                                         count_ey = count_ey + 1

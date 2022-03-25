@@ -35,10 +35,10 @@ def auth(request):
 
             try:
                 img64 = img_Base64(img)
-                print(img64)
+               # print(img64)
 
                 try:
-                    print('отправляю запрос')
+                    #print('отправляю запрос')
                     responseVov = RQ.post('http://192.168.48.114:8080/docreateguest', data={
                         "ID": person.id,
                         "img64": img64,
@@ -77,11 +77,11 @@ def auth(request):
 
         # берем код для входа
         face_token_ch = request.GET.get('invite_code', False)
-        print('face_code',face_token_ch)
-        print(request.GET)
+        # print('face_code',face_token_ch)
+        # print(request.GET)
         # если отправился
         if face_token_ch and len(face_token_ch) == 6:
-            print('a')
+            #print('a')
             try:
                 active, person, name = active_code(face_token_ch)
                 if True:  # active:
