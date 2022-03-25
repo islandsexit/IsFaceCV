@@ -86,7 +86,7 @@ label {
 }
 
 .container{
-    zoom:2;
+    zoom:1.5;
     display: inline-block;
     vertical-align: middle;
 	margin: auto;
