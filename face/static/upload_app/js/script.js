@@ -106,7 +106,14 @@ $(document).ready(function () {
 
 					
 					$('#second_step').removeClass('active')
-					
+					$('.step').each(function(index, element) {
+						// element == this
+						$(element).not('.active').addClass('done');
+						$('.done').html('<i class="icon-ok"></i>');
+						if($(this).is('.active')) {
+						  return false;
+						}
+					  });
 
 					// $("#uploaded_view").append('<img src="' + uploadedFileURL + '" />').addClass("show")
 					$("#btn_submit").removeClass("btn-submit")
