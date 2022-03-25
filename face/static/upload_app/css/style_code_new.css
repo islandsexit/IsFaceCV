@@ -261,7 +261,7 @@ input {
         zoom:0;
     }
     html{
-        width:130%;
+        /* width:130%; */
     }
     body{
 
@@ -326,7 +326,6 @@ input {
     font-weight: 600;
     text-align: center;
     line-height: 35px;
-    transition: 0.3s;
   }
   .step:first-child {
     /* line-height: 40px; */
@@ -342,7 +341,6 @@ input {
     background-color: white;
     transform: translate(-95px, 21px);
     content: '';  
-    transition: 0.3s;
   }
   .step:after {
     width: 150px;
