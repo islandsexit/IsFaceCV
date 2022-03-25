@@ -16,7 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-mockjax@2.2.2/src/jquery.mockjax.min.js"></script>
     <link rel="stylesheet" href = {% static 'upload_app/css/style_code_new.css' %} /> 
     <script src={% static 'upload_app/js/script_code.js' %} defer></script>
-    
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
@@ -42,6 +42,13 @@
             </a>
           </div>
         </form>
+      </div>
+      <div id="steps">
+        <div class="step" id="first_step" data-desc="Аутентификация">1</div>
+        <div class="step" id="second_step" data-desc="Добавление фото">2</div>
+        <div class="step" id="third_step" data-desc="Пропуск готов">3</div>
+       
+      </div>
       </div>
   </div>
   <form id="form-horizontal" action="/checkin" method="GET" enctype="multipart/form-data" style="display:none;" >

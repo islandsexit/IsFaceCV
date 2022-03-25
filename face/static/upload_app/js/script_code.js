@@ -14,6 +14,16 @@ $(function () {
     //   responseTime: 1000
     // });
   
+    $('#first_step').addClass('active')
+
+    $('.step').each(function(index, element) {
+      // element == this
+      $(element).not('.active').addClass('done');
+      $('.done').html('<i class="icon-ok"></i>');
+      if($(this).is('.active')) {
+        return false;
+      }
+    }); 
   
   
     // pincode
@@ -308,6 +318,18 @@ $(function () {
       .inputmask({
         oncomplete: function () {
           // add sixth character
+          $('#first_step').removeClass('active')
+          $('#second_step').addClass('active')
+
+          $('.step').each(function(index, element) {
+            // element == this
+            $(element).not('.active').addClass('done');
+            $('.done').html('<i class="icon-ok"></i>');
+            if($(this).is('.active')) {
+              return false;
+            }
+          }); 
+
           _pincode.push($(this).val());
           
           
