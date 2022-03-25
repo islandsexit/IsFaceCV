@@ -24,54 +24,62 @@
 </head>
 <body>
   <div class="content">
-    <div class="container">
-        <h1>Добавьте фото лица</h1>
-<form action="/checkin" method="POST" enctype="multipart/form-data" class="form-inline md-form", id="uplForm">
-  {% csrf_token %}
+        <div class="container">
+                <h1>Добавьте фото лица</h1>
+            <form action="/checkin" method="POST" enctype="multipart/form-data" class="form-inline md-form", id="uplForm">
+                {% csrf_token %}
 
-          <div class="panel" style="margin: 50px auto 40px;">
-              <div class="button_outer">
-                  <div class="success_box"></div>
-                  <div class="btn_upload" >
-                      <div id='input_div' style="padding: 5px;">
-                      <input type="file" id="upload_file" accept=".png, .jpg, .jpeg" name="file_img">
-                      Ваше фото
-                      </div>
-                      <div id='spinner'>
-                      <span class="spinner-border spinner-border-sm " id='spinner1' role="status" aria-hidden="true"></span>
-                      <span class="sr-only " id='spinner2' ></span>
-                      </div>
-                  </div>
-                  </div>
-                  <div class="processing_bar" style='display:none;'></div>
-                  
-              </div>
-              <div class="error_msg">{{no_face}}</div>
-          </div>
-          
-          <!-- <div class="uploaded_file_view" id="uploaded_view"> -->
-              <!-- <span class="file_remove">X</span> -->
+                    <div class="panel" style="margin: 50px auto 40px;">
+                        <div class="button_outer">
+                            <div class="success_box"></div>
+                            <div class="btn_upload" >
+                                <div id='input_div' style="padding: 5px;">
+                                <input type="file" id="upload_file" accept=".png, .jpg, .jpeg" name="file_img">
+                                Ваше фото
+                                </div>
+                                <div id='spinner'>
+                                <span class="spinner-border spinner-border-sm " id='spinner1' role="status" aria-hidden="true"></span>
+                                <span class="sr-only " id='spinner2' ></span>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="processing_bar" style='display:none;'></div>
+                            
+                        </div>
+                        <div class="error_msg">{{no_face}}</div>
+                    </div>
+                    
+                    <!-- <div class="uploaded_file_view" id="uploaded_view"> -->
+                        <!-- <span class="file_remove">X</span> -->
+                        <div id="steps">
+                            <div class="step" id="first_step" data-desc="Аутентификация">1</div>
+                            <div class="step" id="second_step" data-desc="Добавление фото">2</div>
+                            <div class="step" id="third_step" data-desc="Пропуск готов">3</div>
+                        
+                        </div>
+                    </div>
 
-          </div>
-          <div>
-              <!-- <button type="submit" name="upload_image" id="btn_submit" style="position: absolute;left: 50%;margin-right: -50%;transform: translate(-50%, -50%);background:#00b4ef;"
-               class="btn btn-primary btn-submit">Загрузить изображение</button> -->
-          </div>
-          <div id="progress-box" class="not_vivible">
+                    <div>
+                        <!-- <button type="submit" name="upload_image" id="btn_submit" style="position: absolute;left: 50%;margin-right: -50%;transform: translate(-50%, -50%);background:#00b4ef;"
+                        class="btn btn-primary btn-submit">Загрузить изображение</button> -->
+                    </div>
+                    <div id="progress-box" class="not_vivible">
 
-          </div>
+                    </div>
 
-  <input id="id" name="id" style="display:none;" value="{{id}}">
-  <input id="name" name="name" style="display:none;" value="{{name}}">
-  <input id="password" name="invite_code" style="display:none;" value="{{password}}">
-</form>
+                <input id="id" name="id" style="display:none;" value="{{id}}">
+                <input id="name" name="name" style="display:none;" value="{{name}}">
+                <input id="password" name="invite_code" style="display:none;" value="{{password}}">
+            </form>
 
-      </div>
+        </div>
+
+
   </div>
-  <form id="form-horizontal" action="/checkin" method="GET" enctype="multipart/form-data" style="display:none;" >
-    <input type="text" class="form-control" id="password" value="0">
-    <button type="submit" class="btn btn-default" id="btn_sbm"></button>
-  </form>
+        <form id="form-horizontal" action="/checkin" method="GET" enctype="multipart/form-data" style="display:none;" >
+            <input type="text" class="form-control" id="password" value="0">
+            <button type="submit" class="btn btn-default" id="btn_sbm"></button>
+        </form>
 </body>
 </html>
 

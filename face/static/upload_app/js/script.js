@@ -19,6 +19,19 @@ $(document).ready(function () {
 	// console.log(status_bar[0].style)
 	var btnUpload = $("#upload_file"),
 		btnOuter = $(".button_outer");
+
+	$('#second_step').addClass('active')
+
+    $('.step').each(function(index, element) {
+      // element == this
+      $(element).not('.active').addClass('done');
+      $('.done').html('<i class="icon-ok"></i>');
+      if($(this).is('.active')) {
+        return false;
+      }
+    });
+
+
 	btnUpload.on("change", function (e) {
 		console.log("if")
 		var ext = btnUpload.val().split('.').pop().toLowerCase();
@@ -90,6 +103,11 @@ $(document).ready(function () {
 					// status_bar[0].style.width = 100 + '%';
 					console.log(response)
 					btnOuter.addClass("file_uploaded");
+
+					
+					$('#second_step').removeClass('active')
+					
+
 					// $("#uploaded_view").append('<img src="' + uploadedFileURL + '" />').addClass("show")
 					$("#btn_submit").removeClass("btn-submit")
 					$(".error_msg").text(response['msg'])
