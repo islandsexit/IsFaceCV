@@ -9,7 +9,7 @@ html{
     vertical-align: middle;
 } */
 .content{
-    
+    padding:60px;
     height:100vh;
     display: flex;
     justify-content: center; /*Центрирование по горизонтали*/
