@@ -87,7 +87,7 @@ label {
 }
 
 .container{
-    zoom:1.5;
+    zoom:1;
     display: inline-block;
     vertical-align: middle;
 	margin: auto;
@@ -362,7 +362,7 @@ input {
 .file_uploaded {
     margin-top: 0;
     width: 50px;
-    background: #00b4ef;
+    background: #663faa;
     height: 50px;
 }
 
@@ -455,10 +455,10 @@ input {
     color: #CDD0DA;
     font-weight: 600;
     text-align: center;
-    line-height: 35px;
+    line-height: 30px;
   }
   .step:first-child {
-    /* line-height: 40px; */
+    line-height: 35px;
   }
   .step:nth-child(n+2) {
     margin: 0 0 0 100px;
