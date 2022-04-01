@@ -132,10 +132,12 @@ $(document).ready(function () {
 						  return false;
 						}
 					  });
-					  test.reload();
-						// setTimeout(function () {
-						// 	window.location('/checkin');
-						// 	 }, 2000);
+					 	if(test.reload()){
+						setTimeout(function () {
+							window.location('/checkin');
+							 }, 2000);
+						 }
+
 						
 						
 					}
