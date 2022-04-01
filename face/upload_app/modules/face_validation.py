@@ -37,12 +37,14 @@ def isFace_in_img(imgMem):
         
         img = cv2.imdecode(np.fromstring(imgMem.file.read(), np.uint8), cv2.IMREAD_UNCHANGED)
         img = resizing(img, new_width=None, new_height=450)
+        print(img, ' img cv2')
     except Exception as e:
         print(e)
     try:
         for flip in range(1, 10, 1):
             img = fix_orientation(img, flip)
             faces = face_cascade_db.detectMultiScale(img, 1.1, 19)
+            print(faces, 'faces')
             if faces != ():
                 for (x, y, w, h) in faces:
                     height_face_1_3=int(h/3)
@@ -63,6 +65,7 @@ def isFace_in_img(imgMem):
                                         count_ey = count_ey + 1
                                         if count_ey == 2:
                                             if True:  # count_my_ey:
+                                                print(img_face, ' img_face')
                                                 return img_face, True
     except Exception as e:
         print(e)
@@ -109,15 +112,17 @@ def img_Base64(imgMem):
         #name_img = str(uuid.uuid4()) + '.png'
 
         cv2.imwrite(name_img, imgMem)
+        print('cv2 written')
 
         with open(name_img, "rb") as image_file:
 
             encoded_string = base64.b64encode(image_file.read())
+            print(image_file, 'image_file before base64')
 
         os.remove(name_img)
         
         return encoded_string
     except Exception as e:
         print(e)
-
+    print('returned none')
     return None
