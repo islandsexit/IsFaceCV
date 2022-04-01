@@ -56,6 +56,7 @@ def isFace_in_img(imgMem):
                     print(img_face, 'img_face')
                     if img_face == []:
                         img_face = img
+                        print(img_face, 'new cropped')
                     eyes = eye_cascade.detectMultiScale(img, 1.1, 19)
                     if eyes != ():
                         mouths = mouth_cascade.detectMultiScale(img, 1.1, 19)
