@@ -51,7 +51,9 @@ def isFace_in_img(imgMem):
                     height_face_1_3=int(h/3)
                     height_face_1_6 = int(h / 6)
                     weight_face_1_6=int(w/6)
+                    print(img, 'img')
                     img_face = img[y-height_face_1_3:y+h+height_face_1_6, x-weight_face_1_6:x+w+weight_face_1_6]
+                    print(img_face, 'img_face')
                     eyes = eye_cascade.detectMultiScale(img, 1.1, 19)
                     if eyes != ():
                         mouths = mouth_cascade.detectMultiScale(img, 1.1, 19)
