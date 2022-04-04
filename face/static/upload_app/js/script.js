@@ -132,9 +132,12 @@ $(document).ready(function () {
 						  return false;
 						}
 					  });
-						// setTimeout(function () {
-						// 	window.location('/checkin');
-						// 	 }, 2000);
+					  if(test.reload() == "Hello"){
+						setTimeout(function () {
+							location.replace('/checkin');
+							 }, 2000);
+						 }
+
 						
 						
 					}
