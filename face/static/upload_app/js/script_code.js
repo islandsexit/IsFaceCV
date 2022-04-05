@@ -1,6 +1,6 @@
 $(function () {
     // setting
-    var debug = false;
+    var debug = true;
   
     // fake ajax request
     // $.mockjax({
@@ -38,6 +38,10 @@ $(function () {
   
     // all input fields
     var $inputs = $group.find(':input');
+    // $inputs.splice(3,3)
+    var $inputs = $inputs.filter((value, index) => index !== 2)
+
+    console.log($inputs)
   
     // input fields
     var $first = $form.find('[name=pincode-1]')
@@ -87,6 +91,20 @@ $(function () {
             , next = index + 1;
   
           if (prev >= 0) {
+            if(prev==3){
+              prev=prev-1
+              $inputs.eq(prev).val('');
+  
+              // focus field
+              $inputs.eq(prev).focus();
+    
+            }else{
+                          // clear field
+            $inputs.eq(prev).val('');
+  
+            // focus field
+            $inputs.eq(prev).focus();
+            }
             // clear field
             $inputs.eq(prev).val('');
   

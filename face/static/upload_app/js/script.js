@@ -109,9 +109,11 @@ $(document).ready(function () {
 
 					// $("#uploaded_view").append('<img src="' + uploadedFileURL + '" />').addClass("show")
 					
-					$(".error_msg").text(response['msg'])
+					
 					// status_bar[0].style.display = 'none';
 					if (response['result']=='ERROR'){
+						$(".error_msg").text(response['msg'])
+						сonsole.log(response['msg'])
 						// setTimeout(function () {
 						// 	location.reload(false);
 						// 	 },
@@ -122,7 +124,7 @@ $(document).ready(function () {
 						// $("#btn_submit").removeClass("btn-submit")
 						btnOuter.addClass("file_uploaded");
 						error_msg[0].style.color='green'
-						$(".error_msg").text('Фото успешно добавлено')
+						$(".error_msg").text('Фото успешно добавлено в базу. Турникет теперь пропустит вас по лицу')
 						$('#second_step').removeClass('active')
 					$('.step').each(function(index, element) {
 						// element == this
@@ -135,7 +137,7 @@ $(document).ready(function () {
 					  if(test.reload() == "Hello"){
 						setTimeout(function () {
 							location.replace('/checkin');
-							 }, 2000);
+							 }, 3000);
 						 }
 
 						
