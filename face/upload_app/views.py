@@ -51,7 +51,7 @@ def auth(request):
                     msg = responseServ['DESC']
 
                     # тут ошибка т.к при хорошем завершении у меня ничего не берется из респонса
-                    return JsonResponse({'result': f'{result}', 'msg': f'Попробуйте другое фото \n Или обратитесть к администратору'})
+                    return JsonResponse({'result': f'{result}', 'msg': f'Попробуйте другое фото.\n Или обратитесть к администратору'})
                     # return render(request, './upload_app/auth.html',
                     #               {'header': str(responseVov.json()) + " img: " + str(name)})
 
