@@ -53,8 +53,9 @@ $(function () {
   
     // submit button
     var $button = $form.find('.button--primary');
-  
+    $('[name=pincode-1]').focus();
     if (document.getElementById('password').value == '007'){
+      
       $group.addClass('form__group--error');
       setTimeout(function(){
         $(this).prop('disabled', false);
