@@ -108,12 +108,12 @@ def index(request):
                 try:
                     active, person, name = active_code(face_token_ch)
                     if True:  # active:
-                        return JsonResponse({'RESULT': 'SUCCESS', 'code': f'{person.id}'})
+                        return JsonResponse({'RESULT': 'SUCCESS', 'code': f'{person.id}', 'name':f'{name}'})
                     else:
-                        return JsonResponse({'RESULT': 'ERROR', 'CODE': f'0'})
+                        return JsonResponse({'RESULT': 'ERROR', 'CODE': f'0', 'name':f'0'})
                 except Exception as e:
 
-                    return JsonResponse({'RESULT': 'ERROR', 'CODE': f'{e}'})
+                    return JsonResponse({'RESULT': 'ERROR', 'CODE': f'{e}', 'name':f'{0}'})
         else:
-            return JsonResponse({'RESULT': 'AXAXAXAXAXAXAXXAX', 'CODE': 'Im not vindictive. I will write it down.'})
-    return JsonResponse({'RESULT': 'ERROR', 'CODE': f'0'})
+            return JsonResponse({'RESULT': 'AXAXAXAXAXAXAXXAX', 'CODE': 'Im not vindictive. I will write it down.', 'name':f'Your_MOTHER'})
+    return JsonResponse({'RESULT': 'ERROR', 'CODE': f'0', 'name':f'0'})
