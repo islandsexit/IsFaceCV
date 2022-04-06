@@ -110,7 +110,7 @@ def index(request):
                     if True:  # active:
                         return JsonResponse({'RESULT': 'SUCCESS', 'code': f'{person.id}', 'name':f'{name}'})
                     else:
-                        return JsonResponse({'RESULT': 'ERROR', 'CODE': f'0', 'name':f'0'})
+                        return JsonResponse({'RESULT': 'ERROR', 'CODE': f'Код устарел', 'name':f'0'})
                 except Exception as e:
 
                     return JsonResponse({'RESULT': 'ERROR', 'CODE': f'{e}', 'name':f'{0}'})
