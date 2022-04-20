@@ -25,10 +25,11 @@ def auth(request):
         try:
             active, person, name = active_code(face_token_ch)
             if False:  # active != True:
-                raise Exception('Не активный код')
+                print("AJAX| inactive password in POST img64")
+                return JsonResponse({'result': f'ERROR', 'msg': f'Заявка неактивна'})
 
         except Exception as e:
-            print(e)
+            print("AJAX| exception in POST img64 ",e)
             return render(request, './upload_app/auth.html', {'header': 'ОШИБКА'})
 
         img, confidence = isFace_in_img(file)
@@ -49,26 +50,29 @@ def auth(request):
                     responseServ = responseVov.json()
                     result = responseServ['RESULT']
                     msg = responseServ['DESC']
-
+                    print(responseServ)
                     # тут ошибка т.к при хорошем завершении у меня ничего не берется из респонса
-                    return JsonResponse({'result': f'{result}', 'msg': f'Попробуйте другое фото.\n Или обратитесть к администратору'})
+                    return JsonResponse({'result': f'{result}', 'msg': f'Ошибка. Обратитесть к администратору'})
                     # return render(request, './upload_app/auth.html',
                     #               {'header': str(responseVov.json()) + " img: " + str(name)})
 
                 except:
                     # return render(request, './upload_app/auth.html',
                     #               {'no_face': 'Ошибка на сервере Вовы', "valid": "0", "id": f'{person.id}'})
-                    return JsonResponse({'result': f'ERROR', 'msg': f'Ошибка на сервере Вовы'})
+                    print("error in server registering face")
+                    return JsonResponse({'result': f'ERROR', 'msg': f'Ошибка на сервере'})
 
             except:
 
                 # return render(request, './upload_app/auth.html',
                 #               {'no_face': 'Ошибка кодирования в Base64', "valid": "0", "id": f'{person.id}'})
+                print("Exception in converting img to base64")
                 return JsonResponse({'result': f'ERROR', 'msg': f'Ошибка кодирования Base64'})
 
         # return render(request, './upload_app/auth.html',
         #               {"name": f"{name}", "valid": "0", "id": f'{person.id}',
         #                "no_face": "На фото не было найдено лицо"})
+        print('No Face found')
         return JsonResponse({'result': f'ERROR', 'msg': f'На фото не было найдено лицо'})
 
         return JsonResponse({'message': f'{request.POST, request.FILES}'})
@@ -88,14 +92,16 @@ def auth(request):
                 if True:  # active:
                     return render(request, './upload_app/auth.html', {'name': f'{name}', "valid": 'True', "id": f'{person.id}', "password": f'{face_token_ch}'})
                 else:
+                    print("inactive code")
                     return render(request, './upload_app/code.html', {'value_pass': '007'})
 
             except:
-
+                print("exception in getting db data")
                 return render(request, './upload_app/code.html',
                               {'value_pass': '007'})
 
         else:
+            print("exception in len password")
             return render(request, './upload_app/code.html', {'value_pass': ''})
 
 
@@ -110,10 +116,13 @@ def index(request):
                     if True:  # active:
                         return JsonResponse({'RESULT': 'SUCCESS', 'code': f'{person.id}', 'name':f'{name}'})
                     else:
+                        print("API|   inactive person")
                         return JsonResponse({'RESULT': 'ERROR', 'CODE': f'Код устарел', 'name':f'0'})
                 except Exception as e:
-
+                    print("API|   Exception in database ")
                     return JsonResponse({'RESULT': 'ERROR', 'CODE': f'{e}', 'name':f'{0}'})
         else:
+            print("API|   Exception in secretpassword")
             return JsonResponse({'RESULT': 'AXAXAXAXAXAXAXXAX', 'CODE': 'Im not vindictive. I will write it down.', 'name':f'Your_MOTHER'})
+    print("API| exception in request type")
     return JsonResponse({'RESULT': 'ERROR', 'CODE': f'0', 'name':f'0'})

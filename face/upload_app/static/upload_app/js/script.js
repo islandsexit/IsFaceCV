@@ -108,12 +108,33 @@ $(document).ready(function () {
 					
 
 					// $("#uploaded_view").append('<img src="' + uploadedFileURL + '" />').addClass("show")
-					
+					if (!window.console) {
+						window.console = {};
+						window.console.log = function(){};
+					}
 					
 					// status_bar[0].style.display = 'none';
-					if (response['result']=='ERROR'){
-						$(".error_msg").text(response['msg'])
-						сonsole.log(response['msg'])
+					window.console.log(response['result'])
+					window.console.log(response['msg'])
+					if (response['result']=='SUCCES'){
+					// $("#btn_submit").removeClass("btn-submit")
+					btnOuter.addClass("file_uploaded");
+					error_msg[0].style.color='green'
+					$(".error_msg").text('Фото успешно добавлено в базу.\n Турникет теперь пропустит вас по лицу')
+					$('#second_step').removeClass('active')
+				$('.step').each(function(index, element) {
+					// element == this
+					$(element).not('.active').addClass('done');
+					$('.done').html('<i class="icon-ok"></i>');
+					if($(this).is('.active')) {
+						return false;
+					}
+					});
+					if(test.reload() == "Hello"){
+					setTimeout(function () {
+						location.replace('/checkin');
+							}, 3000);
+						}
 						// setTimeout(function () {
 						// 	location.reload(false);
 						// 	 },
@@ -121,24 +142,8 @@ $(document).ready(function () {
 					
 					}
 					else{
-						// $("#btn_submit").removeClass("btn-submit")
-						btnOuter.addClass("file_uploaded");
-						error_msg[0].style.color='green'
-						$(".error_msg").text('Фото успешно добавлено в базу. Турникет теперь пропустит вас по лицу')
-						$('#second_step').removeClass('active')
-					$('.step').each(function(index, element) {
-						// element == this
-						$(element).not('.active').addClass('done');
-						$('.done').html('<i class="icon-ok"></i>');
-						if($(this).is('.active')) {
-						  return false;
-						}
-					  });
-					  if(test.reload() == "Hello"){
-						setTimeout(function () {
-							location.replace('/checkin');
-							 }, 3000);
-						 }
+						$(".error_msg").text(response['msg'])
+						сonsole.log(response['msg'])
 
 						
 						
