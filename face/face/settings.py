@@ -88,20 +88,20 @@ DATABASES = {
 }
 
 LOGGING = {
-    'version': 1,
+'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-        'file': {
-            'level': 'DEBUG',
+        'logfile': {
             'class': 'logging.FileHandler',
             'filename': 'home/vig/django/IsFaceCV/django.log',
         },
+        'console':{
+            'class':'logging.StreamHandler'
+        }
     },
     'loggers': {
         'django': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-            'propagate': True,
+            'handlers': ['console', 'logfile'],
         },
     },
 }
