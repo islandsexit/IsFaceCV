@@ -4,6 +4,10 @@ import numpy as np
 import os
 import base64
 import uuid
+import logging
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
+import datetime
 
 face = r'../mod/front.xml'
 eye = r'../mod/eye.xml'
@@ -38,7 +42,7 @@ def isFace_in_img(imgMem):
         img = resizing(img, new_width=None, new_height=450)
 
     except Exception as e:
-        print(e)
+        logger.error(str(datetime.datetime.now())+ " " + e)
         return 12, False
     try:
         for flip in range(1, 10, 1):
@@ -74,13 +78,13 @@ def isFace_in_img(imgMem):
                         #                 if True:  # count_my_ey:
                         return img_face, True
     except Exception as e:
-        print(e)
+        logger.error(str(datetime.datetime.now())+ ";" + ";[ERROR]; in face detecting"+ e)
         return 12, False
         
     if face!=():
-        print("face_detected ", datetime.now())
+        logger.error(str(datetime.datetime.now())+";" + ";[ERROR];"+" only face_detected ", datetime.now())
         if eyes!=():
-            print("eyes detected ",datetime.now())
+            logger.error(str(datetime.datetime.now())+";" + ";[ERROR];"+" and eyes detected ",datetime.now())
     return 12, False
 
 
@@ -128,5 +132,5 @@ def img_Base64(imgMem):
 
         return encoded_string
     except Exception as e:
-        print(e)
+        logger.error(str(datetime.datetime.now())+ ";" + ";[ERROR]; IN converting base 64"+ e)
     return None

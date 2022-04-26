@@ -99,6 +99,7 @@ LOGGING = {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
             'filename': BASE_DIR / 'logs'/'warning.log',
+
         },
     },
     # A logger for WARNING which has a handler called 'file'. A logger can have multiple handler
@@ -108,6 +109,8 @@ LOGGING = {
             'handlers': ['file'], #notice how file variable is called in handler which has been defined above
             'level': 'ERROR',
             'propagate': True,
+            'backupCount': 10,
+            'maxBytes': 1024 * 1024 * 5,  # 5 MB
         },
         
     },

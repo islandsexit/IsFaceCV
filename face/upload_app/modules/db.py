@@ -1,6 +1,7 @@
 from ..models import Requests
 from datetime import datetime
 
+
 def active_code(code):
     date_now = datetime.now().date()
     person  = Requests.objects.get(invite_code = code)
