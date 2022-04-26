@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-o@kg(^%$3)61zz3_dnr%!lge!_b%z6n1d+-8g&k5tj^5vd&dm7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['192.168.48.131', '127.0.0.1', '192.168.48.67']
 
@@ -85,6 +85,25 @@ DATABASES = {
         'HOST': '192.168.35.197'
         # 'PORT': '5432',
     }
+}
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'home/vig/django/IsFaceCV/django.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
 }
 
 
