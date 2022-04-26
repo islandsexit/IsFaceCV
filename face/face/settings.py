@@ -96,9 +96,9 @@ LOGGING = {
     # A handler for WARNING. It is basically writing the WARNING messages into a file called WARNING.log
     'handlers': {
         'file': {
-            'level': 'WARNING',
+            'level': 'ERROR',
             'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'warning.log',
+            'filename': BASE_DIR / 'logs'/'warning.log',
         },
     },
     # A logger for WARNING which has a handler called 'file'. A logger can have multiple handler
@@ -106,9 +106,10 @@ LOGGING = {
        # notice the blank '', Usually you would put built in loggers like django or root here based on your needs
         '': {
             'handlers': ['file'], #notice how file variable is called in handler which has been defined above
-            'level': 'WARNING',
+            'level': 'ERROR',
             'propagate': True,
         },
+        
     },
 }
 
