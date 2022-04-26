@@ -28,12 +28,12 @@ def auth(request):
         try:
             active, person, name = active_code(face_token_ch)
             if False:  # active != True:
-                logger.error(str(datetime.datetime.now())+";" + ";[ERROR];"+"AJAX| inactive password in POST img64")
+                logger.error(str(datetime.datetime.now())+ ";[ERROR];"+"AJAX| inactive password in POST img64")
                 return JsonResponse({'result': f'ERROR', 'msg': f'Заявка неактивна'})
 
         except Exception as e:
             
-            logger.error(str(datetime.datetime.now())+";" + ";[ERROR];"+"AJAX| exception in POST img64 ",e)
+            logger.error(str(datetime.datetime.now())+ ";[ERROR];"+"AJAX| exception in POST img64 ",e)
             return render(request, './upload_app/auth.html', {'header': 'ОШИБКА'})
 
         img, confidence = isFace_in_img(file)
@@ -54,7 +54,7 @@ def auth(request):
                     responseServ = responseVov.json()
                     result = responseServ['RESULT']
                     msg = responseServ['DESC']
-                    logger.error(str(datetime.datetime.now())+";" + ";[INFO];"+responseServ)
+                    logger.error(str(datetime.datetime.now()) + ";[INFO];"+responseServ)
                     # тут ошибка т.к при хорошем завершении у меня ничего не берется из респонса
                     return JsonResponse({'result': f'{result}', 'msg': f'Ошибка. Обратитесть к администратору'})
                     # return render(request, './upload_app/auth.html',
@@ -63,20 +63,20 @@ def auth(request):
                 except:
                     # return render(request, './upload_app/auth.html',
                     #               {'no_face': 'Ошибка на сервере Вовы', "valid": "0", "id": f'{person.id}'})
-                    logger.error(str(datetime.datetime.now())+";" + ";[ERROR];"+"error in server registering face")
+                    logger.error(str(datetime.datetime.now()) + ";[ERROR];"+"error in server registering face")
                     return JsonResponse({'result': f'ERROR', 'msg': f'Ошибка на сервере'})
 
             except:
 
                 # return render(request, './upload_app/auth.html',
                 #               {'no_face': 'Ошибка кодирования в Base64', "valid": "0", "id": f'{person.id}'})
-                logger.error(str(datetime.datetime.now())+";" + ";[ERROR];"+"Exception in converting img to base64")
+                logger.error(str(datetime.datetime.now())+ ";[ERROR];"+"Exception in converting img to base64")
                 return JsonResponse({'result': f'ERROR', 'msg': f'Ошибка кодирования Base64'})
 
         # return render(request, './upload_app/auth.html',
         #               {"name": f"{name}", "valid": "0", "id": f'{person.id}',
         #                "no_face": "На фото не было найдено лицо"})
-        logger.error(str(datetime.datetime.now())+";" + ";[ERROR];"+'No Face found')
+        logger.error(str(datetime.datetime.now())+ ";[ERROR];"+'No Face found')
         return JsonResponse({'result': f'ERROR', 'msg': f'На фото не было найдено лицо'})
 
         return JsonResponse({'message': f'{request.POST, request.FILES}'})
@@ -94,19 +94,19 @@ def auth(request):
             try:
                 active, person, name = active_code(face_token_ch)
                 if True:  # active:
-                    logger.error(str(datetime.datetime.now())+ ";" + ";[INFO];"+  "SITE|   VISITOR  ")
+                    logger.error(str(datetime.datetime.now())+ ";[INFO];"+  "SITE|   VISITOR  ")
                     return render(request, './upload_app/auth.html', {'name': f'{name}', "valid": 'True', "id": f'{person.id}', "password": f'{face_token_ch}'})
                 else:
-                    logger.error(str(datetime.datetime.now())+ " " + "inactive code")
+                    logger.error(str(datetime.datetime.now())+ ";[ERROR];"+ "inactive code")
                     return render(request, './upload_app/code.html', {'value_pass': '007'})
 
             except:
-                logger.error(str(datetime.datetime.now())+ ";" + ";[ERROR];"+"exception in getting db data")
+                logger.error(str(datetime.datetime.now())+";[ERROR];"+"exception in getting db data")
                 return render(request, './upload_app/code.html',
                               {'value_pass': '007'})
 
         else:
-            logger.error(str(datetime.datetime.now())+ ";" + ";[ERROR];"+"visitor on main template")
+            logger.error(str(datetime.datetime.now())+";[ERROR];"+"visitor on main template")
             return render(request, './upload_app/code.html', {'value_pass': ''})
 
 
@@ -119,16 +119,16 @@ def index(request):
                 try:
                     active, person, name = active_code(face_token_ch)
                     if True:  # active:
-                        logger.error(str(datetime.datetime.now())+ ";" + ";[INFO];"+  "API|   VISITOR  ")
+                        logger.error(str(datetime.datetime.now())+  ";[INFO];"+  "API|   VISITOR  ")
                         return JsonResponse({'RESULT': 'SUCCESS', 'code': f'{person.id}', 'name':f'{name}'})
                     else:
-                        logger.error(str(datetime.datetime.now())+ " " + "API|   inactive person")
+                        logger.error(str(datetime.datetime.now())+ ";[ERROR];" + "API|   inactive person")
                         return JsonResponse({'RESULT': 'ERROR', 'CODE': f'Код устарел', 'name':f'0'})
                 except Exception as e:
-                    logger.error(str(datetime.datetime.now())+ " " ";" + ";[ERROR];"+ + "API|   Exception in database ")
+                    logger.error(str(datetime.datetime.now())+ + ";[ERROR];"+ + "API|   Exception in database ")
                     return JsonResponse({'RESULT': 'ERROR', 'CODE': f'{e}', 'name':f'{0}'})
         else:
-            logger.error(str(datetime.datetime.now())+ " " + ";" + ";[ERROR];"+ "API|   Exception in secretpassword")
+            logger.error(str(datetime.datetime.now())+ ";[ERROR];"+ "API|   Exception in secretpassword")
             return JsonResponse({'RESULT': 'AXAXAXAXAXAXAXXAX', 'CODE': 'Im not vindictive. I will write it down.', 'name':f'Your_MOTHER'})
-    logger.error(str(datetime.datetime.now())+ " " + ";" + ";[ERROR];"+ "API| exception in request type")
+    logger.error(str(datetime.datetime.now())+  ";[ERROR];"+ "API| exception in request type")
     return JsonResponse({'RESULT': 'ERROR', 'CODE': f'0', 'name':f'0'})
