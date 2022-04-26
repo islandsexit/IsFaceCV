@@ -90,18 +90,20 @@ DATABASES = {
 LOGGING = {
 'version': 1,
     'disable_existing_loggers': False,
-    'handlers': {
-        'logfile': {
-            'class': 'logging.FileHandler',
-            'filename': 'home/vig/django/IsFaceCV/django.log',
+        'handlers': {
+        'console': {
+            'formatter': 'default',
+            'class': 'logging.StreamHandler',
+            'stream': 'ext://sys.stderr',
         },
-        'console':{
-            'class':'logging.StreamHandler'
-        }
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console', 'logfile'],
+        'output': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'formatter': 'default',
+            'filename': 'home/vig/django/IsFaceCV/django.log',
+            'when': 'MIDNIGHT',
+            'interval': 1,
+            'backupCount': 5,
         },
     },
 }
