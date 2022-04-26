@@ -106,7 +106,7 @@ def auth(request):
                               {'value_pass': '007'})
 
         else:
-            logger.error(str(datetime.datetime.now())+";[ERROR];"+"visitor on main template")
+            logger.error(str(datetime.datetime.now())+";[INFO];"+"visitor on main template")
             return render(request, './upload_app/code.html', {'value_pass': ''})
 
 
