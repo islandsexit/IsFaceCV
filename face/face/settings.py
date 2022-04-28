@@ -82,8 +82,8 @@ DATABASES = {
         'NAME': 'profiledb',
         'USER': 'sb_pass',
         'PASSWORD': 'QNLPGMWWhh2q',
-        'HOST': '192.168.35.197'
-        # 'PORT': '5432',
+        'HOST': '192.168.35.197',
+         'PORT': '5432'
     }
 }
 
