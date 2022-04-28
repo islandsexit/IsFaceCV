@@ -110,7 +110,7 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
             'backupCount': 10,
-            'maxBytes': 1024 * 1024 * 5,  # 5 MB
+            'maxBytes': 1024 * 1024 * 5,  # 5 B
         },
         
     },
