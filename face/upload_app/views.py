@@ -125,7 +125,7 @@ def index(request):
                         logger.error(str(datetime.datetime.now())+ ";[ERROR];" + "API|   inactive person")
                         return JsonResponse({'RESULT': 'ERROR', 'CODE': f'Код устарел', 'name':f'0'})
                 except Exception as e:
-                    logger.error(str(datetime.datetime.now())+ + ";[ERROR];"+ + "API|   Exception in database ")
+                    logger.error(str(datetime.datetime.now())+ + ";[ERROR];"+ "API|   Exception in database ")
                     return JsonResponse({'RESULT': 'ERROR', 'CODE': f'{e}', 'name':f'{0}'})
         else:
             logger.error(str(datetime.datetime.now())+ ";[ERROR];"+ "API|   Exception in secretpassword")
