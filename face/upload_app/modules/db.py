@@ -9,7 +9,7 @@ import datetime
 
 def active_code(code):
     try:
-        response_code = RQ.post('http://192.168.48.132:1237/FindGuest', data={
+        response_code = RQ.post('http://192.168.48.92:1237/FindGuest', data={
                         "INVITECODE": code,
 
                     })
