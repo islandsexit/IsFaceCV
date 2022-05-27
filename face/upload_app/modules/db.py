@@ -1,4 +1,5 @@
 
+from urllib import response
 import requests as RQ
 # Get an instance of a logger
 import logging
@@ -14,6 +15,7 @@ def active_code(code):
                     })
         if response_code.status_code == 200:
            response_code = response_code.json()
+           logger.error(str(datetime.datetime.now())+ ";[INFO];" + f"response from db = {response_code}")
            id = response_code["DATA"][0]["FID"]
            name = response_code["DATA"][0]["Name"]
            active = True 
