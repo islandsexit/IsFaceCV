@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-o@kg(^%$3)61zz3_dnr%!lge!_b%z6n1d+-8g&k5tj^5vd&dm7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['192.168.48.131', '127.0.0.1', '192.168.48.67']
 
@@ -39,8 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'upload_app',
-    'django.contrib.postgres',
-    "mysql.connector.django"
+    'django.contrib.postgres'
 ]
 
 MIDDLEWARE = [
@@ -58,7 +57,7 @@ ROOT_URLCONF = 'face.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ os.path.join(BASE_DIR,"static") ],
+        'DIRS': [os.path.join(BASE_DIR, "static")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -95,13 +94,12 @@ WSGI_APPLICATION = 'face.wsgi.application'
 #         'NAME': 'sac3',
 #         'USER': 'root',
 #         'PASSWORD': '5682881',
-        
+
 #         'HOST': '192.168.48.132',
 #         'PORT': '3306',
 #         'OPTIONS': {
 #              'charset':"cp1251",
 #         },
-        
 
 
 #     }
@@ -123,15 +121,16 @@ LOGGING = {
     },
     # A logger for WARNING which has a handler called 'file'. A logger can have multiple handler
     'loggers': {
-       # notice the blank '', Usually you would put built in loggers like django or root here based on your needs
+        # notice the blank '', Usually you would put built in loggers like django or root here based on your needs
         '': {
-            'handlers': ['file'], #notice how file variable is called in handler which has been defined above
+            # notice how file variable is called in handler which has been defined above
+            'handlers': ['file'],
             'level': 'ERROR',
             'propagate': True,
             'backupCount': 10,
             'maxBytes': 1024 * 1024 * 5,  # 5 B
         },
-        
+
     },
 }
 
