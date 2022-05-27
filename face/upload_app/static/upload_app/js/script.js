@@ -116,7 +116,7 @@ $(document).ready(function () {
 					// status_bar[0].style.display = 'none';
 					window.console.log(response['result'])
 					window.console.log(response['msg'])
-					if (response['result']=='SUCCES'){
+					if (response['result']=='SUCCESS'){
 					// $("#btn_submit").removeClass("btn-submit")
 					btnOuter.addClass("file_uploaded");
 					error_msg[0].style.color='green'
