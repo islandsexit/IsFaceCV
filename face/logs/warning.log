@@ -1,5 +1,3 @@
-Watching for file changes with StatReloader
-X:\Projects\Работа\IsFaceCV\face\face\settings.py changed, reloading.
 2022-04-28 18:01:36.341465;[INFO];visitor on main template
 2022-04-28 18:02:20.713597;[INFO];visitor on main template
 2022-04-28 18:03:54.150837;[INFO];SITE|   VISITOR  
@@ -13,81 +11,71 @@ X:\Projects\Работа\IsFaceCV\face\face\settings.py changed, reloading.
 2022-04-28 18:12:50.532924;[ERROR];exception in getting db data
 2022-04-28 18:12:58.232258;[INFO];SITE|   VISITOR  
 2022-04-28 18:13:14.978963;[INFO];SITE|   VISITOR  
-Internal Server Error: /backendofreact
-Traceback (most recent call last):
-  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\db\backends\base\base.py", line 244, in ensure_connection
-    self.connect()
-  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\utils\asyncio.py", line 26, in inner
-    return func(*args, **kwargs)
-  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\db\backends\base\base.py", line 225, in connect
-    self.connection = self.get_new_connection(conn_params)
-  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\utils\asyncio.py", line 26, in inner
-    return func(*args, **kwargs)
-  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\db\backends\postgresql\base.py", line 203, in get_new_connection
-    connection = Database.connect(**conn_params)
-  File "C:\Python310\lib\site-packages\psycopg2\__init__.py", line 122, in connect
-    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
-psycopg2.OperationalError: connection to server at "192.168.35.197", port 5432 failed: Connection timed out (0x0000274C/10060)
-	Is the server running on that host and accepting TCP/IP connections?
-
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "X:\Projects\Работа\IsFaceCV\face\upload_app\views.py", line 120, in index
-    active, person, name = active_code(face_token_ch)
-  File "X:\Projects\Работа\IsFaceCV\face\upload_app\modules\db.py", line 7, in active_code
-    person  = Requests.objects.get(invite_code = code)
-  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\db\models\manager.py", line 85, in manager_method
-    return getattr(self.get_queryset(), name)(*args, **kwargs)
-  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 492, in get
-    num = len(clone)
-  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 302, in __len__
-    self._fetch_all()
-  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 1507, in _fetch_all
-    self._result_cache = list(self._iterable_class(self))
-  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 57, in __iter__
-    results = compiler.execute_sql(
-  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\compiler.py", line 1359, in execute_sql
-    cursor = self.connection.cursor()
-  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\utils\asyncio.py", line 26, in inner
-    return func(*args, **kwargs)
-  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\db\backends\base\base.py", line 284, in cursor
-    return self._cursor()
-  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\db\backends\base\base.py", line 260, in _cursor
-    self.ensure_connection()
-  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\utils\asyncio.py", line 26, in inner
-    return func(*args, **kwargs)
-  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\db\backends\base\base.py", line 243, in ensure_connection
-    with self.wrap_database_errors:
-  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\db\utils.py", line 91, in __exit__
-    raise dj_exc_value.with_traceback(traceback) from exc_value
-  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\db\backends\base\base.py", line 244, in ensure_connection
-    self.connect()
-  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\utils\asyncio.py", line 26, in inner
-    return func(*args, **kwargs)
-  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\db\backends\base\base.py", line 225, in connect
-    self.connection = self.get_new_connection(conn_params)
-  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\utils\asyncio.py", line 26, in inner
-    return func(*args, **kwargs)
-  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\db\backends\postgresql\base.py", line 203, in get_new_connection
-    connection = Database.connect(**conn_params)
-  File "C:\Python310\lib\site-packages\psycopg2\__init__.py", line 122, in connect
-    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
-django.db.utils.OperationalError: connection to server at "192.168.35.197", port 5432 failed: Connection timed out (0x0000274C/10060)
-	Is the server running on that host and accepting TCP/IP connections?
-
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
-    response = get_response(request)
-  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-  File "X:\Projects\Работа\IsFaceCV\face\upload_app\views.py", line 128, in index
-    logger.error(str(datetime.datetime.now())+ + ";[ERROR];"+ + "API|   Exception in database ")
-TypeError: bad operand type for unary +: 'str'
 2022-04-28 18:29:17.084615;[ERROR];exception in getting db data
 2022-04-28 18:29:17.122613;[ERROR];exception in getting db data
 2022-04-28 18:29:26.541472;[INFO];SITE|   VISITOR  
+2022-05-23 18:52:30.753663;[INFO];visitor on main template
+2022-05-23 18:52:40.779236;[ERROR];exception in getting db data
+2022-05-23 18:52:44.326349;[ERROR];exception in getting db data
+2022-05-23 18:57:14.696310;[INFO];SITE|   VISITOR  
+2022-05-23 18:57:14.697237;[ERROR];exception in getting db data
+2022-05-23 18:57:22.474185;[INFO];SITE|   VISITOR  
+2022-05-23 18:57:22.474185;[ERROR];exception in getting db data
+2022-05-25 13:43:09.726821;[INFO];visitor on main template
+2022-05-25 16:01:53.730912;[INFO];visitor on main template
+2022-05-25 16:02:18.134466;[ERROR];inactive code
+2022-05-25 16:04:02.616289;[ERROR];inactive code
+2022-05-25 16:05:05.483746;[INFO];visitor on main template
+2022-05-25 16:05:09.798999;[ERROR];inactive code
+2022-05-25 16:05:18.432539;[ERROR];inactive code
+2022-05-25 16:05:19.630005;[ERROR];inactive code
+2022-05-25 16:05:31.156339;[ERROR];inactive code
+2022-05-25 16:06:05.265712;[ERROR];inactive code
+2022-05-25 16:07:14.782944;[ERROR];inactive code
+2022-05-25 16:07:23.636302;[ERROR];inactive code
+2022-05-25 16:08:11.823973;[ERROR];inactive code
+2022-05-25 16:09:20.069463;[ERROR];inactive code
+2022-05-25 16:09:24.995742;[ERROR];inactive code
+2022-05-25 16:09:58.335494;[ERROR];inactive code
+2022-05-25 16:10:35.619120;[ERROR];inactive code
+2022-05-25 16:11:02.239070;[ERROR];inactive code
+2022-05-25 16:11:26.703623;[ERROR];inactive code
+2022-05-25 16:11:46.288712;[ERROR];inactive code
+2022-05-25 16:12:10.500451;[ERROR];inactive code
+2022-05-25 16:12:29.342478;[ERROR];inactive code
+2022-05-25 16:12:59.102569;[ERROR];inactive code
+2022-05-25 16:13:18.122761;[ERROR];inactive code
+2022-05-25 16:13:43.138642;[INFO];SITE|   VISITOR  
+2022-05-25 16:13:52.607440;[INFO];SITE|   VISITOR  
+2022-05-25 16:14:21.237661;[INFO];visitor on main template
+2022-05-25 16:14:23.870023;[ERROR];inactive code
+2022-05-25 16:14:29.434152;[ERROR];inactive code
+2022-05-25 16:14:31.350052;[ERROR];inactive code
+2022-05-25 16:14:33.971921;[ERROR];inactive code
+2022-05-25 16:14:59.066333;[INFO];SITE|   VISITOR  
+2022-05-25 16:16:55.009281;[ERROR];inactive code
+2022-05-25 16:17:20.873474;[ERROR];inactive code
+2022-05-25 16:17:53.727407;[ERROR];inactive code
+2022-05-25 16:18:40.081787;[INFO];SITE|   VISITOR  
+2022-05-25 16:20:03.246260;[ERROR];inactive code
+2022-05-25 16:20:49.459539;[ERROR];inactive code
+2022-05-25 16:21:59.379105;[INFO];SITE|   VISITOR  
+2022-05-25 16:22:24.656899;[ERROR];inactive code
+2022-05-25 16:22:59.984577;[ERROR];inactive code
+2022-05-25 16:23:38.434232;[INFO];SITE|   VISITOR  
+2022-05-25 16:33:08.973149;[INFO];visitor on main template
+2022-05-25 16:33:12.230492;[ERROR];inactive code
+2022-05-25 16:33:22.743511;[ERROR];inactive code
+2022-05-25 16:33:26.455102;[ERROR];inactive code
+2022-05-25 16:37:28.663184;[ERROR];inactive code
+2022-05-25 16:37:48.947113;[ERROR];inactive code
+2022-05-25 16:39:57.497529;[INFO];visitor on main template
+2022-05-25 16:39:59.784629;[ERROR];inactive code
+2022-05-25 16:41:47.054467;[ERROR];inactive code
+2022-05-25 16:42:45.236143;[ERROR];inactive code
+2022-05-25 16:43:53.102173;[ERROR];inactive code
+2022-05-25 17:04:20.629006;[ERROR];inactive code
+2022-05-25 17:04:29.114883;[ERROR];inactive code
+2022-05-27 12:06:59.929010;[INFO];visitor on main template
+2022-05-27 12:07:03.347802;[ERROR];inactive code
+2022-05-27 12:07:24.144521;[INFO];SITE|   VISITOR  

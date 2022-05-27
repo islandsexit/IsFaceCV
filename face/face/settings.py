@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+import pyodbc
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-o@kg(^%$3)61zz3_dnr%!lge!_b%z6n1d+-8g&k5tj^5vd&dm7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['192.168.48.131', '127.0.0.1', '192.168.48.67']
 
@@ -39,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'upload_app',
-    'django.contrib.postgres'
+    'django.contrib.postgres',
+    "mysql.connector.django"
 ]
 
 MIDDLEWARE = [
@@ -76,17 +78,35 @@ WSGI_APPLICATION = 'face.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'profiledb',
-        'USER': 'sb_pass',
-        'PASSWORD': 'QNLPGMWWhh2q',
-        'HOST': '192.168.35.197',
-         'PORT': '5432'
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'profiledb',
+#         'USER': 'sb_pass',
+#         'PASSWORD': 'QNLPGMWWhh2q',
+#         'HOST': '192.168.35.197',
+#          'PORT': '5432'
+#     }
+# }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         #,'charset': 'cp1251'},
+#         'NAME': 'sac3',
+#         'USER': 'root',
+#         'PASSWORD': '5682881',
+        
+#         'HOST': '192.168.48.132',
+#         'PORT': '3306',
+#         'OPTIONS': {
+#              'charset':"cp1251",
+#         },
+        
+
+
+#     }
+# }
 
 LOGGING = {
     'version': 1,
