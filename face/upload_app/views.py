@@ -30,13 +30,13 @@ def auth(request):
             active, id, name = active_code(face_token_ch)
             if active != True:
                 logger.error(str(datetime.datetime.now()) +
-                             ";[ERROR];"+"AJAX| code ={face_token_ch}inactive password in POST img64")
+                             ";[ERROR];"+f"AJAX| code ={face_token_ch}inactive password in POST img64")
                 return JsonResponse({'result': f'ERROR', 'msg': f'Заявка неактивна'})
 
         except Exception as e:
 
             logger.error(str(datetime.datetime.now()) +
-                         ";[ERROR];"+"AJAX| code ={face_token_ch} exception in POST img64 ", e)
+                         ";[ERROR];"+f"AJAX| code ={face_token_ch} exception in POST img64 ", e)
             return render(request, './upload_app/auth.html', {'header': 'ОШИБКА'})
 
         img, confidence = isFace_in_img(file)
@@ -58,7 +58,7 @@ def auth(request):
                     result = responseServ['RESULT']
                     msg = responseServ['DESC']
                     logger.error(str(datetime.datetime.now()) +
-                                 ";[INFO];"+"{responseServ}")
+                                 ";[INFO];"+f"{responseServ}")
                     # тут ошибка т.к при хорошем завершении у меня ничего не берется из респонса
                     return JsonResponse({'result': f'{result}', 'msg': f'Ошибка. Обратитесть к администратору'})
                     # return render(request, './upload_app/auth.html',
@@ -68,7 +68,7 @@ def auth(request):
                     # return render(request, './upload_app/auth.html',
                     #               {'no_face': 'Ошибка на сервере Вовы', "valid": "0", "id": f'{person.id}'})
                     logger.error(str(datetime.datetime.now()) +
-                                 ";[ERROR];"+"code ={face_token_ch} error in server registering face")
+                                 ";[ERROR];"+f"code ={face_token_ch} error in server registering face")
                     return JsonResponse({'result': f'ERROR', 'msg': f'Ошибка на сервере'})
 
             except:
@@ -76,14 +76,14 @@ def auth(request):
                 # return render(request, './upload_app/auth.html',
                 #               {'no_face': 'Ошибка кодирования в Base64', "valid": "0", "id": f'{person.id}'})
                 logger.error(str(datetime.datetime.now()) +
-                             ";[ERROR];"+"code ={face_token_ch} Exception in converting img to base64")
+                             ";[ERROR];"+f"code ={face_token_ch} Exception in converting img to base64")
                 return JsonResponse({'result': f'ERROR', 'msg': f'Ошибка кодирования Base64'})
 
         # return render(request, './upload_app/auth.html',
         #               {"name": f"{name}", "valid": "0", "id": f'{person.id}',
         #                "no_face": "На фото не было найдено лицо"})
         logger.error(str(datetime.datetime.now()) +
-                     ";[ERROR];"+'code ={face_token_ch} No Face found')
+                     ";[ERROR];"+f'code ={face_token_ch} No Face found')
         return JsonResponse({'result': f'ERROR', 'msg': f'На фото не было найдено лицо'})
 
         return JsonResponse({'message': f'{request.POST, request.FILES}'})
@@ -103,16 +103,16 @@ def auth(request):
                 print(active, id, name)
                 if active:  # active:
                     logger.error(str(datetime.datetime.now()) +
-                                 ";[INFO];" + "SITE| code ={face_token_ch} VISITOR  ")
+                                 ";[INFO];" + f"SITE| code ={face_token_ch} VISITOR  ")
                     return render(request, './upload_app/auth.html', {'name': f'{name}', "valid": 'True', "id": f'{id}', "password": f'{face_token_ch}'})
                 else:
                     logger.error(str(datetime.datetime.now()) +
-                                 ";[ERROR];" + "code ={face_token_ch} inactive code")
+                                 ";[ERROR];" + f"code ={face_token_ch} inactive code")
                     return render(request, './upload_app/code.html', {'value_pass': '007'})
 
             except:
                 logger.error(str(datetime.datetime.now()) +
-                             ";[ERROR];"+"code ={face_token_ch} exception in getting db data")
+                             ";[ERROR];"+f"code ={face_token_ch} exception in getting db data")
                 return render(request, './upload_app/code.html',
                               {'value_pass': '007'})
 
@@ -132,15 +132,15 @@ def index(request):
                     active, id, name = active_code(face_token_ch)
                     if active:  # active:
                         logger.error(str(datetime.datetime.now()) +
-                                     ";[INFO];" + "API| code ={face_token_ch} Api checking  ")
+                                     ";[INFO];" + f"API| code ={face_token_ch} Api checking  ")
                         return JsonResponse({'RESULT': 'SUCCESS', 'code': f'{id}', 'name': f'{name}'})
                     else:
                         logger.error(str(datetime.datetime.now()) +
-                                     ";[ERROR];" + "API| code ={face_token_ch} inactive person")
+                                     ";[ERROR];" + f"API| code ={face_token_ch} inactive person")
                         return JsonResponse({'RESULT': 'ERROR', 'code': f'Код устарел', 'name': f'0'})
                 except Exception as e:
                     logger.error(str(datetime.datetime.now()) +
-                                 ";[ERROR];" + "API| code ={face_token_ch} Exception in database ")
+                                 ";[ERROR];" + f"API| code ={face_token_ch} Exception in database ")
                     return JsonResponse({'RESULT': 'ERROR', 'code': f'{e}', 'name': f'{0}'})
         else:
             logger.error(str(datetime.datetime.now()) +

@@ -20,6 +20,6 @@ def active_code(code):
         else:
             return False, "0", "0"
     except Exception as e:
-        logger.error(str(datetime.datetime.now())+ ";[ERROR];" + "code = {code} cannot connect to db server")
+        logger.error(str(datetime.datetime.now())+ ";[ERROR];" + f"code = {code} cannot connect to db server")
         return False, "0", "0"
     return active, id, name

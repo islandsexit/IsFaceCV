@@ -132,5 +132,5 @@ def img_Base64(imgMem):
 
         return encoded_string
     except Exception as e:
-        logger.error(str(datetime.datetime.now())+ ";[ERROR]; IN converting base 64")
+        logger.error(str(datetime.datetime.now())+ ";[ERROR]; In converting base 64")
     return None
