@@ -86,16 +86,19 @@ def auth(request):
                      ";[ERROR];"+f'code ={face_token_ch} No Face found')
         return JsonResponse({'result': f'ERROR', 'msg': f'На фото не было найдено лицо'})
 
-        return JsonResponse({'message': f'{request.POST, request.FILES}'})
-
     # -----------------GET-------------------------
     if request.method == 'GET':
 
+        logger.error(str(datetime.datetime.now()) +";[INFO];"+"visitor on main template")
+        return render(request, './upload_app/code.html', {'value_pass': ''})
+
+    if request.method == 'POST':
+
         # берем код для входа
-        face_token_ch = request.GET.get('invite_code', False)
+        face_token_ch = request.POST.get('invite_code', False)
         # logger.error(str(datetime.datetime.now())+ " " + 'face_code',face_token_ch)
         # logger.error(str(datetime.datetime.now())+ " " + request.GET)
-        # если отправился
+        # если отправилсяx
         if face_token_ch and len(face_token_ch) == 6:
             # logger.error(str(datetime.datetime.now())+ " " + 'a')
             try:
@@ -115,11 +118,10 @@ def auth(request):
                              ";[ERROR];"+f"code ={face_token_ch} exception in getting db data")
                 return render(request, './upload_app/code.html',
                               {'value_pass': '007'})
-
         else:
             logger.error(str(datetime.datetime.now()) +
-                         ";[INFO];"+"visitor on main template")
-            return render(request, './upload_app/code.html', {'value_pass': ''})
+                                 ";[ERROR];" + f"code ={face_token_ch} inactive code")
+            return render(request, './upload_app/code.html', {'value_pass': '007'})
 
 
 def index(request):

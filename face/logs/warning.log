@@ -81,3 +81,52 @@
 2022-05-27 12:07:24.144521;[INFO];SITE|   VISITOR  
 2022-07-15 17:36:55.493400;[INFO];visitor on main template
 2022-07-15 17:37:18.566641;[INFO];SITE| code =121212 VISITOR  
+2022-07-19 13:34:27.453115;[INFO];visitor on main template
+2022-07-19 13:34:41.675994;[INFO];visitor on main template
+2022-07-19 13:35:19.894271;[INFO];visitor on main template
+2022-07-19 13:35:22.952769;[ERROR];code =222222 exception in getting db data
+2022-07-19 13:35:25.948440;[ERROR];code =222222 exception in getting db data
+2022-07-19 13:35:43.018977;[ERROR];code =111111 exception in getting db data
+2022-07-19 13:35:45.582671;[ERROR];code =222222 exception in getting db data
+2022-07-19 13:36:50.487995;[ERROR];code =222222 exception in getting db data
+2022-07-19 13:37:47.838285;[ERROR];code = 222222 cannot connect to db server
+2022-07-19 13:37:47.842284;[ERROR];code =222222 inactive code
+2022-07-19 13:38:07.913578;[ERROR];code = 111111 cannot connect to db server
+2022-07-19 13:38:07.914582;[ERROR];code =111111 inactive code
+2022-07-19 13:38:39.716352;[INFO];SITE| code =121212 VISITOR  
+2022-07-19 13:38:49.932880;[INFO];SITE| code =121212 VISITOR  
+2022-07-19 13:38:53.576453;[ERROR];code = 111111 cannot connect to db server
+2022-07-19 13:38:53.577455;[ERROR];code =111111 inactive code
+2022-07-19 13:39:21.422931;[ERROR];code =111111 inactive code
+2022-07-19 13:39:22.883881;[INFO];SITE| code =121212 VISITOR  
+2022-07-19 13:39:27.788528;[ERROR];code =111111 inactive code
+2022-07-19 14:47:42.088873;[ERROR];code =122121 inactive code
+2022-07-19 14:47:44.617805;[INFO];SITE| code =121212 VISITOR  
+2022-08-08 18:11:34.451636;[INFO];visitor on main template
+2022-08-08 18:12:16.327761;[INFO];visitor on main template
+2022-08-08 18:12:24.709302;[ERROR];code =000000 inactive code
+2022-08-08 18:13:02.023553;[ERROR];code =000000 inactive code
+2022-08-08 18:14:59.439676;[ERROR];code =121212 inactive code
+2022-08-08 18:17:07.638070;[ERROR];code =111111 inactive code
+2022-08-08 18:17:09.291148;[ERROR];code =111111 inactive code
+2022-08-08 18:17:10.424033;[ERROR];code =122133 inactive code
+2022-08-08 18:17:11.093595;[ERROR];code =321323 inactive code
+2022-08-08 18:17:11.773352;[ERROR];code =321323 inactive code
+2022-08-08 18:17:12.512297;[ERROR];code =232321 inactive code
+2022-08-08 18:17:15.699887;[ERROR];code =132322 inactive code
+2022-08-08 18:17:16.723301;[ERROR];code =232323 inactive code
+2022-08-08 18:17:17.401175;[ERROR];code =321323 inactive code
+2022-08-08 18:17:33.822719;[ERROR];code =332323 inactive code
+2022-08-08 18:17:34.685007;[ERROR];code =323213 inactive code
+2022-08-08 18:17:35.336597;[ERROR];code =213123 inactive code
+2022-08-08 18:17:35.936893;[ERROR];code =313232 inactive code
+2022-08-10 13:21:44.976627;[ERROR];code =313232 inactive code
+2022-08-10 13:21:47.990986;[ERROR];code =111111 inactive code
+2022-08-10 13:21:49.659602;[ERROR];code =212121 inactive code
+2022-08-10 13:21:51.058763;[ERROR];code =221211 inactive code
+2022-08-10 13:21:51.901904;[ERROR];code =212111 inactive code
+2022-08-10 13:21:52.909744;[ERROR];code =222121 inactive code
+2022-08-10 13:21:56.751099;[ERROR];code =121212 inactive code
+2022-08-10 13:22:08.227849;[ERROR];code =343243 inactive code
+2022-08-10 13:22:09.543867;[ERROR];code =324234 inactive code
+2022-08-10 13:22:11.025690;[ERROR];code =342342 inactive code
