@@ -14,26 +14,31 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/jquery.inputmask.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-mockjax@2.2.2/src/jquery.mockjax.min.js"></script>
-    <link rel="stylesheet" href = "{% static 'upload_app/css/style_code_new.css' %}"/> 
+
+    <link rel="stylesheet" href = "{% static 'upload_app/css/style_code_new.css' %}"/>
+    <!--<link rel="stylesheet" href = "{% static 'upload_app/css/style_ati_1.css' %}"/>-->
+
     <script src="{% static 'upload_app/js/script_code.js' %}"></script>
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <title>Document</title>
+
 </head>
 <body>
   <div class="content">
     <div class="container">
         <form id="form">
           <h1>АУТЕНТИФИКАЦИЯ</h1>
-          <div class="form__group form__pincode">
-            <label>Введите 6-значный код, который пришел вам в СМС для входа на сайт</label>
-            <input type="tel" name="pincode-1" maxlength="1" pattern="[\d]*" tabindex="1" placeholder="·" autocomplete="off">
-            <input type="tel" name="pincode-2" maxlength="1" pattern="[\d]*" tabindex="2" placeholder="·" autocomplete="off">
-            <input type="tel" name="pincode-3" maxlength="1" pattern="[\d]*" tabindex="3" placeholder="·" autocomplete="off">
-            <input  class="prop" disabled  placeholder="-">
-            <input type="tel" name="pincode-4" maxlength="1" pattern="[\d]*" tabindex="4" placeholder="·" autocomplete="off">
-            <input type="tel" name="pincode-5" maxlength="1" pattern="[\d]*" tabindex="5" placeholder="·" autocomplete="off">
-            <input type="tel" name="pincode-6" maxlength="1" pattern="[\d]*" tabindex="6" placeholder="·" autocomplete="off">
-            
+          <div class="form__group_1">
+            <label>Для входа на сайт введите <br> 6-значный код, который пришел <br> вам в СМС.</label>
+              <div class="form__group form__pincode">
+                <input type="tel" name="pincode-1" maxlength="1" pattern="[\d]*" tabindex="1" placeholder="_" autocomplete="off">
+                <input type="tel" name="pincode-2" maxlength="1" pattern="[\d]*" tabindex="2" placeholder="_" autocomplete="off">
+                <input type="tel" name="pincode-3" maxlength="1" pattern="[\d]*" tabindex="3" placeholder="_" autocomplete="off">
+                <input  class="prop" disabled  placeholder="-">
+                <input type="tel" name="pincode-4" maxlength="1" pattern="[\d]*" tabindex="4" placeholder="_" autocomplete="off">
+                <input type="tel" name="pincode-5" maxlength="1" pattern="[\d]*" tabindex="5" placeholder="_" autocomplete="off">
+                <input type="tel" name="pincode-6" maxlength="1" pattern="[\d]*" tabindex="6" placeholder="_" autocomplete="off">
+              </div>
           </div>
           <div class="form__buttons">
             <a href="#" id="btn_loading" class="button button--primary" style="display:none" disabled>
@@ -44,11 +49,14 @@
         </form>
       </div>
       <div id="steps">
-        <div class="step" id="first_step" data-desc="Аутентификация">1</div>
-        <div class="step" id="second_step" data-desc="Добавление фото">2</div>
-        <div class="step" id="third_step" data-desc="Пропуск готов">3</div>
-       
+        <div class="step" id="first_step" data-desc="_____________">1</div>
+        <div class="step" id="second_step" data-desc="______________">2</div>
+        <div class="step" id="third_step" data-desc="_______________">3</div>
       </div>
+      <div id="steps_info">
+        <div class="step_info" id="first_step_info">Аутентификация</div>
+        <div class="step_info" id="second_step_info">Добавление фото</div>
+        <div class="step_info" id="third_step_info">Пропуск готов</div>
       </div>
   </div>
   <form id="form-horizontal" action="/checkin" method="POST" enctype="multipart/form-data" style="display:none;" >

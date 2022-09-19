@@ -104,7 +104,7 @@ $(document).ready(function () {
 					// console.log(response)
 					
 
-					
+
 					
 
 					// $("#uploaded_view").append('<img src="' + uploadedFileURL + '" />').addClass("show")
@@ -120,13 +120,20 @@ $(document).ready(function () {
 					if (response['result']=='SUCCESS'){
 					// $("#btn_submit").removeClass("btn-submit")
 					btnOuter.addClass("file_uploaded");
-					error_msg[0].style.color='green'
+
+
+					/*error_msg[0].style.color='black'*/
 					$(".error_msg").text('Фото успешно добавлено в базу.\n Турникет теперь пропустит вас по лицу')
 					$('#second_step').removeClass('active')
 				$('.step').each(function(index, element) {
 					// element == this
 					$(element).not('.active').addClass('done');
 					$('.done').html('<i class="icon-ok"></i>');
+
+                    document.getElementById('second_step_info').style.color='#58BB58'       /* <------------ Andrew */
+                    document.getElementById('third_step_info').style.color='#58BB58'        /* <------------ Andrew */
+                    document.getElementById('third_step_info').style.color='#58BB58'        /* <------------ Andrew */
+
 					if($(this).is('.active')) {
 						return false;
 					}

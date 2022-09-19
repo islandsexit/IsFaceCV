@@ -1,53 +1,78 @@
-html{
+html {
     -moz-user-select: none;
--khtml-user-select: none;
--webkit-user-select: none;
-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
     height: 100%;
-    width:100%;
+    width: 100%;
 }
+
 /* .content::before{
     content: '';
     display: inline-block;
     height:100%;
     vertical-align: middle;
 } */
-.content{
-    padding:60px;
-    height:100vh;
+.content {
+    padding: 60px;
+    height: 100vh;
     display: flex;
-    justify-content: center; /*Центрирование по горизонтали*/
-    align-items: center;   
+    justify-content: center;
+    /*Центрирование по горизонтали*/
+    align-items: center;
     flex-direction: column;
+
+
 
 }
 
+.content.form__group--error {
+    animation: shake 0.5s;
+}
+
+
+/* ---------------------------------- ЦВЕТ И ОТСТУП ЗОНЫ ПИНКОДА -------------------------------------*/
+.form__pincode {
+    background-color: #fddfc6;
+    border-radius: 15px;
+    height: 50px;
+}
+
+.form__pincode>input.prop {
+    background-color: #fddfc6;
+    transform: translate(18px, 5px);
+}
+
+/* ---------------------------------- BODY -----------------------------------------------------------*/
+
 body {
-    
     /* width:80%;
     height:80%; */
-    background-color: #663faa;
+    background-color: #383c4c;
     /* background: -ms-linear-gradient(top left, #663faa 0%, #585fd5 100%);
     background: -webkit-linear-gradient(top left, #663faa, #585fd5);
     background: -o-linear-gradient(top left, #663faa, #585fd5);
     background: -moz-linear-gradient(top left, #663faa, #585fd5);
     background: linear-gradient(top left, #663faa, #585fd5); */
     background-repeat: no-repeat;
-    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    font-family: Tahoma, Helvetica, Arial, sans-serif;
+    /*font-family: 'Open Sans', Helvetica, Arial, sans-serif;*/
     font-size: 14px;
     min-width: 100%;
     min-height: 100%;
     overflow: scroll;
-    
+
 }
 
 
-.form{
+.form {
     display: block;
     margin-top: 0em;
-    
+
 }
-h1{
+
+h1 {
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
     display: block;
     font-size: 2vh;
     margin-block-start: 0.67em;
@@ -57,51 +82,56 @@ h1{
     font-weight: bold;
 }
 
-.form__group--error > input{
-    background-color: #ff00007c;
-    color:white;
+
+.form__pincode.form__group--error {}
+
+.form__group--success>input {
+    background-color: rgb(64, 243, 58);
+    color: white;
     opacity: 1;
 }
 
-.form__group--success > input{
-    background-color: rgb(64, 243, 58);
-    color:white;
-    opacity: 1;
-    }
-
-.form_pincode{
+.form_pincode {
     display: block;
     width: 100%;
     margin: 10px auto 20px;
     padding: 0;
-    
+
 }
+
 .form__pincode:before, .form__pincode:after {
     display: table;
     content: '';
 }
-.form__pincode > label {
+
+.form__group_1>label {
     display: block;
     text-align: center;
-    margin: 3vh 0;
-    
+    margin: 5vh 0;
+    transform: translate(0px, 20px);
+
 }
+
 label {
     cursor: default;
 }
 
-.container{
-    zoom:1;
+.container {
+    zoom: 1;
     display: inline-block;
     vertical-align: middle;
-	margin: auto;
+    margin: auto;
     background: #fff;
-    width: 320px;
+    width: 325px;
     min-height: 400px;
-    border-radius: 3px;
+    border-radius: 15px;
     margin: 0 auto;
     padding: 30px;
+
+    transform: translate(0px, 20px);
+    /* <--------------------------- Andrew */
 }
+
 .container h1 {
     position: relative;
     display: inline-block;
@@ -112,36 +142,42 @@ label {
     text-align: center;
     margin: 0 0 20px;
     padding: 0;
+    transform: translate(0px, 25px);
+    /* <--------------------------- Andrew */
 }
 
-.form_group {
+/*.form_group {
     margin: 4vh 0 0;
-}
+    transform: translate(0px, 40px);
+}*/
 
-.form__pincode > input {
-    outline:none;
+.form__pincode>input {
+    transform: translate(18px, 10px);
+    background-color: #fddfc6;
+    outline: none;
     display: inline-block;
     float: left;
     width: 12.5%;
-    height: 50px;
+    height: 33px;
     line-height: 48px;
     text-align: center;
     font-size: 2em;
-    color: #181819;
+    color: black;
     border: 0;
-    border-bottom: 2px solid rgba(0,0,0,0.3);
-    border-radius: 2px 2px 0 0;
-    transition: background-color 0.3s, color 0.3s, opacity 0.3s;
+    /*    border-bottom: 2px solid rgba(0,0,0,0.3);*/
+    border-radius: 5px;
+    /*    transition: background-color 0.3s, color 0.3s, opacity 0.3s;*/
     cursor: default;
     user-select: none;
-    margin: 0;
-    margin-top: 1vh;
-    margin-right: 2%;
+    /*    margin: 0;*/
+    /*    margin-top: 1vh;*/
+
+
     padding: 0;
     animation: none;
 }
 
-.form__pincode > input :focus{
+.form__pincode>input :focus {
     display: inline-block;
     float: left;
     width: 15%;
@@ -149,7 +185,7 @@ label {
     line-height: 48px;
     text-align: center;
     font-size: 2em;
-    color: #181819;
+    /*    color: #181819;*/
     border: 0;
     border-bottom: 2px solid rgba(59, 201, 236, 0.863);
     border-radius: 2px 2px 0 0;
@@ -161,25 +197,29 @@ label {
     margin-right: 2%;
     padding: 0;
     animation: animate_fading 2s infinite;
-	animation-timing-function: linear;
+    animation-timing-function: linear;
 }
 
 @keyframes input {
-	0% {
-		opacity: 1;
-	}
-	25% {
-		opacity: 0.6;
-	}
-	50% {
-		opacity: 0.1;
-	}
-	75% {
-		opacity: 0.6;
-	}
-	100% {
-		opacity: 1;
-	}
+    0% {
+        opacity: 1;
+    }
+
+    25% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 0.1;
+    }
+
+    75% {
+        opacity: 0.6;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 .button {
@@ -207,12 +247,12 @@ label {
     transition: all 0.2s ease-in-out;
     box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
     user-select: none;
-    -webkit-tap-highlight-color: rgba(0,0,0,0.1);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
     -webkit-touch-callout: none;
-    
+
 }
 
-.container > .form__buttons ::after{
+.container>.form__buttons ::after {
     display: block;
     background: #000;
     content: '';
@@ -246,7 +286,7 @@ input {
     border-image: initial;
 }
 
-.form__pincode > input:last-child {
+.form__pincode>input:last-child {
     margin-right: 0;
 }
 
@@ -260,28 +300,18 @@ input {
     padding: 10px 0 0;
 }
 
-@media only screen and (max-width: 1000px)  {
+@media only screen and (max-width: 1000px) {
     .container {
-        zoom:0;
+        zoom: 0;
     }
-    html{
+
+    html {
         /* width:130%; */
     }
-    body{
 
-    }
-    }
-
-
-.container h1:after {
-    display: block;
-    background: #000;
-    content: '';
-    height: 3px;
-    width: 50%;
-    margin: 20px auto 0;
-    padding: 0;
+    body {}
 }
+
 
 .button--primary[disabled] {
     background-color: #4776e6;
@@ -296,87 +326,210 @@ input {
 
 
 
-
-
-
-
-
-
-
-
-
-
-/* Progress bar */
-
+/*  --------------------------------------- Progress bar ----------------------------------------  */
 
 
 #steps {
-    
-    margin: 50px auto; 
-    display:flex;
+    margin: 50px auto;
+    display: flex;
     align-items: center;
-  }
-  
-  .step {
-    width: 40px;
-    height: 40px;
+    width: 325px;
+}
+
+.step {
+    width: 45px;
+    height: 45px;
     background-color: white;
     display: inline-block;
     border: 4px solid;
     border-color: transparent;
-    border-radius: 50%;
-    
-    color: #CDD0DA;
-    font-weight: 600;
+    border-radius: 25%;
+
+    /*color: #CDD0DA;*/
+    font-weight: 300;
+    font-size: 28px;
+
+    color: #EF7D00;
+    /* ЦВЕТ ЦИФР в STEP*/
+
+
+    /*    text-align: center;*/
+    /*line-height: 30px;*/
+}
+
+.step:first-child {
     text-align: center;
-    line-height: 30px;
-  }
-  .step:first-child {
     line-height: 35px;
-  }
-  .step:nth-child(n+2) {
-    margin: 0 0 0 100px;
+}
+
+.step:nth-child(n+2) {
+    text-align: center;
+    margin: 0 0 0 94px;
+    line-height: 22px;
+
+    font-size: 27px;
+
     /* transform: translate(0, -4px); */
-  }
-  .step:nth-child(n+2):before {
+}
+
+.step:nth-child(n+2):before {
     width: 75px;
-    height: 3px;
+    height: 6px;
+    /* 3px <------------- Andrew */
     display: block;
-    background-color: white;
-    transform: translate(-95px, 21px);
-    content: '';  
-  }
-  .step:after {
+    transform: translate(-88px, 16px);
+
+    margin-top: 1px;
+    content: '';
+    background: linear-gradient(to right, white 0%, white 100%);
+
+    border-radius: 3px;
+    /* <------------- Andrew */
+}
+
+.step:after {
     width: 150px;
     display: block;
-    transform: translate(-55px, 3px);
-    
-    color: #CDD0DA;
+    /*transform: translate(-55px, 20px);*/
+    transform: translate(-55px, 22px);
+
+    /*color: white;*/
+    color: #383c4c;
+
     content: attr(data-desc);
+    /*< ----------------------------------------------------------------------*/
+
     font-weight: 400;
     font-size: 13px;
-  }
-  .step:first-child:after {
-    transform: translate(-55px, -1px);  
-  }
-  .step.active {
-    border-color: #70C1FF;
-    
-    color: #70C1FF;
-  }
-  .step.active:before {
+
+}
+
+.step:first-child:after {
+    transform: translate(-55px, 0px);
+    font-weight: 400;
+    font-size: 13px;
+}
+
+.step.active {
+    background-color: #EF7D00;
+    color: white;
+    font-size: 27px;
+
+}
+
+.step.active:before {
     background: linear-gradient(to right, #58BB58 0%,
-                                          #70C1FF 100%);
-  }
-  .step.active:after {
-    color: #70C1FF;  
-  }
-  .step.done {
+            #EF7D00 100%);
+}
+
+.step.active:after {
+    /*color: #EF7D00;*/
+    color: #383c4c;
+    transform: translate(-55px, 11px);
+}
+
+.step.done {
     background-color: #58BB58;
     border-color: #58BB58;
-    
+
+    /*color: white;*/
+    color: #383c4c;
+}
+
+.step.done:before {
+    background-color: #58BB58;
+}
+
+
+/* Исправляем позицию и размер цифр */
+
+
+
+
+.step:nth-child(2)::before {
+    background: linear-gradient(to right, #EF7D00 0%,
+            white 70%);
+}
+
+.step:nth-child(2).active::before {
+    background: linear-gradient(to right,
+            #58BB58 0%, #EF7D00 100%);
+}
+
+.step.last::before {
+    background: linear-gradient(to right, #EF7D00 0%,
+            white 70%);
+}
+
+#steps_info {
+    margin: 1px auto;
+    display: flex;
+    align-items: center;
+    width: 325px;
+}
+
+.step_info {
+    display: inline-block;
+}
+
+#first_step_info {
+    color: #EF7D00;
+    transform: translate(-30px, -30px);
+}
+
+#second_step_info {
+    transform: translate(-5px, -30px);
     color: white;
-  }
-  .step.done:before {
-    background-color: #58BB58;  
-  }
+}
+
+#third_step_info {
+    transform: translate(25px, -30px);
+    color: white;
+}
+
+
+@keyframes shake {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
+}

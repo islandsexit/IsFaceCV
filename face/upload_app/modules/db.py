@@ -3,6 +3,9 @@
 import datetime
 import pymysql.cursors
 import pymysql
+import logging
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
 
 
 CONNECT_AUTH_BASE = "None"   # Для авторизации в базе данных
@@ -39,9 +42,9 @@ def active_code(code):
             CONNECT_AUTH_BASE.commit()
             return active, id, name
 
-    except pymysql.OperationalError as e:
+    except pymysql.OperationalError:
         return False, "0", "0"
     except Exception as ex:
         CONNECT_AUTH_BASE = "None"
-        print(ex)
+        logger.error(str(datetime.datetime.now())+ ";[ERROR];" + ex)
         return False, "0", "0"

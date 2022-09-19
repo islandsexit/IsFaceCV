@@ -56,10 +56,10 @@ $(function () {
     $('[name=pincode-1]').focus();
     if (document.getElementById('password').value == '007'){
       
-      $group.addClass('form__group--error');
+      $('.content').addClass('form__group--error');
       setTimeout(function(){
         $(this).prop('disabled', false);
-        $group.removeClass('form__group--success form__group--error');
+        $('.content').removeClass('form__group--success form__group--error');
         $button.attr('disabled', true);
       }, 1500)
     }
@@ -339,7 +339,7 @@ $(function () {
           // add sixth character
           $('#first_step').removeClass('active')
           $('#second_step').addClass('active')
-
+          $('#third_step').addClass('last')
           $('.step').each(function(index, element) {
             // element == this
             $(element).not('.active').addClass('done');
