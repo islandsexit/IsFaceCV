@@ -49,7 +49,7 @@ def auth(request):
                 try:
                     #logger.error(str(datetime.datetime.now())+ " " + 'отправляю запрос')
                     responseVov = RQ.post('http://192.168.48.114:8080/docreateguest', data={
-                        "ID": id,
+                        "id": id,
                         "img64": img64,
                         "name": name
 
@@ -113,7 +113,8 @@ def auth(request):
                                  ";[ERROR];" + f"code ={face_token_ch} inactive code")
                     return render(request, './upload_app/code.html', {'value_pass': '007'})
 
-            except:
+            except Exception as ex:
+                print("View Exception", ex)
                 logger.error(str(datetime.datetime.now()) +
                              ";[ERROR];"+f"code ={face_token_ch} exception in getting db data")
                 return render(request, './upload_app/code.html',

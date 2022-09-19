@@ -15,6 +15,15 @@ $(function () {
     // });
   
     $('#first_step').addClass('active')
+    $('#first_step_info').addClass('active')
+    $('.step_info').each(function(index, element) {
+      // element == this
+      $(element).not('.active').addClass('done');
+      if($(this).is('.active')) {
+        return false;
+      }
+    }); 
+
 
     $('.step').each(function(index, element) {
       // element == this
@@ -339,6 +348,9 @@ $(function () {
           // add sixth character
           $('#first_step').removeClass('active')
           $('#second_step').addClass('active')
+
+          $('#first_step_info').removeClass('active')
+          $('#second_step_info').addClass('active')
           $('#third_step').addClass('last')
           $('.step').each(function(index, element) {
             // element == this
@@ -348,6 +360,13 @@ $(function () {
               return false;
             }
           }); 
+          $('.step_info').each(function(index, element) {
+            // element == this
+            $(element).not('.active').addClass('done');
+            if($(this).is('.active')) {
+              return false;
+            }
+          });
 
           _pincode.push($(this).val());
           

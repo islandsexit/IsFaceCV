@@ -439,6 +439,16 @@ input {
 .step.done:before {
     background-color: #58BB58;
 }
+.step.done:before {
+    background-color: #58BB58;
+}
+
+.step_info.done{
+    color:#58BB58
+}
+.step_info.active{
+    color:#EF7D00
+}
 
 
 /* Исправляем позицию и размер цифр */

@@ -440,6 +440,18 @@ input {
     background-color: #58BB58;
 }
 
+.step.done:before {
+    background-color: #58BB58;
+}
+
+.step_info.done {
+    color: #58BB58
+}
+
+.step_info.active {
+    color: #EF7D00
+}
+
 
 /* Исправляем позицию и размер цифр */
 
@@ -470,21 +482,21 @@ input {
 
 .step_info {
     display: inline-block;
+    color: white;
 }
 
 #first_step_info {
-    color: #EF7D00;
     transform: translate(-30px, -30px);
 }
 
 #second_step_info {
     transform: translate(-5px, -30px);
-    color: white;
+
 }
 
 #third_step_info {
     transform: translate(25px, -30px);
-    color: white;
+
 }
 
 

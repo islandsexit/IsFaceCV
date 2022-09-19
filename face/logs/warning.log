@@ -529,3 +529,78 @@
 2022-09-19 16:01:11.624769;[INFO];visitor on main template
 2022-09-19 16:01:16.418882;[INFO];SITE| code =111111 VISITOR  
 2022-09-19 16:01:21.461948;[INFO];visitor on main template
+2022-09-19 17:12:40.064800;[INFO];visitor on main template
+2022-09-19 17:13:28.775483;[INFO];visitor on main template
+2022-09-19 17:20:03.744328;[INFO];visitor on main template
+2022-09-19 17:20:19.151891;[INFO];visitor on main template
+2022-09-19 17:20:20.018456;[INFO];visitor on main template
+2022-09-19 17:20:20.347925;[INFO];visitor on main template
+2022-09-19 17:20:20.577942;[INFO];visitor on main template
+2022-09-19 17:20:20.843212;[INFO];visitor on main template
+2022-09-19 17:20:20.953318;[INFO];visitor on main template
+2022-09-19 17:20:21.097885;[INFO];visitor on main template
+2022-09-19 17:20:21.253360;[INFO];visitor on main template
+2022-09-19 17:20:21.423371;[INFO];visitor on main template
+2022-09-19 17:20:21.584381;[INFO];visitor on main template
+2022-09-19 17:20:21.737196;[INFO];visitor on main template
+2022-09-19 17:20:21.923070;[INFO];visitor on main template
+2022-09-19 17:20:48.169419;[INFO];visitor on main template
+2022-09-19 17:20:52.542259;[ERROR];code =111111 exception in getting db data
+2022-09-19 17:21:22.985530;[ERROR];code =111111 exception in getting db data
+2022-09-19 17:21:33.614288;[ERROR];code =111111 exception in getting db data
+2022-09-19 17:21:42.610891;[ERROR];code =111111 exception in getting db data
+2022-09-19 17:21:47.558337;[ERROR];code =111111 exception in getting db data
+2022-09-19 17:23:22.972791;[ERROR];code =111111 exception in getting db data
+2022-09-19 17:23:56.715322;[ERROR];code =111111 exception in getting db data
+2022-09-19 17:24:08.830767;[ERROR];code =111111 exception in getting db data
+2022-09-19 17:25:14.665947;[ERROR];code =111111 exception in getting db data
+2022-09-19 17:25:46.639292;[ERROR];code =111111 exception in getting db data
+2022-09-19 17:25:56.893432;[ERROR];code =111111 exception in getting db data
+2022-09-19 17:28:05.823018;[ERROR];code =111111 exception in getting db data
+2022-09-19 17:29:52.163839;[ERROR];code =111111 exception in getting db data
+2022-09-19 17:30:04.225708;[ERROR];code =455367 exception in getting db data
+2022-09-19 17:30:50.606808;[ERROR];code =111111 exception in getting db data
+2022-09-19 17:31:20.230093;[ERROR];code =111111 exception in getting db data
+2022-09-19 17:31:30.966505;[ERROR];code =111111 exception in getting db data
+2022-09-19 17:31:41.860943;[ERROR];code =455367 exception in getting db data
+2022-09-19 17:32:55.515869;[ERROR];code =455367 exception in getting db data
+2022-09-19 17:33:13.521860;[ERROR];code =111111 exception in getting db data
+2022-09-19 17:33:43.706629;[ERROR];code =455377 exception in getting db data
+2022-09-19 17:35:26.377548;[ERROR];code =455377 exception in getting db data
+2022-09-19 17:35:38.354026;[ERROR];code =455377 exception in getting db data
+2022-09-19 17:36:19.107111;[ERROR];code =455377 exception in getting db data
+2022-09-19 17:37:33.867648;[ERROR];code =455377 exception in getting db data
+2022-09-19 17:38:55.694563;[ERROR];code =111111 exception in getting db data
+2022-09-19 17:39:05.800334;[ERROR];code =455367 exception in getting db data
+2022-09-19 17:39:49.898709;[ERROR];code =455377 exception in getting db data
+2022-09-19 17:40:02.546979;[ERROR];code =455377 exception in getting db data
+2022-09-19 17:41:29.083829;[ERROR];code =455377 exception in getting db data
+2022-09-19 17:42:13.410875;[ERROR];code =455377 exception in getting db data
+2022-09-19 17:42:47.056241;[ERROR];code =455377 exception in getting db data
+2022-09-19 17:43:16.915068;[ERROR];{"Result":"SUCCESS","Description":"Успешное выполнение функции","Data":{"id":"87580", "name":"Зозуля  Иван Николаевич"}}
+2022-09-19 17:43:16.916070;[ERROR];code =455377 exception in getting db data
+2022-09-19 17:43:51.598713;[ERROR];code =333333 exception in getting db data
+2022-09-19 17:45:31.241150;[ERROR];code =455377 exception in getting db data
+2022-09-19 17:45:46.374549;[ERROR];code =455377 exception in getting db data
+2022-09-19 17:46:00.077158;[ERROR];code =333333 exception in getting db data
+2022-09-19 17:46:40.315242;[ERROR];code =455377 exception in getting db data
+2022-09-19 17:47:08.921901;[ERROR];<class 'str'>
+2022-09-19 17:47:08.922901;[ERROR];code =455377 exception in getting db data
+2022-09-19 17:48:19.093608;[ERROR];<class 'str'>
+2022-09-19 17:48:19.095612;[ERROR];code =121212 exception in getting db data
+2022-09-19 17:48:56.877100;[ERROR];<class 'str'>
+2022-09-19 17:48:56.877651;[ERROR];code =111111 exception in getting db data
+2022-09-19 17:49:21.901174;[ERROR];<class 'str'>
+2022-09-19 17:49:21.902176;[ERROR];code =111111 exception in getting db data
+2022-09-19 17:49:32.908119;[ERROR];<class 'str'>
+2022-09-19 17:49:32.909117;[ERROR];code =111111 exception in getting db data
+2022-09-19 17:49:47.800592;[ERROR];<class 'str'>
+2022-09-19 17:49:47.801593;[ERROR];code =111111 exception in getting db data
+2022-09-19 17:50:00.979284;[ERROR];<class 'str'>
+2022-09-19 17:50:00.980286;[ERROR];code =111111 exception in getting db data
+2022-09-19 17:50:15.448388;[ERROR];<class 'str'>
+2022-09-19 17:50:15.449390;[ERROR];code =111111 exception in getting db data
+2022-09-19 17:50:28.699120;[ERROR];<class 'str'>
+2022-09-19 17:50:28.700120;[ERROR];code =111111 exception in getting db data
+2022-09-19 17:59:21.896662;[INFO];SITE| code =455377 VISITOR  
+2022-09-19 17:59:42.444740;[ERROR];code =111111 inactive code
