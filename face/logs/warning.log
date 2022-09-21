@@ -604,3 +604,179 @@
 2022-09-19 17:50:28.700120;[ERROR];code =111111 exception in getting db data
 2022-09-19 17:59:21.896662;[INFO];SITE| code =455377 VISITOR  
 2022-09-19 17:59:42.444740;[ERROR];code =111111 inactive code
+2022-09-19 18:45:32.025889;[ERROR];code =111111 exception in getting db data
+2022-09-19 18:45:44.186125;[ERROR];code =111111 exception in getting db data
+2022-09-19 18:45:50.623325;[ERROR];code =111111 exception in getting db data
+2022-09-19 18:46:10.667526;[ERROR];code =111111 exception in getting db data
+2022-09-19 18:47:19.384354;[ERROR];code =111111 exception in getting db data
+2022-09-19 18:47:45.783620;[ERROR];code =111111 exception in getting db data
+2022-09-19 18:47:51.849215;[ERROR];code =111111 exception in getting db data
+2022-09-19 18:47:59.763266;[ERROR];code =111111 exception in getting db data
+2022-09-20 11:10:42.788222;[ERROR];code =111111 exception in getting db data
+2022-09-20 11:10:46.389744;[ERROR];code =111111 exception in getting db data
+2022-09-20 11:11:11.095613;[ERROR];code =111111 exception in getting db data
+2022-09-20 11:11:13.169074;[ERROR];code =111111 exception in getting db data
+2022-09-20 11:11:15.269729;[ERROR];code =111111 exception in getting db data
+2022-09-20 11:11:16.952987;[ERROR];code =111111 exception in getting db data
+2022-09-20 11:11:19.352619;[ERROR];code =555555 exception in getting db data
+2022-09-20 11:11:22.132659;[ERROR];code =555555 exception in getting db data
+2022-09-20 11:11:32.984227;[ERROR];code =555555 exception in getting db data
+2022-09-20 11:11:35.512804;[ERROR];code =555555 exception in getting db data
+2022-09-20 11:11:50.480570;[ERROR];code =555555 exception in getting db data
+2022-09-20 11:12:52.883572;[ERROR];code =555555 exception in getting db data
+2022-09-20 11:12:55.195510;[ERROR];code =111111 exception in getting db data
+2022-09-20 11:12:57.683544;[ERROR];code =555555 exception in getting db data
+Internal Server Error: /checkin
+Traceback (most recent call last):
+  File "X:\Projects\Работа\IsFaceCV\face\upload_app\modules\db.py", line 21, in active_code
+    if responseServ['Result'] == "SUCCESS":
+KeyError: 'Result'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "X:\Projects\Работа\IsFaceCV\face\upload_app\views.py", line 105, in auth
+    active, id, name = active_code(face_token_ch)
+  File "X:\Projects\Работа\IsFaceCV\face\upload_app\modules\db.py", line 31, in active_code
+    logger.error(str(datetime.datetime.now())+ ";[ERROR];" + ex)
+TypeError: can only concatenate str (not "KeyError") to str
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "X:\Projects\Работа\IsFaceCV\face\upload_app\views.py", line 118, in auth
+    logger.error(str(datetime.datetime.now()) +
+TypeError: can only concatenate str (not "TypeError") to str
+Internal Server Error: /checkin
+Traceback (most recent call last):
+  File "X:\Projects\Работа\IsFaceCV\face\upload_app\modules\db.py", line 21, in active_code
+    if responseServ['Result'] == "SUCCESS":
+KeyError: 'Result'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "X:\Projects\Работа\IsFaceCV\face\upload_app\views.py", line 105, in auth
+    active, id, name = active_code(face_token_ch)
+  File "X:\Projects\Работа\IsFaceCV\face\upload_app\modules\db.py", line 31, in active_code
+    logger.error(str(datetime.datetime.now())+ ";[ERROR];" + ex)
+TypeError: can only concatenate str (not "KeyError") to str
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "X:\Projects\Работа\IsFaceCV\face\upload_app\views.py", line 118, in auth
+    logger.error(str(datetime.datetime.now()) +
+TypeError: can only concatenate str (not "builtin_function_or_method") to str
+Internal Server Error: /checkin
+Traceback (most recent call last):
+  File "X:\Projects\Работа\IsFaceCV\face\upload_app\modules\db.py", line 21, in active_code
+    if responseServ['Result'] == "SUCCESS":
+KeyError: 'Result'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "X:\Projects\Работа\IsFaceCV\face\upload_app\views.py", line 105, in auth
+    active, id, name = active_code(face_token_ch)
+  File "X:\Projects\Работа\IsFaceCV\face\upload_app\modules\db.py", line 31, in active_code
+    logger.error(str(datetime.datetime.now())+ ";[ERROR];" + ex)
+TypeError: can only concatenate str (not "KeyError") to str
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Admin\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "X:\Projects\Работа\IsFaceCV\face\upload_app\views.py", line 119, in auth
+    ";[ERROR];"+f"code ={face_token_ch} exception in getting db data" + ex.with_traceback())
+TypeError: BaseException.with_traceback() takes exactly one argument (0 given)
+2022-09-20 11:17:34.225777;[INFO];SITE| code =555555 VISITOR  
+2022-09-20 11:17:54.218108;[INFO];visitor on main template
+2022-09-20 11:17:59.618749;[INFO];SITE| code =555555 VISITOR  
+2022-09-20 11:18:02.849762;[INFO];visitor on main template
+2022-09-20 11:18:05.014490;[INFO];SITE| code =555555 VISITOR  
+2022-09-20 11:18:19.545640;[INFO];visitor on main template
+2022-09-20 11:18:26.943949;[ERROR];code =111111 inactive code
+2022-09-20 11:18:29.915307;[INFO];SITE| code =555555 VISITOR  
+2022-09-20 11:18:32.449936;[INFO];visitor on main template
+2022-09-20 11:19:13.677194;[ERROR];code =552222 inactive code
+2022-09-20 11:19:16.562102;[ERROR];code =222222 inactive code
+2022-09-20 11:19:18.870923;[ERROR];code =222222 inactive code
+2022-09-20 15:40:57.313324;[INFO];visitor on main template
+Invalid HTTP_HOST header: '192.168.48.47:8000'. You may need to add '192.168.48.47' to ALLOWED_HOSTS.
+Invalid HTTP_HOST header: '192.168.48.47:8000'. You may need to add '192.168.48.47' to ALLOWED_HOSTS.
+2022-09-20 15:44:32.037736;[INFO];visitor on main template
+2022-09-20 15:45:26.206818;[ERROR];code =000000 inactive code
+2022-09-20 15:46:39.317779;[INFO];visitor on main template
+2022-09-20 15:47:28.468445;[INFO];visitor on main template
+2022-09-20 15:48:44.496929;[INFO];visitor on main template
+2022-09-20 15:48:51.599834;[INFO];visitor on main template
+2022-09-20 15:49:04.201445;[INFO];visitor on main template
+2022-09-20 15:49:10.503267;[INFO];visitor on main template
+2022-09-20 15:49:38.059396;[INFO];visitor on main template
+2022-09-20 15:49:44.434807;[INFO];visitor on main template
+2022-09-20 15:49:50.093354;[INFO];visitor on main template
+2022-09-20 15:49:50.473992;[INFO];visitor on main template
+2022-09-20 15:49:50.756295;[INFO];visitor on main template
+2022-09-20 15:49:51.159862;[INFO];visitor on main template
+2022-09-20 15:49:51.726026;[INFO];visitor on main template
+2022-09-20 15:49:52.262065;[INFO];visitor on main template
+2022-09-20 15:49:52.660818;[INFO];visitor on main template
+2022-09-20 15:49:53.046880;[INFO];visitor on main template
+2022-09-20 15:49:53.380430;[INFO];visitor on main template
+2022-09-20 15:49:59.217302;[INFO];visitor on main template
+2022-09-20 15:50:01.815356;[INFO];visitor on main template
+2022-09-20 15:50:02.856952;[INFO];visitor on main template
+2022-09-20 15:50:06.392008;[INFO];visitor on main template
+2022-09-20 15:50:06.803252;[INFO];visitor on main template
+2022-09-20 15:50:07.513366;[INFO];visitor on main template
+2022-09-20 15:50:08.176167;[INFO];visitor on main template
+2022-09-20 15:50:17.408049;[INFO];visitor on main template
+2022-09-20 15:50:47.692054;[INFO];visitor on main template
+2022-09-20 15:54:40.527474;[INFO];SITE| code =555555 VISITOR  
+2022-09-20 15:54:45.135169;[INFO];visitor on main template
+2022-09-20 16:12:17.975051;[INFO];visitor on main template
+2022-09-20 16:12:41.275057;[ERROR];code =121211 inactive code
+2022-09-20 16:14:06.476937;[INFO];visitor on main template
+2022-09-20 16:14:56.859424;[INFO];visitor on main template
+2022-09-20 16:15:12.813907;[INFO];visitor on main template
+2022-09-20 16:15:22.538084;[ERROR];code =121211 inactive code
+2022-09-20 16:17:18.805774;[INFO];visitor on main template
+2022-09-20 16:17:43.790155;[ERROR];code =121211 inactive code
+2022-09-20 16:17:45.409576;[ERROR];code =121211 inactive code
+2022-09-20 16:17:57.357687;[INFO];visitor on main template
+2022-09-20 16:18:13.648872;[INFO];visitor on main template
+2022-09-20 16:18:19.028276;[ERROR];code =222222 inactive code
+2022-09-20 16:18:42.122074;[ERROR];code =121211 inactive code
+2022-09-20 16:18:43.813132;[ERROR];code =121211 inactive code
+2022-09-20 16:18:45.738501;[ERROR];code =121211 inactive code
+2022-09-20 16:18:48.932182;[ERROR];code =122211 inactive code
+2022-09-20 16:18:51.355268;[ERROR];code =222222 inactive code
+2022-09-20 16:20:10.176875;[INFO];visitor on main template
+2022-09-20 16:20:27.645201;[ERROR];code =586569 inactive code
+2022-09-20 16:20:30.975177;[ERROR];code =111111 inactive code
+2022-09-20 16:20:34.393783;[ERROR];code =252525 inactive code
+2022-09-20 16:20:37.381811;[ERROR];code =255555 inactive code
+2022-09-20 16:20:40.823920;[ERROR];code =666666 inactive code
+2022-09-20 16:20:45.520138;[INFO];SITE| code =555555 VISITOR  
+2022-09-20 16:20:47.292658;[INFO];visitor on main template
+2022-09-20 16:20:50.756802;[ERROR];code =222222 inactive code
+2022-09-20 16:20:55.522618;[ERROR];code =282528 inactive code
+2022-09-20 16:20:58.465433;[ERROR];code =696767 inactive code
+2022-09-20 16:21:00.831291;[ERROR];code =757582 inactive code
+2022-09-20 17:03:10.275329;[ERROR];code =222225 inactive code
+2022-09-20 17:03:15.756476;[INFO];SITE| code =555555 VISITOR  
+2022-09-20 17:03:18.651278;[INFO];visitor on main template
+2022-09-20 17:03:22.156143;[ERROR];code =111111 inactive code
+2022-09-20 17:03:27.121267;[ERROR];code =111111 inactive code

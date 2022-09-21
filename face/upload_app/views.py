@@ -126,29 +126,5 @@ def auth(request):
 
 
 def index(request):
-    if request.method == 'GET':
-        if request.GET.get('master_password', False) == 'secretmasterpasswordvig':
-            face_token_ch = request.GET.get('invite_code', False)
-            if face_token_ch and len(face_token_ch) == 6:
-                # logger.error(str(datetime.datetime.now())+ " " + 'a')
-                try:
-                    active, id, name = active_code(face_token_ch)
-                    if active:  # active:
-                        logger.error(str(datetime.datetime.now()) +
-                                     ";[INFO];" + f"API| code ={face_token_ch} Api checking  ")
-                        return JsonResponse({'RESULT': 'SUCCESS', 'code': f'{id}', 'name': f'{name}'})
-                    else:
-                        logger.error(str(datetime.datetime.now()) +
-                                     ";[ERROR];" + f"API| code ={face_token_ch} inactive person")
-                        return JsonResponse({'RESULT': 'ERROR', 'code': f'Код устарел', 'name': f'0'})
-                except Exception as e:
-                    logger.error(str(datetime.datetime.now()) +
-                                 ";[ERROR];" + f"API| code ={face_token_ch} Exception in database ")
-                    return JsonResponse({'RESULT': 'ERROR', 'code': f'{e}', 'name': f'{0}'})
-        else:
-            logger.error(str(datetime.datetime.now()) +
-                         ";[ERROR];" + "API| Exception in secretpassword")
-            return JsonResponse({'RESULT': 'AXAXAXAXAXAXAXXAX', 'code': 'Im not vindictive. I will write it down.', 'name': f'Your_MOTHER'})
-    logger.error(str(datetime.datetime.now()) +
-                 ";[ERROR];" + "API| exception in request type")
+    
     return JsonResponse({'RESULT': 'ERROR', 'code': f'0', 'name': f'0'})

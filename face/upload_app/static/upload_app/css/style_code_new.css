@@ -159,7 +159,7 @@ label {
     float: left;
     width: 12.5%;
     height: 33px;
-    line-height: 48px;
+    line-height: 30px;
     text-align: center;
     font-size: 2em;
     color: black;
@@ -276,6 +276,7 @@ input {
     text-align: start;
     appearance: auto;
     -webkit-rtl-ordering: logical;
+    padding: 0;
     cursor: text;
     background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
     margin: 0em;
@@ -284,6 +285,8 @@ input {
     border-style: inset;
     border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
     border-image: initial;
+    -webkit-appearance: none;
+
 }
 
 .form__pincode>input:last-child {
@@ -483,6 +486,7 @@ input {
 .step_info {
     display: inline-block;
     color: white;
+    text-align: center;
 }
 
 #first_step_info {

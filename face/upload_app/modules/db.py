@@ -16,9 +16,9 @@ def active_code(code):
     try:
         responseVov = RQ.get(f'http://192.168.48.174/getguestbyic?ic={code}')
         responseServ = responseVov.json()
-        print(responseVov.json()["Data"])
+        print(responseVov.json())
 
-        if responseServ['Result'] == "SUCCESS":
+        if responseServ['RESULT'] == "SUCCESS":
             name = responseServ['Data']['name'] 
             id = responseServ['Data']['id']
             active = True
