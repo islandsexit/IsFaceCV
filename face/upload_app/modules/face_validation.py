@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime
 import cv2
 import numpy as np
 import os
@@ -7,7 +7,6 @@ import uuid
 import logging
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
-import datetime
 
 face = r'../mod/front.xml'
 eye = r'../mod/eye.xml'

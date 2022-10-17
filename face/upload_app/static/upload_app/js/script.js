@@ -166,7 +166,7 @@ $(document).ready(function () {
 					// btnOuter.addClass("file_uploaded");
 					// $("#uploaded_view").append('<img src="' + uploadedFileURL + '" />').addClass("show")
 					// $("#btn_submit").removeClass("btn-submit")
-					$(".error_msg").text('Ошибка отпраки фото на сервер')
+					$(".error_msg").text('Ошибка отправки фото на сервер')
 					// setTimeout(function () {
 					// 	location.reload(false);
 					// 	 }, 3000);

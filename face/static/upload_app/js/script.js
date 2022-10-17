@@ -133,16 +133,10 @@ $(document).ready(function () {
 				},
 				error: function(error){
 					document.getElementById('input_div').style.display = 'block'
-					document.getElementById('spinner').style.display='none'
-					// status_bar[0].style.width = 100 + '%';
+					document.getElementById('spinner').style.display='none'					// status_bar[0].style.width = 100 + '%';
 					
-					// btnOuter.addClass("file_uploaded");
-					// $("#uploaded_view").append('<img src="' + uploadedFileURL + '" />').addClass("show")
-					// $("#btn_submit").removeClass("btn-submit")
 					$(".error_msg").text('Ошибка отправки фото на сервер')
-					// setTimeout(function () {
-					// 	location.reload(false);
-					// 	 }, 3000);
+
 				},
 				cache: false,
 				contentType:false,

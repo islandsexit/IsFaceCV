@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 def active_code(code):
     try:
-        responseVov = RQ.get(f'http://192.168.48.174/getguestbyic?ic={code}')
+        responseVov = RQ.get(f'http://192.168.48.174:81/getguestbyic?ic={code}')
         responseServ = responseVov.json()
         print(responseVov.json())
 
