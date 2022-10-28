@@ -5,7 +5,12 @@ html {
     -khtml-user-select: none;
     -webkit-user-select: none;
     user-select: none;
+    overflow-y: hidden;
+    /* Hide vertical scrollbar */
+    overflow-x: hidden;
+    /* Hide horizontal scrollbar */
 }
+
 
 /* .content::before{
     content: '';
@@ -52,7 +57,7 @@ body {
     font-size: 14px;
     min-width: 100%;
     min-height: 100%;
-    overflow: scroll;
+
 
 }
 
@@ -123,7 +128,7 @@ label {
     border-radius: 15px;
     /* 3px <------------------------------------ andrew */
     margin: 0 auto;
-    padding: 30px;
+
 
     transform: translate(0px, 20px);
     /* <--------------------------- Andrew */
@@ -239,7 +244,7 @@ input {
     padding: 10px 0 0;
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 900px) {
     .container {
         zoom: 0;
     }
@@ -247,6 +252,7 @@ input {
     html {
         /* width:130%; */
     }
+
 }
 
 
@@ -293,7 +299,6 @@ input {
 
 .container {
     max-width: 1100px;
-    padding: 0 20px;
     margin: 0 auto;
 }
 
@@ -672,4 +677,49 @@ input {
 
     color: #EF7D00;
 
+}
+
+.inst {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.icon:hover {
+    fill: #EF7D00;
+}
+
+
+
+.invisible {
+    display: none;
+}
+
+.img {
+    animation: 2s show ease;
+    max-width: 1000px;
+}
+
+img {
+    height: auto;
+    width: auto;
+    max-width: 300px;
+    max-height: 500px;
+    margin: 6px 0px 0px -2px;
+
+
+}
+
+.forma {
+    animation: 1s show ease;
+}
+
+@keyframes show {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }

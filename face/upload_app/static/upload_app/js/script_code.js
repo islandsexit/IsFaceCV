@@ -1,6 +1,7 @@
 $(function () {
   // setting
   var debug = false;
+  document.getElementById('btn_loading').setAttribute('style', 'display: none');
 
   // fake ajax request
   // $.mockjax({

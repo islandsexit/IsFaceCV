@@ -1,6 +1,6 @@
 
 $(document).ready(function () {
-
+	
 	console.log("ready DOMMM");
 
 	// const progressBox = document.getElementById('progress-box')
@@ -19,6 +19,8 @@ $(document).ready(function () {
 	// console.log(status_bar[0].style)
 	var btnUpload = $("#upload_file"),
 		btnOuter = $(".button_outer");
+
+
 
 	$('#second_step').addClass('active')
 
@@ -177,16 +179,7 @@ $(document).ready(function () {
 
 			})
 
-			// setTimeout(function () {
-			// 	btnOuter.addClass("file_uploaded");
-			// }, 3000);
-			// var uploadedFile = URL.createObjectURL(e.target.files[0]);
-			// setTimeout(function () {
-			// 	$("#uploaded_view").append('<img src="' + uploadedFile + '" />').addClass("show");
-			// }, 3500);
-			// setTimeout(function () {
-			// 	$("#btn_submit").removeClass("btn-submit")
-			// }, 3500);
+
 		}
 	});
 	$(".file_remove").on("click", function (e) {
@@ -197,7 +190,21 @@ $(document).ready(function () {
 		$("#btn_submit").addClass("btn-submit")
 	});
 
+	$("#icon-help").on("click", function (e) {
+	$(".forma").addClass("invisible");
+	$(".img").removeClass("invisible")
+	$("#icon-help").addClass("invisible")
+	$("#icon-cross").removeClass("invisible")
+	
+	})
 
+	$("#icon-cross").on("click", function (e) {
+		$(".forma").removeClass("invisible");
+		$(".img").addClass("invisible")
+		$("#icon-help").removeClass("invisible")
+		$("#icon-cross").addClass("invisible")
+		
+		})
 
 	// btn_submit.addEventListener('click', () => {
 		

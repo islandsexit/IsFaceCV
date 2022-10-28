@@ -5,6 +5,10 @@ html {
     user-select: none;
     height: 100%;
     width: 100%;
+    overflow-y: hidden;
+    /* Hide vertical scrollbar */
+    overflow-x: hidden;
+    /* Hide horizontal scrollbar */
 }
 
 /* .content::before{
@@ -60,7 +64,7 @@ body {
     font-size: 14px;
     min-width: 100%;
     min-height: 100%;
-    overflow: scroll;
+
 
 }
 
@@ -159,7 +163,7 @@ label {
     float: left;
     width: 12.5%;
     height: 33px;
-    line-height: 48px;
+    line-height: 30px;
     text-align: center;
     font-size: 2em;
     color: black;
@@ -276,6 +280,7 @@ input {
     text-align: start;
     appearance: auto;
     -webkit-rtl-ordering: logical;
+    padding: 0;
     cursor: text;
     background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
     margin: 0em;
@@ -284,6 +289,8 @@ input {
     border-style: inset;
     border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
     border-image: initial;
+    -webkit-appearance: none;
+
 }
 
 .form__pincode>input:last-child {
@@ -314,13 +321,13 @@ input {
 
 
 .button--primary[disabled] {
-    background-color: #4776e6;
+    background-color: #fddfc6;
     user-select: none;
     pointer-events: none;
     cursor: not-allowed;
-    -moz-opacity: 0.3;
-    -khtml-opacity: 0.3;
-    opacity: 0.3;
+    -moz-opacity: 0.6;
+    -khtml-opacity: 0.6;
+    opacity: 0.6;
 }
 
 
@@ -439,15 +446,17 @@ input {
 .step.done:before {
     background-color: #58BB58;
 }
+
 .step.done:before {
     background-color: #58BB58;
 }
 
-.step_info.done{
-    color:#58BB58
+.step_info.done {
+    color: #58BB58
 }
-.step_info.active{
-    color:#EF7D00
+
+.step_info.active {
+    color: #EF7D00
 }
 
 
@@ -480,21 +489,22 @@ input {
 
 .step_info {
     display: inline-block;
+    color: white;
+    text-align: center;
 }
 
 #first_step_info {
-    color: #EF7D00;
     transform: translate(-30px, -30px);
 }
 
 #second_step_info {
     transform: translate(-5px, -30px);
-    color: white;
+
 }
 
 #third_step_info {
     transform: translate(25px, -30px);
-    color: white;
+
 }
 
 
@@ -542,4 +552,5 @@ input {
     100% {
         transform: translate(1px, -2px) rotate(-1deg);
     }
+
 }

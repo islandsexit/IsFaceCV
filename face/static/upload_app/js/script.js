@@ -1,6 +1,6 @@
 
 $(document).ready(function () {
-
+	
 	console.log("ready DOMMM");
 
 	// const progressBox = document.getElementById('progress-box')
@@ -19,6 +19,8 @@ $(document).ready(function () {
 	// console.log(status_bar[0].style)
 	var btnUpload = $("#upload_file"),
 		btnOuter = $(".button_outer");
+
+
 
 	$('#second_step').addClass('active')
 
@@ -73,7 +75,27 @@ $(document).ready(function () {
 						setTimeout(function(){
 							$("#h1_text").removeClass('extra_h1')
 						},100)
-					
+						// console.log(e)
+						// if (e.lengthComputable){
+							
+						// 	var percent = Math.floor(e.loaded / e.total * 100); 
+						// 	if(percent==100){
+						// 		percent = 89
+						// 	}
+						// 	console.log(percent)
+						// 	console.log(loading[0].style.width)
+						// 	if (percent < 90){
+							
+						// 	loading[0].style.width = percent + '%';
+						// 	if (percent>50){
+						// 		status_bar[0].style.width = percent +'%';
+								
+						// 	}
+							
+						// 	}
+
+							
+						// }
 					})
 					return xhr
 				},
@@ -84,7 +106,7 @@ $(document).ready(function () {
 					// console.log(response)
 					
 
-					
+
 					
 
 					// $("#uploaded_view").append('<img src="' + uploadedFileURL + '" />').addClass("show")
@@ -94,19 +116,26 @@ $(document).ready(function () {
 					}
 					
 					// status_bar[0].style.display = 'none';
-					window.console.log(response['result'])
+					window.console.log(response['result']=='SUCCESS')
 					window.console.log(response['msg'])
-					if (response['result']=='SUCCES'){
+
+					if (response['result']=='SUCCESS'){
 					// $("#btn_submit").removeClass("btn-submit")
 					btnOuter.addClass("file_uploaded");
-					error_msg[0].style.color='green'
+
+
+					/*error_msg[0].style.color='black'*/
 					$(".error_msg").text('Фото успешно добавлено в базу.\n Турникет теперь пропустит вас по лицу')
 					$('#second_step').removeClass('active')
-
 				$('.step').each(function(index, element) {
 					// element == this
 					$(element).not('.active').addClass('done');
 					$('.done').html('<i class="icon-ok"></i>');
+
+                    document.getElementById('second_step_info').style.color='#58BB58'       /* <------------ Andrew */
+                    document.getElementById('third_step_info').style.color='#58BB58'        /* <------------ Andrew */
+                    document.getElementById('third_step_info').style.color='#58BB58'        /* <------------ Andrew */
+
 					if($(this).is('.active')) {
 						return false;
 					}
@@ -133,10 +162,16 @@ $(document).ready(function () {
 				},
 				error: function(error){
 					document.getElementById('input_div').style.display = 'block'
-					document.getElementById('spinner').style.display='none'					// status_bar[0].style.width = 100 + '%';
+					document.getElementById('spinner').style.display='none'
+					// status_bar[0].style.width = 100 + '%';
 					
+					// btnOuter.addClass("file_uploaded");
+					// $("#uploaded_view").append('<img src="' + uploadedFileURL + '" />').addClass("show")
+					// $("#btn_submit").removeClass("btn-submit")
 					$(".error_msg").text('Ошибка отправки фото на сервер')
-
+					// setTimeout(function () {
+					// 	location.reload(false);
+					// 	 }, 3000);
 				},
 				cache: false,
 				contentType:false,
@@ -144,16 +179,7 @@ $(document).ready(function () {
 
 			})
 
-			// setTimeout(function () {
-			// 	btnOuter.addClass("file_uploaded");
-			// }, 3000);
-			// var uploadedFile = URL.createObjectURL(e.target.files[0]);
-			// setTimeout(function () {
-			// 	$("#uploaded_view").append('<img src="' + uploadedFile + '" />').addClass("show");
-			// }, 3500);
-			// setTimeout(function () {
-			// 	$("#btn_submit").removeClass("btn-submit")
-			// }, 3500);
+
 		}
 	});
 	$(".file_remove").on("click", function (e) {
@@ -164,7 +190,21 @@ $(document).ready(function () {
 		$("#btn_submit").addClass("btn-submit")
 	});
 
+	$("#icon-help").on("click", function (e) {
+	$(".forma").addClass("invisible");
+	$(".img").removeClass("invisible")
+	$("#icon-help").addClass("invisible")
+	$("#icon-cross").removeClass("invisible")
+	
+	})
 
+	$("#icon-cross").on("click", function (e) {
+		$(".forma").removeClass("invisible");
+		$(".img").addClass("invisible")
+		$("#icon-help").removeClass("invisible")
+		$("#icon-cross").addClass("invisible")
+		
+		})
 
 	// btn_submit.addEventListener('click', () => {
 		

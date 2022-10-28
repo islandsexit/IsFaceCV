@@ -2,6 +2,7 @@ import datetime
 from logging import raiseExceptions
 from random import random
 
+
 from .modules.face_validation import isFace_in_img
 from .modules.face_validation import img_Base64
 import requests as RQ
@@ -91,14 +92,18 @@ def auth(request):
                             msg = "Ошибка. Лицо было снято в движении"
                         elif code_error == FACE_TOO_DARK:
                             msg = "Ошибка. Фото слишком темное"
-                    logger.error(str(datetime.datetime.now()) +
-                                 ";[INFO];"+f"{code_error}")
+                        else:
+                            logger.error(str(datetime.datetime.now()) +
+                                 ";[ERROR];"+f"{responseServ}")
+                    
+                    print(responseServ)
                     # тут ошибка т.к при хорошем завершении у меня ничего не берется из респонса
                     return JsonResponse({'result': f'{result}', 'msg': f'{msg}'})
 
-                except:
+                except Exception as e:
+                    print(e)
                     logger.error(str(datetime.datetime.now()) +
-                                 ";[ERROR];"+f"code ={face_token_ch} error in server registering face")
+                                 ";[ERROR];"+f"code ={face_token_ch} error in server registering face, {e.with_traceback}")
                     return JsonResponse({'result': f'ERROR', 'msg': f'Ошибка на сервере'})
 
             except:
