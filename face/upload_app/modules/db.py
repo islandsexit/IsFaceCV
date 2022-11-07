@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 def active_code(code):
     try:
-        responseVov = RQ.get(f'http://192.168.48.174:81/getguestbyic?ic={code}')
+        responseVov = RQ.get(f'http://192.168.43.174:81/getguestbyic?ic={code}')
         responseServ = responseVov.json()
         print(responseVov.json())
 
@@ -28,7 +28,7 @@ def active_code(code):
             return False, "0", "0"
     except Exception as ex:
         print(ex)
-        logger.error(str(datetime.datetime.now())+ ";[ERROR];" + ex)
+        logger.error(str(datetime.datetime.now())+ ";[ERROR];" + "Cannot connect to baseHelper")
         return False, "0", "0"
 
 
