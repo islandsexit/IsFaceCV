@@ -60,7 +60,7 @@ def auth(request):
 
                 try:
                     #logger.error(str(datetime.datetime.now())+ " " + 'отправляю запрос')
-                    responseVov = RQ.post('http://192.168.48.91:1235/addPersonWithFace', data={
+                    responseVov = RQ.post('http://192.168.15.10:1235/addPersonWithFace', data={
                         "id": id,
                         "img64": img64,
                         "name": name,
