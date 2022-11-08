@@ -27,7 +27,6 @@ def active_code(code):
         else:
             return False, "0", "0"
     except Exception as ex:
-        print(ex)
         logger.error(str(datetime.datetime.now())+ ";[ERROR];" + "Cannot connect to baseHelper")
         return False, "0", "0"
 
