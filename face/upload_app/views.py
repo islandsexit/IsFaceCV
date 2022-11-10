@@ -1,7 +1,8 @@
 import datetime
 from logging import raiseExceptions
 from random import random
-
+from django.http import HttpResponseNotFound
+from django.template import loader
 
 from .modules.face_validation import isFace_in_img
 from .modules.face_validation import img_Base64
@@ -191,6 +192,12 @@ def auth(request):
 def index(request):
     
     return JsonResponse({'RESULT': 'ERROR', 'code': f'0', 'name': f'0'})
+
+
+def page_not_found(request, exception):
+    content = loader.render_to_string('./upload_app/custom_40x.html', {}, request)
+    return HttpResponseNotFound(content)
+
 
 
 
