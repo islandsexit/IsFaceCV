@@ -2,3 +2,7 @@
 face/logs/warning.log
 *.pyc
 face/logs/warning.log
+face/upload_app/__pycache__/views.cpython-310.pyc
+face/upload_app/__pycache__/views.cpython-310.pyc
+face/upload_app/modules/__pycache__/db.cpython-310.pyc
+face/logs/warning.log

@@ -683,7 +683,7 @@ input {
 .inst {
     display: flex;
     justify-content: center;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .icon:hover {
