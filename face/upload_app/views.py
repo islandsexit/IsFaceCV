@@ -69,6 +69,7 @@ def auth(request):
 
                     })
                     responseServ = responseVov.json()
+                    print(responseServ)
                     result = responseServ['RESULT']
                     msg = 'Ошибка. Попробуйте еще раз.'
                     if result == "ERROR":
