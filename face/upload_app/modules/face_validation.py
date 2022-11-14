@@ -81,9 +81,9 @@ def isFace_in_img(imgMem):
         return 12, False
         
     if face!=():
-        logger.error(str(datetime.datetime.now())+ ";[ERROR];"+" only face_detected ", datetime.now())
+        logger.error(str(datetime.datetime.now())+ ";[ERROR];"+" only face_detected ")
         if eyes!=():
-            logger.error(str(datetime.datetime.now())+ ";[ERROR];"+" and eyes detected ",datetime.now())
+            logger.error(str(datetime.datetime.now())+ ";[ERROR];"+" and eyes detected ")
     return 12, False
 
 
