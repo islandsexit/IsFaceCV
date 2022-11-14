@@ -66,7 +66,7 @@ $(document).ready(function () {
 				enctype: 'multipart/form-data',
 				data:fd,
 				beforeSend: function(){
-					
+					console.log(uploadForm.action)
 				},
 				xhr: function(){
 					const xhr = new window.XMLHttpRequest();
@@ -161,6 +161,7 @@ $(document).ready(function () {
 					
 				},
 				error: function(error){
+					console.log(error.error_msg)
 					document.getElementById('input_div').style.display = 'block'
 					document.getElementById('spinner').style.display='none'
 					// status_bar[0].style.width = 100 + '%';
