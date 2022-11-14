@@ -1,3 +1,4 @@
 *.log
 face/logs/warning.log
 *.pyc
+face/logs/warning.log
