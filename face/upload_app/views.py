@@ -36,22 +36,10 @@ def auth(request):
 
     if is_ajax(request):
         face_token_ch = request.POST.get('invite_code')
-        ID = request.POST['id']
+        id = request.POST['id']
         name = request.POST.get('name')
         file = request.FILES['upload_file']
-        try:
-            active, id, name = active_code(face_token_ch)
-            if active != True:
-                logger.error(str(datetime.datetime.now()) +
-                             ";[ERROR];"+f"AJAX| code ={face_token_ch}inactive password in POST img64")
-                return JsonResponse({'result': f'ERROR', 'msg': f'Заявка неактивна'})
-
-        except Exception as e:
-
-            logger.error(str(datetime.datetime.now()) +
-                         ";[ERROR];"+f"AJAX| code ={face_token_ch} exception in POST img64 ", e)
-            return render(request, './upload_app/auth.html', {'header': 'ОШИБКА'})
-
+       
         img, confidence = isFace_in_img(file)
         if confidence:
 
@@ -68,6 +56,7 @@ def auth(request):
                         "isGuest":1
 
                     })
+                    print(id, name)
                     responseServ = responseVov.json()
                     print(responseServ)
                     result = responseServ['RESULT']
