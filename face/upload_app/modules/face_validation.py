@@ -34,6 +34,8 @@ def resizing(img, new_width=None, new_height=None, interp=cv2.INTER_LINEAR):
 
 
 def isFace_in_img(imgMem):
+    face = ()
+    eyes = ()
     try:
 
         img = cv2.imdecode(np.fromstring(imgMem.file.read(),
@@ -79,7 +81,6 @@ def isFace_in_img(imgMem):
     except Exception as e:
         logger.error(str(datetime.datetime.now()) + ";[ERROR]; in face detecting")
         return 12, False
-        
     if face!=():
         logger.error(str(datetime.datetime.now())+ ";[ERROR];"+" only face_detected ")
         if eyes!=():
