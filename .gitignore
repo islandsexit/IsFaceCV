@@ -1,5 +1,7 @@
 *.log
 face/logs/warning.log
+**/logs
+**/__pycache__/
 *.pyc
 face/logs/warning.log
 face/upload_app/__pycache__/views.cpython-310.pyc
