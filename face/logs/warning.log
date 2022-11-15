@@ -26,3 +26,9 @@
 2022-11-15 13:42:56.784638;[INFO];visitor on main template
 2022-11-15 13:43:10.579288;[INFO];SITE| code =444444 VISITOR  
 2022-11-15 13:44:15.675225;[INFO];SITE| code =444444 VISITOR  
+2022-11-15 13:47:16.921057;[ERROR];Cannot connect to baseHelper
+2022-11-15 13:47:16.922049;[ERROR];code =444444 inactive code
+2022-11-15 13:47:46.375812;[ERROR];Cannot connect to baseHelper
+2022-11-15 13:47:46.376812;[ERROR];code =444444 inactive code
+2022-11-15 13:48:00.559716;[ERROR];Cannot connect to baseHelper
+2022-11-15 13:48:00.560717;[ERROR];code =111111 inactive code
